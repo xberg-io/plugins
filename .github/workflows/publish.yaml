@@ -1,0 +1,61 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Validate and pack without publishing"
+        required: false
+        type: boolean
+        default: true
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  npm:
+    name: Publish opencode packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+          cache: npm
+
+      - name: Ensure npm supports trusted publishing
+        run: npm install -g npm@^11.5.1
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate opencode entrypoints
+        run: npm run validate:opencode
+
+      - name: Validate manifest versions
+        run: scripts/validate-manifests.sh
+
+      - name: Pack kreuzberg opencode package
+        run: npm pack --dry-run --workspace @kreuzberg/opencode-kreuzberg
+
+      - name: Pack kreuzcrawl opencode package
+        run: npm pack --dry-run --workspace @kreuzberg/opencode-kreuzcrawl
+
+      - name: Publish kreuzberg opencode package
+        if: ${{ github.event_name == 'release' || inputs.dry_run != true }}
+        run: npm publish --workspace @kreuzberg/opencode-kreuzberg --access public --provenance
+
+      - name: Publish kreuzcrawl opencode package
+        if: ${{ github.event_name == 'release' || inputs.dry_run != true }}
+        run: npm publish --workspace @kreuzberg/opencode-kreuzcrawl --access public --provenance

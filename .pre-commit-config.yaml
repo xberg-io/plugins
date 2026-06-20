@@ -15,7 +15,6 @@ repos:
   - repo: https://github.com/kreuzberg-dev/pre-commit-hooks
     rev: v2.1.10
     hooks:
-      - id: ai-rulez-generate
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-merge-conflict

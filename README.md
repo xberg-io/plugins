@@ -90,11 +90,16 @@ copilot plugin install kreuzberg-cloud@kreuzberg
 
 ### opencode
 
-Self-host install:
+Add the published packages to `opencode.json`:
 
-```text
-opencode plugin add github:kreuzberg-dev/plugins
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["@kreuzberg/opencode-kreuzberg", "@kreuzberg/opencode-kreuzcrawl"]
+}
 ```
+
+`kreuzberg-cloud` is skills-only in v0.1.0 and is not published as an opencode package yet.
 
 ## Binary Requirements
 
@@ -120,7 +125,9 @@ Skills are loaded at agent startup. Their descriptions stay in context so agents
 
 ```text
 .claude-plugin/
-├── manifest.json              # plugin registration
+├── marketplace.json           # Claude marketplace
+.github/plugin/
+├── marketplace.json           # Copilot CLI marketplace
 plugins/
 ├── kreuzberg/
 │   └── plugin.json            # MCP server config

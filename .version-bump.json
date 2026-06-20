@@ -1,11 +1,17 @@
 {
   "files": [
     { "path": "VERSION", "field": "__raw__" },
+    { "path": "package.json", "field": "version" },
+    { "path": ".github/plugin/marketplace.json", "field": "metadata.version" },
+    { "path": ".github/plugin/marketplace.json", "field": "plugins.0.version" },
+    { "path": ".github/plugin/marketplace.json", "field": "plugins.1.version" },
+    { "path": ".github/plugin/marketplace.json", "field": "plugins.2.version" },
 
     { "path": "plugins/kreuzberg/.claude-plugin/plugin.json", "field": "version" },
     { "path": "plugins/kreuzberg/.codex-plugin/plugin.json", "field": "version" },
     { "path": "plugins/kreuzberg/.cursor-plugin/plugin.json", "field": "version" },
     { "path": "plugins/kreuzberg/.factory-plugin/plugin.json", "field": "version" },
+    { "path": "plugins/kreuzberg/.github/plugin/plugin.json", "field": "version" },
     { "path": "plugins/kreuzberg/gemini-extension.json", "field": "version" },
     { "path": "plugins/kreuzberg/package.json", "field": "version" },
 
@@ -13,6 +19,7 @@
     { "path": "plugins/kreuzcrawl/.codex-plugin/plugin.json", "field": "version" },
     { "path": "plugins/kreuzcrawl/.cursor-plugin/plugin.json", "field": "version" },
     { "path": "plugins/kreuzcrawl/.factory-plugin/plugin.json", "field": "version" },
+    { "path": "plugins/kreuzcrawl/.github/plugin/plugin.json", "field": "version" },
     { "path": "plugins/kreuzcrawl/gemini-extension.json", "field": "version" },
     { "path": "plugins/kreuzcrawl/package.json", "field": "version" },
 
@@ -20,6 +27,7 @@
     { "path": "plugins/kreuzberg-cloud/.codex-plugin/plugin.json", "field": "version" },
     { "path": "plugins/kreuzberg-cloud/.cursor-plugin/plugin.json", "field": "version" },
     { "path": "plugins/kreuzberg-cloud/.factory-plugin/plugin.json", "field": "version" },
+    { "path": "plugins/kreuzberg-cloud/.github/plugin/plugin.json", "field": "version" },
     { "path": "plugins/kreuzberg-cloud/gemini-extension.json", "field": "version" },
     { "path": "plugins/kreuzberg-cloud/package.json", "field": "version" }
   ],
