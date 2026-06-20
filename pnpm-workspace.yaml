@@ -1,0 +1,7 @@
+packages:
+  - plugins/*
+
+# msgpackr-extract is an optional native accelerator (msgpackr has a JS
+# fallback); the opencode packages never need it, so skip its build script.
+ignoredBuiltDependencies:
+  - msgpackr-extract

@@ -3,18 +3,12 @@
   "version": "0.2.2",
   "private": true,
   "type": "module",
-  "workspaces": [
-    "plugins/kreuzberg",
-    "plugins/kreuzcrawl",
-    "plugins/kreuzberg-cloud",
-    "plugins/html-to-markdown",
-    "plugins/tree-sitter-language-pack"
-  ],
   "scripts": {
     "validate:opencode": "node scripts/validate-opencode.mjs"
   },
   "engines": {
     "node": ">=22.14.0",
-    "npm": ">=11.5.1"
-  }
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@11.8.0"
 }
