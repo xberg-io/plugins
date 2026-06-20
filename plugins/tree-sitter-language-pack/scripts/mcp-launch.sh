@@ -51,7 +51,7 @@
 set -euo pipefail
 
 REPO="kreuzberg-dev/tree-sitter-language-pack"
-NPM_PKG="ts-pack-cli"
+NPM_PKG="@kreuzberg/ts-pack-cli"
 PYPI_PKG="ts-pack-cli"
 
 log() { printf 'ts-pack-launch: %s\n' "$*" >&2; }

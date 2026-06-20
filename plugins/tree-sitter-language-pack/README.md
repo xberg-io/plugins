@@ -29,7 +29,7 @@ To install the `ts-pack` CLI yourself:
 ```bash
 brew install kreuzberg-dev/tap/ts-pack
 # or run it without a persistent install (the CLI proxy package self-installs the binary):
-npx ts-pack-cli --help
+npx @kreuzberg/ts-pack-cli --help
 uvx --from ts-pack-cli ts-pack --help
 # or download a prebuilt binary from the latest GitHub release:
 #   https://github.com/kreuzberg-dev/tree-sitter-language-pack/releases/latest

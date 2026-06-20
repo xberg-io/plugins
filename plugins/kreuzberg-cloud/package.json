@@ -1,6 +1,6 @@
 {
   "name": "@kreuzberg/opencode-kreuzberg-cloud",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Deferred OpenCode package placeholder for Kreuzberg Cloud.",
   "private": true,
   "type": "module",

@@ -42,7 +42,7 @@
 # script MUST go to stderr (>&2). Only the exec'd binary may write to stdout.
 set -euo pipefail
 
-NPM_PKG="kreuzcrawl-cli"
+NPM_PKG="@kreuzberg/kreuzcrawl-cli"
 PYPI_PKG="kreuzcrawl-cli"
 
 log() { printf 'kreuzcrawl-launch: %s\n' "$*" >&2; }

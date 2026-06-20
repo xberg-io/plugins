@@ -1,6 +1,6 @@
 {
   "name": "@kreuzberg/opencode-html-to-markdown",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "OpenCode tools for HTML→Markdown conversion with the html-to-markdown CLI.",
   "type": "module",
   "main": ".opencode/plugins/html-to-markdown.js",

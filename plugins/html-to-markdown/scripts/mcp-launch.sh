@@ -51,7 +51,7 @@
 set -euo pipefail
 
 REPO="kreuzberg-dev/html-to-markdown"
-NPM_PKG="html-to-markdown-cli"
+NPM_PKG="@kreuzberg/html-to-markdown-cli"
 PYPI_PKG="html-to-markdown-cli"
 
 log() { printf 'html-to-markdown-launch: %s\n' "$*" >&2; }

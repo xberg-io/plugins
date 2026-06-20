@@ -42,7 +42,7 @@
 set -euo pipefail
 
 REPO="kreuzberg-dev/liter-llm"
-NPM_PKG="liter-llm-cli"
+NPM_PKG="@kreuzberg/liter-llm-cli"
 PYPI_PKG="liter-llm-cli"
 
 log() { printf 'liter-llm-launch: %s\n' "$*" >&2; }

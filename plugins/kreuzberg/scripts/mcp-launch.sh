@@ -44,7 +44,7 @@
 # script MUST go to stderr (>&2). Only the exec'd binary may write to stdout.
 set -euo pipefail
 
-NPM_PKG="kreuzberg-cli"
+NPM_PKG="@kreuzberg/kreuzberg-cli"
 PYPI_PKG="kreuzberg-cli"
 
 log() { printf 'kreuzberg-launch: %s\n' "$*" >&2; }

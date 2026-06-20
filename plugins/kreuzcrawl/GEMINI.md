@@ -24,7 +24,7 @@ The `kreuzcrawl` binary must be on `PATH`. Install one of:
 ```bash
 brew install kreuzberg-dev/tap/kreuzcrawl
 # or run without a persistent install (self-installs the binary):
-npx kreuzcrawl --help
+npx @kreuzberg/kreuzcrawl-cli --help
 uvx --from kreuzcrawl kreuzcrawl --help
 # or build from source (mcp/api subcommands are non-default features):
 cargo install --git https://github.com/kreuzberg-dev/kreuzcrawl kreuzcrawl-cli --features all

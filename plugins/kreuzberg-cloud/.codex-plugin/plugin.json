@@ -1,6 +1,6 @@
 {
   "name": "kreuzberg-cloud",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Managed Kreuzberg document intelligence on api.kreuzberg.dev — async extraction with OCR, URL crawling, presigned uploads, document versioning and diffing, signed webhooks, and usage tracking.",
   "author": {
     "name": "Kreuzberg, Inc.",

@@ -41,7 +41,8 @@ function runCli(args, context) {
       if (error.code === "ENOENT") {
         resolve({
           title: "ts-pack CLI not found",
-          output: "Install the ts-pack CLI with `brew install kreuzberg-dev/tap/ts-pack`, or run it via `npx ts-pack` (the npm package's bin is `tspack`).",
+          output:
+            "Install the ts-pack CLI with `brew install kreuzberg-dev/tap/ts-pack`, or run it via `npx ts-pack` (the npm package's bin is `tspack`).",
           metadata: { exitCode: 127, command: "ts-pack", subcommand: args[0] },
         });
         return;

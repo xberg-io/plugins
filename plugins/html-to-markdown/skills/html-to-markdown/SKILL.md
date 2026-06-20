@@ -49,7 +49,7 @@ Use this skill when writing code that:
 brew trust kreuzberg-dev/tap
 brew install kreuzberg-dev/tap/html-to-markdown
 # or run without a persistent install (the CLI proxy package self-installs the binary):
-npx html-to-markdown-cli --help
+npx @kreuzberg/html-to-markdown-cli --help
 uvx --from html-to-markdown-cli html-to-markdown --help
 # or download a prebuilt binary from the latest GitHub release:
 #   https://github.com/kreuzberg-dev/html-to-markdown/releases/latest

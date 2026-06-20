@@ -1,6 +1,6 @@
 {
   "name": "@kreuzberg/opencode-tree-sitter-language-pack",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "OpenCode tools for parsing and code intelligence with the ts-pack CLI.",
   "type": "module",
   "main": ".opencode/plugins/tree-sitter-language-pack.js",

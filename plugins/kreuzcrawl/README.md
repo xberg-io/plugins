@@ -26,7 +26,7 @@ To install the CLI yourself (recommended for direct CLI use, and reused by the l
 ```bash
 brew install kreuzberg-dev/tap/kreuzcrawl
 # or run it without a persistent install (the CLI proxy package self-installs the binary):
-npx kreuzcrawl-cli --help
+npx @kreuzberg/kreuzcrawl-cli --help
 uvx --from kreuzcrawl-cli kreuzcrawl --help
 # or build from source (the mcp/api subcommands are non-default features):
 cargo install --git https://github.com/kreuzberg-dev/kreuzcrawl kreuzcrawl-cli --features all

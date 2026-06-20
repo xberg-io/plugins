@@ -16,7 +16,7 @@ The CLI must be installed separately:
 ```bash
 brew install kreuzberg-dev/tap/html-to-markdown
 # or run without a persistent install (self-installs the binary):
-npx html-to-markdown --help
+npx @kreuzberg/html-to-markdown-cli --help
 uvx --from html-to-markdown html-to-markdown --help
 # or build from source:
 cargo install --git https://github.com/kreuzberg-dev/html-to-markdown html-to-markdown-cli

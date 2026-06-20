@@ -10,6 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MCP server transport for kreuzberg-cloud
 - html-to-markdown and tree-sitter-language-pack MCP servers (plugin wiring is in place; the upstream `mcp` subcommands land in their next releases)
 
+## [0.2.1] - 2026-06-20
+
+### Fixed
+
+- Scope the cli-proxy npm packages to `@kreuzberg/<tool>-cli` (npx); update the MCP launchers and install docs accordingly. PyPI/uvx names stay flat (`<tool>-cli`).
+
 ## [0.2.0] - 2026-06-20
 
 ### Added

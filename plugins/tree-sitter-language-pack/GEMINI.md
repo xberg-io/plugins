@@ -15,7 +15,7 @@ separately:
 ```bash
 brew install kreuzberg-dev/tap/ts-pack
 # or run without a persistent install (the npm package's bin is `tspack`):
-npx ts-pack --help
+npx @kreuzberg/ts-pack-cli --help
 # or download a prebuilt binary from the latest GitHub release, or build from source:
 cargo install --git https://github.com/kreuzberg-dev/tree-sitter-language-pack ts-pack-cli
 # binary is installed as `ts-pack`

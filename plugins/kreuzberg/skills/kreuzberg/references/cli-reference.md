@@ -7,7 +7,7 @@ Comprehensive command-line interface for the Kreuzberg document intelligence lib
 ```bash
 brew install kreuzberg-dev/tap/kreuzberg
 # or run without a persistent install (self-installs the binary):
-npx kreuzberg --help
+npx @kreuzberg/kreuzberg-cli --help
 uvx --from kreuzberg kreuzberg --help
 ```
 

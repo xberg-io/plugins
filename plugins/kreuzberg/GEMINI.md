@@ -19,7 +19,7 @@ The CLI must be installed separately:
 ```bash
 brew install kreuzberg-dev/tap/kreuzberg
 # or run it without a persistent install (self-installs the binary):
-npx kreuzberg --help
+npx @kreuzberg/kreuzberg-cli --help
 uvx --from kreuzberg kreuzberg --help
 # or download a prebuilt binary from the latest GitHub release, or build from source:
 cargo install --git https://github.com/kreuzberg-dev/kreuzberg kreuzberg-cli

@@ -24,7 +24,7 @@ Install the `kreuzberg` CLI:
 ```bash
 brew install kreuzberg-dev/tap/kreuzberg
 # or run it without a persistent install (the CLI proxy package self-installs the binary):
-npx kreuzberg-cli --help
+npx @kreuzberg/kreuzberg-cli --help
 uvx --from kreuzberg-cli kreuzberg --help
 # or download a prebuilt binary from the latest GitHub release:
 #   https://github.com/kreuzberg-dev/kreuzberg/releases/latest

@@ -63,7 +63,7 @@ building software; the proxy when centralizing access for multiple consumers.
 brew install kreuzberg-dev/tap/liter-llm
 
 # or run it without a persistent install (the CLI proxy package self-installs the binary)
-npx liter-llm-cli --help
+npx @kreuzberg/liter-llm-cli --help
 uvx --from liter-llm-cli liter-llm --help
 
 # or download a prebuilt binary from the latest GitHub release:
