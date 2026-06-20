@@ -23,7 +23,7 @@ fi
 # No key found — emit a one-line setup reminder via the platform-appropriate
 # JSON shape. Same dispatch as superpowers' session-start.
 
-message='Kreuzberg Cloud: set KREUZBERG_API_KEY or write ~/.kreuzberg/cloud.toml to enable extraction offload. See https://kreuzberg.dev/cloud for keys.'
+message='Kreuzberg Cloud: set KREUZBERG_API_KEY or write ~/.kreuzberg/cloud.toml to enable cloud extraction. See https://kreuzberg.dev/cloud for keys.'
 
 # Escape string for JSON embedding using bash parameter substitution.
 escape_for_json() {

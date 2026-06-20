@@ -1,6 +1,6 @@
 # kreuzberg-cloud
 
-Offload document extraction to `api.kreuzberg.dev` — managed extraction with webhook delivery, presigned uploads for large files, sandbox keys, and per-project usage tracking.
+Managed Kreuzberg document intelligence on `api.kreuzberg.dev` — async extraction with OCR, URL crawling, presigned uploads for large files, document versioning and diffing, signed webhook delivery, sandbox keys, and per-project usage tracking.
 
 <!-- TODO: screenshot -->
 
@@ -38,9 +38,10 @@ If neither is set, the plugin's SessionStart hook displays a reminder. For evalu
 
 | Skill | Trigger |
 |-------|---------|
-| **kreuzberg-cloud** | Offload document extraction to api.kreuzberg.dev. Use when the user wants managed extraction with webhook delivery, presigned uploads for large files, sandbox keys, or per-project usage tracking — instead of running the local kreuzberg CLI. Covers authentication, the 12 REST endpoints, request/response shapes, error model, and SDK options. |
+| **kreuzberg-cloud** | Managed Kreuzberg document intelligence at api.kreuzberg.dev. Use when the user wants cloud extraction with webhook delivery, presigned uploads for large files, document versioning and diffing, sandbox keys, or per-project usage tracking — instead of running the local kreuzberg CLI. Covers authentication, the 12 REST endpoints, request/response shapes, error model, and SDK options. |
 | **offloading-extraction** | Use when the user wants to extract a document via the cloud rather than the local kreuzberg CLI. Covers POST /v1/extract — JSON vs multipart bodies, URL crawls, options block, webhook attachment, and the async response shape. |
 | **tracking-cloud-jobs** | Use when an extraction job has been submitted and the result needs to be retrieved. Covers GET /v1/jobs/{id}, polling cadence with exponential backoff, terminal status detection, and webhook delivery (signature verification, retry semantics). |
+| **versioning-documents** | Use when the user wants to retrieve a stored document and its result, list a document's versions, or diff two versions. Covers GET /v1/documents/{id}, /versions, and the sync-with-async-fallback diff at /diff plus its poll endpoint. |
 | **presigned-uploads** | Use when the user has files larger than ~50 MB to extract via the cloud, or when base64-encoding the body would be wasteful. Covers the three-step presign / PUT / confirm flow against POST /v1/uploads/presign and POST /v1/uploads/confirm. |
 | **managing-cloud-usage** | Use when the user asks about quota, billing visibility, or processed-page counts. Covers GET /v1/usage — query params, response shape, when to report usage proactively to the user. |
 | **sandbox-keys** | Use when the user wants to try Kreuzberg Cloud without signing up, or needs an ephemeral key for evaluation, demos, or CI integration tests. Covers POST /v1/sandbox/key — the no-auth endpoint, quota, TTL, and cleanup expectations. |

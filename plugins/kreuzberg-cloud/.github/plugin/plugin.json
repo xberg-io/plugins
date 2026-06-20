@@ -1,6 +1,6 @@
 {
   "name": "kreuzberg-cloud",
-  "description": "Offload document extraction to api.kreuzberg.dev — managed extraction with webhooks, presigned uploads, and usage tracking.",
+  "description": "Managed Kreuzberg document intelligence on api.kreuzberg.dev — async extraction with OCR, URL crawling, presigned uploads, document versioning and diffing, signed webhooks, and usage tracking.",
   "version": "0.1.0",
   "author": {
     "name": "Kreuzberg, Inc.",
@@ -13,9 +13,11 @@
   "keywords": [
     "document-intelligence",
     "extraction",
+    "ocr",
     "cloud",
     "api",
-    "webhooks"
+    "webhooks",
+    "versioning"
   ],
   "category": "document-intelligence",
   "skills": "skills/"

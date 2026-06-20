@@ -1,13 +1,14 @@
 # kreuzberg-cloud
 
-Offload document extraction to `api.kreuzberg.dev` from Gemini CLI sessions.
-The cloud surface accepts PDFs, Office docs, images, and URL crawls; returns
-text, tables, metadata, and images; supports webhook delivery, presigned
-uploads for large files, sandbox keys, and per-project usage tracking.
+Managed Kreuzberg document intelligence on `api.kreuzberg.dev` from Gemini CLI
+sessions. The cloud surface accepts PDFs, Office docs, images, and URL crawls;
+returns text, tables, metadata, and images; supports webhook delivery,
+presigned uploads for large files, document versioning and diffing, sandbox
+keys, and per-project usage tracking.
 
 ## v0.1.0 limitation
 
-This release is documentation-only — six skills covering the API surface and
+This release is documentation-only — seven skills covering the API surface and
 no MCP server. The `kreuzberg-cloud` CLI binary lands in plugin v0.2.0 and
 will be auto-registered as an MCP server at that point. Until then, call the
 HTTP API directly (curl) or use the official TypeScript / Python SDKs.
@@ -36,6 +37,7 @@ skill.
 - `kreuzberg-cloud` — full API surface, when to prefer cloud over local.
 - `offloading-extraction` — submitting jobs via `POST /v1/extract`.
 - `tracking-cloud-jobs` — polling `GET /v1/jobs/{id}` and webhook delivery.
+- `versioning-documents` — `GET /v1/documents/{id}`, version history, and diffs.
 - `presigned-uploads` — three-step flow for files larger than ~50 MB.
 - `managing-cloud-usage` — quota and billing visibility via `GET /v1/usage`.
 - `sandbox-keys` — minting ephemeral keys for evaluation.

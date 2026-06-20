@@ -1,7 +1,7 @@
 {
   "name": "kreuzberg-cloud",
   "version": "0.1.0",
-  "description": "Offload document extraction to api.kreuzberg.dev — managed extraction with webhooks, presigned uploads, and usage tracking.",
+  "description": "Managed Kreuzberg document intelligence on api.kreuzberg.dev — async extraction with OCR, URL crawling, presigned uploads, document versioning and diffing, signed webhooks, and usage tracking.",
   "author": {
     "name": "Kreuzberg, Inc.",
     "email": "support@kreuzberg.dev",
@@ -13,15 +13,17 @@
   "keywords": [
     "document-intelligence",
     "extraction",
+    "ocr",
     "cloud",
     "api",
-    "webhooks"
+    "webhooks",
+    "versioning"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Kreuzberg Cloud",
-    "shortDescription": "Managed cloud extraction with webhooks and presigned uploads",
-    "longDescription": "Offload extraction to api.kreuzberg.dev. Authenticate with a bearer API key, push large files through presigned uploads, poll job status or receive webhook callbacks, and track per-project usage against your quota. Sandbox keys are available for evaluation without signup.",
+    "shortDescription": "Managed extraction, document versioning, and diffing",
+    "longDescription": "Managed Kreuzberg document intelligence at api.kreuzberg.dev. Authenticate with a bearer API key; submit documents or URL crawls for async extraction with OCR, push large files through presigned uploads, poll job status or receive signed webhook callbacks, retrieve stored documents and diff their versions, and track per-project usage against your quota. Sandbox keys are available for evaluation without signup. An MCP server lands in plugin v0.2.0.",
     "developerName": "Kreuzberg, Inc.",
     "category": "document-intelligence",
     "capabilities": [
@@ -31,7 +33,8 @@
     "defaultPrompt": [
       "Extract this PDF in the cloud",
       "Check my usage",
-      "Get this job's result"
+      "Get this job's result",
+      "Diff the last two versions of this document"
     ],
     "websiteURL": "https://kreuzberg.dev",
     "privacyPolicyURL": "https://kreuzberg.dev/privacy",

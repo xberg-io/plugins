@@ -1,11 +1,12 @@
 ---
 name: kreuzberg-cloud
 description: >-
-  Offload document extraction to api.kreuzberg.dev. Use when the user wants
-  managed extraction with webhook delivery, presigned uploads for large
-  files, sandbox keys, or per-project usage tracking — instead of running
-  the local kreuzberg CLI. Covers authentication, the 12 REST endpoints,
-  request/response shapes, error model, and SDK options.
+  Managed Kreuzberg document intelligence at api.kreuzberg.dev. Use when the
+  user wants cloud extraction with webhook delivery, presigned uploads for
+  large files, document versioning and diffing, sandbox keys, or per-project
+  usage tracking — instead of running the local kreuzberg CLI. Covers
+  authentication, the 12 REST endpoints, request/response shapes, error
+  model, and SDK options.
 license: MIT
 metadata:
   author: kreuzberg-dev
@@ -134,7 +135,7 @@ See the `tracking-cloud-jobs` skill.
 | Method | Path | Purpose |
 |---|---|---|
 | GET | `/v1/documents/{document_id}` | Latest version of a document with its extraction result. |
-| POST | `/v1/documents/{document_id}/diff` | Compute a diff between two versions (sync, with async fallback). |
+| GET | `/v1/documents/{document_id}/diff?from={v}&to={v}` | Compute a diff between two versions (sync, async fallback on budget). |
 | GET | `/v1/documents/{document_id}/diff/{diff_job_id}` | Poll the status of an async diff job. |
 | GET | `/v1/documents/{document_id}/versions` | List all versions of a document (paginated). |
 
@@ -333,6 +334,7 @@ curl -s https://api.kreuzberg.dev/v1/jobs/$JOB_ID \
 - `offloading-extraction` — full `POST /v1/extract` workflow with options.
 - `tracking-cloud-jobs` — polling cadence, webhook signatures.
 - `presigned-uploads` — three-step flow for files >50 MB.
+- `versioning-documents` — retrieve a document, list its versions, diff two versions.
 - `managing-cloud-usage` — quota and per-MIME breakdown.
 - `sandbox-keys` — when to recommend sandbox over production keys.
 

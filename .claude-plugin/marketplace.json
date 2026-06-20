@@ -19,7 +19,7 @@
     {
       "name": "kreuzberg-cloud",
       "source": "./plugins/kreuzberg-cloud",
-      "description": "Offload document extraction to api.kreuzberg.dev via REST API and skills. CLI + MCP server arrive in v0.2.0."
+      "description": "Managed Kreuzberg document intelligence on api.kreuzberg.dev: async extraction with OCR, URL crawling, presigned uploads, document versioning and diffing, signed webhooks, and usage tracking. Skills today; CLI + MCP server arrive in v0.2.0."
     }
   ]
 }
