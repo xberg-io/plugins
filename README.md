@@ -1,11 +1,11 @@
 # Kreuzberg Plugins Marketplace
 
-Document-intelligence plugins for coding agents. Install one, two, or all three into Claude Code, Codex CLI, Cursor, Gemini CLI, Factory Droid, GitHub Copilot CLI, or opencode.
+Document-intelligence plugins for coding agents. Install any of the six into Claude Code, Codex CLI, Cursor, Gemini CLI, Factory Droid, GitHub Copilot CLI, or opencode.
 
 ## Badges
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/kreuzberg-dev/plugins/blob/main/LICENSE)
-[![Version: 0.1.0](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/kreuzberg-dev/plugins/releases)
+[![Version: 0.2.2](https://img.shields.io/badge/version-0.2.2-blue.svg)](https://github.com/kreuzberg-dev/plugins/releases)
 [![GitHub stars](https://img.shields.io/github/stars/kreuzberg-dev/plugins?style=social)](https://github.com/kreuzberg-dev/plugins)
 [![Discord](https://img.shields.io/badge/Discord-Chat-007ec6?logo=discord&logoColor=white)](https://discord.gg/xt9WY3GnKR)
 
@@ -13,13 +13,17 @@ Document-intelligence plugins for coding agents. Install one, two, or all three 
 
 | Plugin | Value Proposition | Status |
 |--------|-------------------|--------|
-| **kreuzberg** | Local document extraction from 91+ formats (PDF, Office, images with OCR, HTML, email, archives, academic) | Stable — v0.1.0 |
-| **kreuzcrawl** | Web crawling and scraping with HTML→Markdown and headless-Chrome fallback | Stable — v0.1.0 |
-| **kreuzberg-cloud** | Managed extraction via `api.kreuzberg.dev` | Skills-only — MCP server lands in v0.2.0 |
+| **kreuzberg** | Local document extraction from 91+ formats (PDF, Office, images with OCR, HTML, email, archives, academic) | Stable — v0.2.2 |
+| **kreuzcrawl** | Web crawling and scraping with HTML→Markdown and headless-Chrome fallback | Stable — v0.2.2 |
+| **kreuzberg-cloud** | Managed extraction via `api.kreuzberg.dev` | Skills-only — MCP server in a later release |
+| **html-to-markdown** | Fast, lossless HTML→Markdown with structured metadata and tables | Stable — v0.2.2 |
+| **liter-llm** | Universal LLM API client for 143 providers (chat, streaming, tools, embeddings) | Stable — v0.2.2 |
+| **tree-sitter-language-pack** | Parse and extract code intelligence from 300+ languages | Stable — v0.2.2 |
 
 ## Install
 
-### Claude Code
+<details open>
+<summary><strong>Claude Code</strong></summary>
 
 Once approved by the marketplace:
 
@@ -27,6 +31,9 @@ Once approved by the marketplace:
 /plugin install kreuzberg@claude-community
 /plugin install kreuzcrawl@claude-community
 /plugin install kreuzberg-cloud@claude-community
+/plugin install html-to-markdown@claude-community
+/plugin install liter-llm@claude-community
+/plugin install tree-sitter-language-pack@claude-community
 ```
 
 Self-host (works today):
@@ -36,11 +43,16 @@ Self-host (works today):
 /plugin install kreuzberg@kreuzberg
 /plugin install kreuzcrawl@kreuzberg
 /plugin install kreuzberg-cloud@kreuzberg
+/plugin install html-to-markdown@kreuzberg
+/plugin install liter-llm@kreuzberg
+/plugin install tree-sitter-language-pack@kreuzberg
 ```
 
 Pending review for official Claude marketplace.
+</details>
 
-### Codex CLI
+<details>
+<summary><strong>Codex CLI</strong></summary>
 
 Codex CLI marketplace is not yet open for third-party submissions. Use self-hosted install:
 
@@ -48,15 +60,19 @@ Codex CLI marketplace is not yet open for third-party submissions. Use self-host
 /plugins add https://github.com/kreuzberg-dev/plugins
 ```
 
-Then search for `kreuzberg`, `kreuzcrawl`, or `kreuzberg-cloud` and select "Install Plugin".
+Then search for the plugin you want — e.g. `kreuzberg`, `kreuzcrawl`, `html-to-markdown`, `liter-llm`, `tree-sitter-language-pack`, or `kreuzberg-cloud` — and select "Install Plugin".
+</details>
 
-### Cursor
+<details>
+<summary><strong>Cursor</strong></summary>
 
 Self-host install only:
 
 Settings → Plugins → Add from URL → `https://github.com/kreuzberg-dev/plugins`. Select the plugin(s) you want.
+</details>
 
-### Gemini CLI
+<details>
+<summary><strong>Gemini CLI</strong></summary>
 
 Self-host install:
 
@@ -64,7 +80,10 @@ Self-host install:
 gemini extensions install https://github.com/kreuzberg-dev/plugins
 ```
 
-### Factory Droid
+</details>
+
+<details>
+<summary><strong>Factory Droid</strong></summary>
 
 Self-host install:
 
@@ -73,11 +92,16 @@ droid plugin marketplace add https://github.com/kreuzberg-dev/plugins
 droid plugin install kreuzberg@kreuzberg
 droid plugin install kreuzcrawl@kreuzberg
 droid plugin install kreuzberg-cloud@kreuzberg
+droid plugin install html-to-markdown@kreuzberg
+droid plugin install liter-llm@kreuzberg
+droid plugin install tree-sitter-language-pack@kreuzberg
 ```
 
 Pending review for official Factory Droid marketplace.
+</details>
 
-### GitHub Copilot CLI
+<details>
+<summary><strong>GitHub Copilot CLI</strong></summary>
 
 Self-host install:
 
@@ -86,20 +110,32 @@ copilot plugin marketplace add https://github.com/kreuzberg-dev/plugins
 copilot plugin install kreuzberg@kreuzberg
 copilot plugin install kreuzcrawl@kreuzberg
 copilot plugin install kreuzberg-cloud@kreuzberg
+copilot plugin install html-to-markdown@kreuzberg
+copilot plugin install liter-llm@kreuzberg
+copilot plugin install tree-sitter-language-pack@kreuzberg
 ```
 
-### opencode
+</details>
+
+<details>
+<summary><strong>opencode</strong></summary>
 
 Add the published packages to `opencode.json`:
 
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["@kreuzberg/opencode-kreuzberg", "@kreuzberg/opencode-kreuzcrawl"]
+  "plugin": [
+    "@kreuzberg/opencode-kreuzberg",
+    "@kreuzberg/opencode-kreuzcrawl",
+    "@kreuzberg/opencode-html-to-markdown",
+    "@kreuzberg/opencode-tree-sitter-language-pack"
+  ]
 }
 ```
 
-`kreuzberg-cloud` is skills-only in v0.1.0 and is not published as an opencode package yet.
+`liter-llm` and `kreuzberg-cloud` are not yet published as opencode packages.
+</details>
 
 ## Binary Requirements
 
@@ -110,6 +146,9 @@ Each plugin shells out to a real CLI. Install whichever you use:
 | kreuzberg | `kreuzberg` | `brew install kreuzberg-dev/tap/kreuzberg` |
 | kreuzcrawl | `kreuzcrawl` | `brew install kreuzberg-dev/tap/kreuzcrawl` |
 | kreuzberg-cloud | `kreuzberg-cloud` (v0.2.0) | — (skills-only in v0.1.0) |
+| html-to-markdown | `html-to-markdown` | `brew install kreuzberg-dev/tap/html-to-markdown` |
+| liter-llm | `liter-llm` | `brew install kreuzberg-dev/tap/liter-llm` |
+| tree-sitter-language-pack | `tree-sitter-language-pack` | `brew install kreuzberg-dev/tap/tree-sitter-language-pack` |
 
 For `kreuzberg-cloud`, set the API key via `KREUZBERG_API_KEY` environment variable or `~/.kreuzberg/cloud.toml`.
 
