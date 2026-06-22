@@ -23,17 +23,22 @@ Install the `kreuzberg` CLI:
 
 ```bash
 brew install kreuzberg-dev/tap/kreuzberg
-# or run it without a persistent install (the CLI proxy package self-installs the binary):
-npx @kreuzberg/kreuzberg-cli --help
-uvx --from kreuzberg-cli kreuzberg --help
-# or download a prebuilt binary from the latest GitHub release:
-#   https://github.com/kreuzberg-dev/kreuzberg/releases/latest
-# or build from source:
-cargo install --git https://github.com/kreuzberg-dev/kreuzberg kreuzberg-cli
 ```
 
-The Python (`kreuzberg`) and Node (`@kreuzberg/node`) packages are language
-SDKs/bindings, not the CLI.
+Or run without a persistent install:
+
+```bash
+npx @kreuzberg/kreuzberg-cli --help
+uvx --from kreuzberg-cli kreuzberg --help
+```
+
+Or download a prebuilt binary from the [latest GitHub release](https://github.com/kreuzberg-dev/kreuzberg/releases/latest), or build from source:
+
+```bash
+cargo install kreuzberg-cli --features mcp
+```
+
+The Python (`kreuzberg`) and Node (`@kreuzberg/node`) packages are language SDKs/bindings, not the CLI. The `kreuzberg` CLI binary includes the MCP server by default.
 
 OCR ships with Tesseract by default. Install language packs for non-English documents:
 
@@ -69,12 +74,19 @@ sudo apt install tesseract-ocr-*   # Debian/Ubuntu
 
 ## MCP tools
 
-The `kreuzberg` MCP server exposes:
+Run `kreuzberg mcp` to start the MCP server over stdio. The server exposes 13 tools:
 
-- `extract` — single file extraction with config.
-- `extract_batch` — batch extraction from multiple files.
-- `detect_mime` — MIME type detection from bytes or path.
-- `cache_clear` — clear the extraction cache.
+**Extraction:** `extract_file`, `extract_bytes`, `batch_extract_files`, `detect_mime_type`, `extract_structured`
+
+**Embeddings:** `embed_text`
+
+**Chunking:** `chunk_text`
+
+**Cache:** `cache_stats`, `cache_clear`, `cache_manifest`, `cache_warm`
+
+**Metadata:** `list_formats`, `get_version`
+
+All extraction tools accept an optional `config` object to override defaults.
 
 ## Configuration
 

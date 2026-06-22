@@ -70,10 +70,31 @@ Rust, Ruby, Go, Java, C#, PHP, Elixir, and WebAssembly bindings are also publish
 
 The plugin auto-registers an MCP server named `tree-sitter-language-pack`,
 launched via `scripts/mcp-launch.sh` (which execs `ts-pack mcp`). It exposes
-`ts-pack`'s `parse` (syntax tree), `process` (structure/imports/exports/symbols/
-docstrings/diagnostics/chunks), and `detect` (language detection) capabilities as
-tools, so the agent can parse and analyze code directly without shelling out to
-the CLI. The launcher auto-installs a binary on first run (override with
+eight tools for parsing, analysis, and cache management; resources for language
+discovery; a code-analysis prompt; and language-name completions.
+
+**Tools** (8):
+
+- **parse** — syntax tree (s-expression or JSON), auto-detecting language from path or explicit.
+- **process** — code intelligence: structure, imports, exports, symbols, docstrings, comments, diagnostics, chunks. Use `all` flag for all features.
+- **detect_language** — identify language by path, extension, or content.
+- **list_languages** — available, downloaded, or manifest languages; filter by name.
+- **info** — show language availability and cache status.
+- **download** — prefetch parsers: specific languages, groups, all, or fresh updates.
+- **cache_dir** — return the cache directory path.
+- **clean_cache** — remove all cached parsers.
+
+**Resources**:
+
+- `ts-pack://languages` — catalog of all known languages.
+- `ts-pack://languages/downloaded` — currently cached languages.
+- `ts-pack://language/{name}` — per-language metadata template.
+
+**Prompt**: `analyze-code` (args: `language`, optional `focus`).
+
+**Completions**: language-name autocomplete.
+
+The launcher auto-installs a binary on first run (override with
 `TS_PACK_LAUNCHER=auto|npx|uvx|brew|download`). The `mcp` subcommand ships in a
 recent release of the tool; an older binary on `PATH` may need an upgrade to
 expose it. See the **using-the-mcp-server** skill for details.

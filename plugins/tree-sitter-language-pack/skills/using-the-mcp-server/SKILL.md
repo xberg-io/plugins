@@ -35,14 +35,30 @@ ts-pack mcp        # for Claude Code / Claude Desktop (stdio)
 
 ## The tools
 
-- **parse** — parse a source file into a syntax tree (s-expression or JSON),
-  auto-detecting the language from the path or taking an explicit one.
-- **process** — run the code-intelligence pipeline: structure, imports, exports,
-  symbols, docstrings, comments, diagnostics, and syntax-aware chunks.
-- **detect** — identify a file's language by path, extension, or content.
+**Parsing and code intelligence:**
 
-The exact tool names and argument schemas come from the running server; ask the
-client to list tools to see the live surface.
+- **parse** — syntax tree (s-expression or JSON), auto-detecting language from path or explicit.
+- **process** — code intelligence: structure, imports, exports, symbols, docstrings, comments, diagnostics, chunks. Use `all` flag to enable all features.
+- **detect_language** — identify language by path, extension, or content.
+
+**Language and cache management:**
+
+- **list_languages** — available, downloaded, or manifest languages; optional filter by name.
+- **info** — show language availability and cache status.
+- **download** — prefetch parsers: specific languages, language groups, all, or fresh updates.
+- **cache_dir** — return the cache directory path.
+- **clean_cache** — remove all cached parsers.
+
+## Resources
+
+- `ts-pack://languages` — catalog of all known languages.
+- `ts-pack://languages/downloaded` — currently cached languages.
+- `ts-pack://language/{name}` — per-language metadata template.
+
+## Prompt and completions
+
+- **analyze-code** — code-analysis prompt (args: `language`, optional `focus`).
+- **Language-name autocomplete** — available language names in completions.
 
 ## When to prefer MCP over the CLI or SDK
 
