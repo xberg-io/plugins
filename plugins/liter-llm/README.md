@@ -29,12 +29,14 @@ To install the CLI yourself (also gives you the proxy server):
 
 ```bash
 brew install kreuzberg-dev/tap/liter-llm
+# or from crates.io (compiles from source):
+cargo install liter-llm-cli
 # or run it without a persistent install (the CLI proxy package self-installs the binary):
 npx @kreuzberg/liter-llm-cli --help
 uvx --from liter-llm-cli liter-llm --help
 # or download a prebuilt binary from the latest GitHub release:
 #   https://github.com/kreuzberg-dev/liter-llm/releases/latest
-# or build from source:
+# or build the unreleased HEAD from source:
 cargo install --git https://github.com/kreuzberg-dev/liter-llm liter-llm-cli
 ```
 

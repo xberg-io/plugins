@@ -21,15 +21,16 @@
 #   e) Checksum-verified download of the prebuilt CLI archive from the tool's
 #      LATEST GitHub release. The latest tag is resolved via the GitHub API; the
 #      versioned asset + SHA256SUMS file are then fetched and verified.
-#   f) Give up with guidance (brew tap, or `cargo install --git` from source).
+#   f) Give up with guidance (brew tap, or `cargo install liter-llm-cli`).
 #
 # `auto` tries every step in order; an explicit value pins that single channel
 # (each still first honors an already-present binary in step (a)).
 #
-# The liter-llm CLI crate is NOT published to crates.io, so `cargo install
-# liter-llm-cli` (registry form) does not work and is intentionally absent. The
-# only cargo path that works is `cargo install --git`, which compiles from the
-# repo — see the final guidance below.
+# The liter-llm CLI crate IS published to crates.io, so `cargo install
+# liter-llm-cli` works. It is intentionally absent from the auto-resolution
+# steps above because it compiles from source (slow, needs a Rust toolchain);
+# the launcher prefers prebuilt channels. `cargo install --git` builds the
+# unreleased repo HEAD. Both appear in the final guidance below.
 #
 # Note on npx/uvx: the liter-llm npm and PyPI CLI packages are being rolled out
 # (the package self-installs/runs the binary, basemind-style). They may not be
@@ -285,6 +286,7 @@ fi
 # ---- (f) Give up with guidance ----------------------------------------------
 die "could not locate or install liter-llm. Install it with one of:
   brew install kreuzberg-dev/tap/liter-llm
-  cargo install --git https://github.com/kreuzberg-dev/liter-llm liter-llm-cli
+  cargo install liter-llm-cli
+  cargo install --git https://github.com/kreuzberg-dev/liter-llm liter-llm-cli   # unreleased HEAD
 or download a prebuilt archive from https://github.com/${REPO}/releases/latest
 then re-run, or set LITER_LLM_LAUNCHER to force a method (auto|npx|uvx|brew|download)."
