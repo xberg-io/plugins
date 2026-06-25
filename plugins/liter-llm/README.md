@@ -159,4 +159,4 @@ MIT. Skill content references the upstream [liter-llm](https://github.com/xberg-
 
 - **Marketplace**: [xberg-io/plugins](https://github.com/xberg-io/plugins)
 - **Upstream**: [xberg-io/liter-llm](https://github.com/xberg-io/liter-llm)
-- **Sibling plugins**: [kreuzberg](../kreuzberg/README.md), [kreuzcrawl](../kreuzcrawl/README.md), [kreuzberg-cloud](../kreuzberg-cloud/README.md)
+- **Sibling plugins**: [kreuzberg](../kreuzberg/README.md), [kreuzcrawl](../kreuzcrawl/README.md), [xberg-enterprise](../xberg-enterprise/README.md)

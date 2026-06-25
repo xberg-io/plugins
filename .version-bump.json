@@ -93,31 +93,31 @@
       "field": "version"
     },
     {
-      "path": "plugins/kreuzberg-cloud/.claude-plugin/plugin.json",
+      "path": "plugins/xberg-enterprise/.claude-plugin/plugin.json",
       "field": "version"
     },
     {
-      "path": "plugins/kreuzberg-cloud/.codex-plugin/plugin.json",
+      "path": "plugins/xberg-enterprise/.codex-plugin/plugin.json",
       "field": "version"
     },
     {
-      "path": "plugins/kreuzberg-cloud/.cursor-plugin/plugin.json",
+      "path": "plugins/xberg-enterprise/.cursor-plugin/plugin.json",
       "field": "version"
     },
     {
-      "path": "plugins/kreuzberg-cloud/.factory-plugin/plugin.json",
+      "path": "plugins/xberg-enterprise/.factory-plugin/plugin.json",
       "field": "version"
     },
     {
-      "path": "plugins/kreuzberg-cloud/.github/plugin/plugin.json",
+      "path": "plugins/xberg-enterprise/.github/plugin/plugin.json",
       "field": "version"
     },
     {
-      "path": "plugins/kreuzberg-cloud/gemini-extension.json",
+      "path": "plugins/xberg-enterprise/gemini-extension.json",
       "field": "version"
     },
     {
-      "path": "plugins/kreuzberg-cloud/package.json",
+      "path": "plugins/xberg-enterprise/package.json",
       "field": "version"
     },
     {

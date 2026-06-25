@@ -107,7 +107,7 @@ console.log(result.status, result.result?.content);
 ### Python SDK
 
 ```python
-from kreuzberg_cloud import KreuzbergCloud
+from xberg_enterprise import KreuzbergCloud
 
 with KreuzbergCloud(api_key=...) as client:
     job = client.wait_for_job(job_id, timeout=300)
@@ -137,7 +137,7 @@ supplied is echoed back inside the payload.
 
 The server signs each webhook delivery with an HMAC computed over the raw
 JSON body using `secret`. The signature header name and exact algorithm
-(SHA-256, hex-encoded) are documented at <https://docs.kreuzberg.cloud>;
+(SHA-256, hex-encoded) are documented at <https://enterprise.xberg.io>;
 treat them as the source of truth — do not hard-code header names from
 this skill.
 

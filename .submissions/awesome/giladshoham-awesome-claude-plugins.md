@@ -5,6 +5,6 @@
 - Branch: `add-kreuzberg-plugins`
 - PR: <https://github.com/GiladShoham/awesome-claude-plugins/pull/19>
 - Submitted: 2026-06-10
-- Plugins entered: kreuzberg, kreuzcrawl, kreuzberg-cloud
+- Plugins entered: kreuzberg, kreuzcrawl, xberg-enterprise
 - Status: open
 - Validation: `jq empty` on marketplace/manifests and `./validate-plugins.sh` passed locally.

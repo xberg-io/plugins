@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- MCP server transport for kreuzberg-cloud
+- MCP server transport for xberg-enterprise
 - html-to-markdown and tree-sitter-language-pack MCP servers (plugin wiring is in place; the upstream `mcp` subcommands land in their next releases)
 
 ## [0.2.2] - 2026-06-20
@@ -31,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **liter-llm** plugin: universal LLM API client for 143 providers (chat, streaming, tools, embeddings, search, OCR) plus an OpenAI-compatible proxy and an MCP server
 - **tree-sitter-language-pack** plugin: parse and extract code intelligence from 300+ languages (structure, imports, symbols, syntax-aware chunking)
 - Auto-installing MCP launchers (existing binary → npx → uvx → brew → checksum-verified prebuilt download) for kreuzberg, kreuzcrawl, and liter-llm; CLI/MCP wiring for html-to-markdown and tree-sitter-language-pack
-- New skills — kreuzberg: `chunking`, `batch-extraction`, `extracting-keywords`; kreuzcrawl: `mapping-urls`, `automating-the-browser`, `serving-the-api`; kreuzberg-cloud: `versioning-documents`
+- New skills — kreuzberg: `chunking`, `batch-extraction`, `extracting-keywords`; kreuzcrawl: `mapping-urls`, `automating-the-browser`, `serving-the-api`; xberg-enterprise: `versioning-documents`
 - `<tool>-cli` npm/PyPI proxy packages so `npx <tool>-cli` / `uvx <tool>-cli` install and run each CLI
 
 ### Changed
@@ -45,7 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **kreuzberg** plugin: local document extraction (PDF, Office, images with OCR, HTML, email, archives, academic; 91+ formats)
 - **kreuzcrawl** plugin: web crawling and scraping with HTML→Markdown and headless-Chrome fallback
-- **kreuzberg-cloud** plugin: managed extraction API (skills-only; MCP server in v0.2.0)
+- **xberg-enterprise** plugin: managed extraction API (skills-only; MCP server in v0.2.0)
 - Multi-harness support: Claude Code, Codex CLI, Cursor, Gemini CLI, Factory Droid, GitHub Copilot CLI, opencode
 - Skill-based agent integration with automatic tool loading
 - Marketplace registration for official Claude Code and Factory Droid (pending review)

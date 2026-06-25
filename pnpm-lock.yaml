@@ -20,7 +20,7 @@ importers:
         specifier: ^1.17.8
         version: 1.17.8
 
-  plugins/kreuzberg-cloud: {}
+  plugins/xberg-enterprise: {}
 
   plugins/kreuzcrawl:
     dependencies:

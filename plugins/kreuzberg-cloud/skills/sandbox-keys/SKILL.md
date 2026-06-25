@@ -1,6 +1,6 @@
 ---
 name: sandbox-keys
-description: Use when the user wants to try Kreuzberg Cloud without signing up, or needs an ephemeral key for evaluation, demos, or CI integration tests. Covers POST /v1/sandbox/key — the no-auth endpoint, quota, TTL, and cleanup expectations.
+description: Use when the user wants to try Xberg Enterprise without signing up, or needs an ephemeral key for evaluation, demos, or CI integration tests. Covers POST /v1/sandbox/key — the no-auth endpoint, quota, TTL, and cleanup expectations.
 ---
 
 # Sandbox keys
@@ -79,7 +79,7 @@ console.log(result.result?.content);
 
 ```python
 import asyncio
-from kreuzberg_cloud import AsyncKreuzbergCloud
+from xberg_enterprise import AsyncKreuzbergCloud
 
 async def main() -> None:
     async with await AsyncKreuzbergCloud.from_sandbox() as client:

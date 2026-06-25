@@ -22,4 +22,4 @@
 - `punkpeye/awesome-mcp-servers` (PR #7633) covers MCP-server discovery.
 - `jmanhype/awesome-claude-code` (PR #54) lists both as MCP servers.
 
-Cloud plugin (kreuzberg-cloud) deferred until v0.2.0 ships the MCP wiring.
+Cloud plugin (xberg-enterprise) deferred until v0.2.0 ships the MCP wiring.

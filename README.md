@@ -15,7 +15,7 @@ Document-intelligence plugins for coding agents. Install any of the six into Cla
 |--------|-------------------|--------|
 | **kreuzberg** | Local document extraction from 91+ formats (PDF, Office, images with OCR, HTML, email, archives, academic) | Stable — v0.2.2 |
 | **kreuzcrawl** | Web crawling and scraping with HTML→Markdown and headless-Chrome fallback | Stable — v0.2.2 |
-| **kreuzberg-cloud** | Managed extraction via `api.xberg.io` | Skills-only — MCP server in a later release |
+| **xberg-enterprise** | Managed extraction via `api.xberg.io` | Skills-only — MCP server in a later release |
 | **html-to-markdown** | Fast, lossless HTML→Markdown with structured metadata and tables | Stable — v0.2.2 |
 | **liter-llm** | Universal LLM API client for 143 providers (chat, streaming, tools, embeddings) | Stable — v0.2.2 |
 | **tree-sitter-language-pack** | Parse and extract code intelligence from 300+ languages | Stable — v0.2.2 |
@@ -30,7 +30,7 @@ Once approved by the marketplace:
 ```text
 /plugin install kreuzberg@claude-community
 /plugin install kreuzcrawl@claude-community
-/plugin install kreuzberg-cloud@claude-community
+/plugin install xberg-enterprise@claude-community
 /plugin install html-to-markdown@claude-community
 /plugin install liter-llm@claude-community
 /plugin install tree-sitter-language-pack@claude-community
@@ -42,7 +42,7 @@ Self-host (works today):
 /plugin marketplace add xberg-io/plugins
 /plugin install kreuzberg@kreuzberg
 /plugin install kreuzcrawl@kreuzberg
-/plugin install kreuzberg-cloud@kreuzberg
+/plugin install xberg-enterprise@kreuzberg
 /plugin install html-to-markdown@kreuzberg
 /plugin install liter-llm@kreuzberg
 /plugin install tree-sitter-language-pack@kreuzberg
@@ -60,7 +60,7 @@ Codex CLI marketplace is not yet open for third-party submissions. Use self-host
 /plugins add https://github.com/xberg-io/plugins
 ```
 
-Then search for the plugin you want — e.g. `kreuzberg`, `kreuzcrawl`, `html-to-markdown`, `liter-llm`, `tree-sitter-language-pack`, or `kreuzberg-cloud` — and select "Install Plugin".
+Then search for the plugin you want — e.g. `kreuzberg`, `kreuzcrawl`, `html-to-markdown`, `liter-llm`, `tree-sitter-language-pack`, or `xberg-enterprise` — and select "Install Plugin".
 </details>
 
 <details>
@@ -91,7 +91,7 @@ Self-host install:
 droid plugin marketplace add https://github.com/xberg-io/plugins
 droid plugin install kreuzberg@kreuzberg
 droid plugin install kreuzcrawl@kreuzberg
-droid plugin install kreuzberg-cloud@kreuzberg
+droid plugin install xberg-enterprise@kreuzberg
 droid plugin install html-to-markdown@kreuzberg
 droid plugin install liter-llm@kreuzberg
 droid plugin install tree-sitter-language-pack@kreuzberg
@@ -109,7 +109,7 @@ Self-host install:
 copilot plugin marketplace add https://github.com/xberg-io/plugins
 copilot plugin install kreuzberg@kreuzberg
 copilot plugin install kreuzcrawl@kreuzberg
-copilot plugin install kreuzberg-cloud@kreuzberg
+copilot plugin install xberg-enterprise@kreuzberg
 copilot plugin install html-to-markdown@kreuzberg
 copilot plugin install liter-llm@kreuzberg
 copilot plugin install tree-sitter-language-pack@kreuzberg
@@ -134,7 +134,7 @@ Add the published packages to `opencode.json`:
 }
 ```
 
-`liter-llm` and `kreuzberg-cloud` are not yet published as opencode packages.
+`liter-llm` and `xberg-enterprise` are not yet published as opencode packages.
 </details>
 
 ## Binary Requirements
@@ -145,18 +145,18 @@ Each plugin shells out to a real CLI. Install whichever you use:
 |--------|--------|---------|
 | kreuzberg | `kreuzberg` | `brew install xberg-io/tap/kreuzberg` |
 | kreuzcrawl | `kreuzcrawl` | `brew install xberg-io/tap/kreuzcrawl` |
-| kreuzberg-cloud | `kreuzberg-cloud` (v0.2.0) | — (skills-only in v0.1.0) |
+| xberg-enterprise | `xberg-enterprise` (v0.2.0) | — (skills-only in v0.1.0) |
 | html-to-markdown | `html-to-markdown` | `brew install xberg-io/tap/html-to-markdown` |
 | liter-llm | `liter-llm` | `brew install xberg-io/tap/liter-llm` |
 | tree-sitter-language-pack | `tree-sitter-language-pack` | `brew install xberg-io/tap/tree-sitter-language-pack` |
 
-For `kreuzberg-cloud`, set the API key via `KREUZBERG_API_KEY` environment variable or `~/.kreuzberg/cloud.toml`.
+For `xberg-enterprise`, set the API key via `KREUZBERG_API_KEY` environment variable or `~/.kreuzberg/cloud.toml`.
 
 ## How Agent Skills Work
 
 Each plugin ships SKILL.md files describing what it can do. Agent harnesses auto-load skills based on the `description:` frontmatter in each file. When you ask your agent to extract a document or crawl a site, the matching skill fires automatically — you don't invoke skills directly.
 
-Example: when you say "extract text and tables from this PDF", the `kreuzberg` skill detects the request and loads the `extract` MCP tool from the local `kreuzberg` binary. The agent then calls that tool with your document, getting back structured text, tables, and metadata. The same pattern applies to web crawling with `kreuzcrawl` and cloud extraction with `kreuzberg-cloud`.
+Example: when you say "extract text and tables from this PDF", the `kreuzberg` skill detects the request and loads the `extract` MCP tool from the local `kreuzberg` binary. The agent then calls that tool with your document, getting back structured text, tables, and metadata. The same pattern applies to web crawling with `kreuzcrawl` and cloud extraction with `xberg-enterprise`.
 
 Skills are loaded at agent startup. Their descriptions stay in context so agents can decide when to use them. This means skills consume zero tokens unless the agent decides to invoke them.
 
@@ -172,7 +172,7 @@ plugins/
 │   └── plugin.json            # MCP server config
 ├── kreuzcrawl/
 │   └── plugin.json
-└── kreuzberg-cloud/
+└── xberg-enterprise/
     └── plugin.json
 scripts/
 ├── bump-version.sh            # lockstep version bump
@@ -215,7 +215,7 @@ Yes. Fork the repo, edit the skill SKILL.md, and use `/plugin marketplace add <l
 
 Open an issue at [xberg-io/plugins](https://github.com/xberg-io/plugins/issues) with the plugin name, agent harness, and exact request that failed.
 
-**When will the kreuzberg-cloud MCP server arrive?**
+**When will the xberg-enterprise MCP server arrive?**
 
 Iteration 3, no firm date. The v0.1.0 skills-only release is functional now and will gain MCP transport in v0.2.0.
 
@@ -226,7 +226,7 @@ MIT. See [LICENSE](LICENSE).
 ## Part of Kreuzberg.dev
 
 - [Kreuzberg](https://github.com/xberg-io/kreuzberg) — document intelligence: text, tables, metadata from 91+ formats with optional OCR.
-- [Kreuzberg Cloud](https://github.com/xberg-io/kreuzberg-cloud) — managed extraction API with SDKs, dashboards, and observability.
+- [Xberg Enterprise](https://github.com/xberg-io/xberg-enterprise) — managed extraction API with SDKs, dashboards, and observability.
 - [kreuzcrawl](https://github.com/xberg-io/kreuzcrawl) — web crawling and scraping with HTML→Markdown and headless-Chrome fallback.
 - [html-to-markdown](https://github.com/xberg-io/html-to-markdown) — fast, lossless HTML→Markdown engine.
 - [liter-llm](https://github.com/xberg-io/liter-llm) — universal LLM API client with native bindings for 14 languages and 143 providers.

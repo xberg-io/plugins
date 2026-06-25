@@ -113,4 +113,4 @@ MIT.
 
 - **Marketplace**: [xberg-io/plugins](https://github.com/xberg-io/plugins)
 - **Upstream**: [xberg-io/kreuzcrawl](https://github.com/xberg-io/kreuzcrawl)
-- **Sibling plugins**: [kreuzberg](../kreuzberg/README.md), [kreuzberg-cloud](../kreuzberg-cloud/README.md)
+- **Sibling plugins**: [kreuzberg](../kreuzberg/README.md), [xberg-enterprise](../xberg-enterprise/README.md)

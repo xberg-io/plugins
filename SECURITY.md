@@ -36,13 +36,13 @@ Security reports are in scope for:
 
 Out of scope:
 
-- Vulnerabilities in upstream binaries (`kreuzberg`, `kreuzcrawl`, `kreuzberg-cloud`) — report those to their respective repositories
+- Vulnerabilities in upstream binaries (`kreuzberg`, `kreuzcrawl`, `xberg-enterprise`) — report those to their respective repositories
 - Dependency vulnerabilities in the binaries themselves
 
-For vulnerabilities in the kreuzberg core, kreuzberg-cloud, or kreuzcrawl, report to their respective repositories:
+For vulnerabilities in the kreuzberg core, xberg-enterprise, or kreuzcrawl, report to their respective repositories:
 
 - [kreuzberg](https://github.com/xberg-io/kreuzberg)
-- [kreuzberg-cloud](https://github.com/xberg-io/kreuzberg-cloud)
+- [xberg-enterprise](https://github.com/xberg-io/xberg-enterprise)
 - [kreuzcrawl](https://github.com/xberg-io/kreuzcrawl)
 
 ## General Security Practices

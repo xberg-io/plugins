@@ -17,8 +17,8 @@
       "description": "Web crawling and scraping with HTML→Markdown and headless-Chrome fallback."
     },
     {
-      "name": "kreuzberg-cloud",
-      "source": "./plugins/kreuzberg-cloud",
+      "name": "xberg-enterprise",
+      "source": "./plugins/xberg-enterprise",
       "description": "Managed Kreuzberg document intelligence on api.xberg.io: async extraction with OCR, URL crawling, presigned uploads, document versioning and diffing, signed webhooks, and usage tracking."
     },
     {

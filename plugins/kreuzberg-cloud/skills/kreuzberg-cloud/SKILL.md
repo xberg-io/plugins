@@ -1,5 +1,5 @@
 ---
-name: kreuzberg-cloud
+name: xberg-enterprise
 description: >-
   Managed Kreuzberg document intelligence at api.xberg.io. Use when the
   user wants cloud extraction with webhook delivery, presigned uploads for
@@ -11,12 +11,12 @@ license: MIT
 metadata:
   author: kreuzberg-dev
   version: "0.1.0"
-  repository: https://github.com/xberg-io/kreuzberg-cloud
+  repository: https://github.com/xberg-io/xberg-enterprise
 ---
 
-# Kreuzberg Cloud
+# Xberg Enterprise
 
-Kreuzberg Cloud is the managed extraction API hosted at
+Xberg Enterprise is the managed extraction API hosted at
 `https://api.xberg.io`. It exposes the same Rust extraction engine as
 the local `kreuzberg` CLI, with two extras: jobs are asynchronous (webhook
 or polling delivery) and large files go through presigned uploads instead
@@ -30,8 +30,8 @@ Use this skill when writing code that:
 
 ## v0.1.0 limitation
 
-The `kreuzberg-cloud` plugin v0.1.0 ships **skills only — no MCP server**.
-The `kreuzberg-cloud` CLI binary that hosts the MCP server lands in plugin
+The `xberg-enterprise` plugin v0.1.0 ships **skills only — no MCP server**.
+The `xberg-enterprise` CLI binary that hosts the MCP server lands in plugin
 v0.2.0. Until then, prefer one of:
 
 1. The TypeScript SDK (`@kreuzberg/cloud`) — ESM, tree-shakable, generated
@@ -92,7 +92,7 @@ resolves project context from the key.
   endpoints. Health endpoints (`/healthz`, `/readyz`) are unversioned.
 - The OpenAPI 3.1 spec is published at
   <https://api.xberg.io/openapi.json>; full reference at
-  <https://docs.kreuzberg.cloud>.
+  <https://enterprise.xberg.io>.
 
 ## The 12 endpoints
 
@@ -303,7 +303,7 @@ console.log(result.result?.content);
 ```
 
 ```python
-from kreuzberg_cloud import AsyncKreuzbergCloud
+from xberg_enterprise import AsyncKreuzbergCloud
 async with await AsyncKreuzbergCloud.from_sandbox() as client:
     job = await client.extract_and_wait(file=b"hello world")
     print(job.status, job.result and job.result.content)
@@ -340,7 +340,7 @@ curl -s https://api.xberg.io/v1/jobs/$JOB_ID \
 
 ## References
 
-- API docs: <https://docs.kreuzberg.cloud>
+- API docs: <https://enterprise.xberg.io>
 - OpenAPI spec: <https://api.xberg.io/openapi.json>
 - TypeScript SDK: <https://www.npmjs.com/package/@kreuzberg/cloud>
 - Python SDK: <https://pypi.org/project/kreuzberg-cloud-sdk/>

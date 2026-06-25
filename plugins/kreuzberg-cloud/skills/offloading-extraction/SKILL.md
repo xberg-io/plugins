@@ -161,7 +161,7 @@ console.log(result.result?.content);
 
 ```python
 from pathlib import Path
-from kreuzberg_cloud import KreuzbergCloud
+from xberg_enterprise import KreuzbergCloud
 
 with KreuzbergCloud(api_key=os.environ["KREUZBERG_API_KEY"]) as client:
     job = client.extract(file=Path("invoice.pdf"))

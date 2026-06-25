@@ -1,12 +1,12 @@
 {
-  "name": "@kreuzberg/opencode-kreuzberg-cloud",
+  "name": "@kreuzberg/opencode-xberg-enterprise",
   "version": "0.2.2",
-  "description": "Deferred OpenCode package placeholder for Kreuzberg Cloud.",
+  "description": "Deferred OpenCode package placeholder for Xberg Enterprise.",
   "private": true,
   "type": "module",
-  "main": ".opencode/plugins/kreuzberg-cloud.js",
+  "main": ".opencode/plugins/xberg-enterprise.js",
   "exports": {
-    ".": "./.opencode/plugins/kreuzberg-cloud.js"
+    ".": "./.opencode/plugins/xberg-enterprise.js"
   },
   "files": [
     ".opencode/",
@@ -16,9 +16,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xberg-io/plugins.git",
-    "directory": "plugins/kreuzberg-cloud"
+    "directory": "plugins/xberg-enterprise"
   },
-  "homepage": "https://github.com/xberg-io/plugins/tree/main/plugins/kreuzberg-cloud",
+  "homepage": "https://github.com/xberg-io/plugins/tree/main/plugins/xberg-enterprise",
   "bugs": {
     "url": "https://github.com/xberg-io/plugins/issues"
   },

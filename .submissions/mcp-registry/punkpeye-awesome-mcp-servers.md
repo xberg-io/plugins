@@ -8,6 +8,6 @@
 - Servers entered:
   - `xberg-io/kreuzberg` in "Search & Data Extraction" (🦀 🏠 🍎 🪟 🐧)
   - `xberg-io/kreuzcrawl` in "Browser Automation" (🦀 🏠 🍎 🪟 🐧)
-- kreuzberg-cloud skipped — no MCP server until plugin v0.2.0 (Iteration 3 ships the binary)
+- xberg-enterprise skipped — no MCP server until plugin v0.2.0 (Iteration 3 ships the binary)
 - Status: open
 - Notes: Points at the underlying Rust CLI repos (not the plugins marketplace) because that's where the MCP server binary lives. Cross-links to the plugins marketplace in each entry's description.
