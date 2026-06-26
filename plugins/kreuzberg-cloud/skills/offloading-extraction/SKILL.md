@@ -23,7 +23,7 @@ extraction result inline. Pair every submit with either a poll loop
 
 ```text
 POST https://api.xberg.io/v1/extract
-Authorization: Bearer $KREUZBERG_API_KEY
+Authorization: Bearer $XBERG_API_KEY
 Content-Type: application/json | multipart/form-data
 ```
 
@@ -35,7 +35,7 @@ Returns `202 Accepted` with `ExtractResponse`.
 
 ```bash
 curl -X POST https://api.xberg.io/v1/extract \
-  -H "Authorization: Bearer $KREUZBERG_API_KEY" \
+  -H "Authorization: Bearer $XBERG_API_KEY" \
   -H "Content-Type: application/json" \
   -d @- <<JSON
 {
@@ -60,7 +60,7 @@ JSON
 
 ```bash
 curl -X POST https://api.xberg.io/v1/extract \
-  -H "Authorization: Bearer $KREUZBERG_API_KEY" \
+  -H "Authorization: Bearer $XBERG_API_KEY" \
   -F "file=@invoice.pdf;type=application/pdf" \
   -F 'options={"extraction_config":{"output_format":"markdown"}};type=application/json'
 ```
@@ -75,7 +75,7 @@ Add a `webhook` part as a JSON string:
 
 ```bash
 curl -X POST https://api.xberg.io/v1/extract \
-  -H "Authorization: Bearer $KREUZBERG_API_KEY" \
+  -H "Authorization: Bearer $XBERG_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "urls": [{"url": "https://example.com/docs"}],
@@ -138,7 +138,7 @@ delivered payload, useful for correlating server-side requests.
 import { KreuzbergCloud } from "@kreuzberg/cloud";
 import { readFile } from "node:fs/promises";
 
-const client = new KreuzbergCloud({ apiKey: process.env.KREUZBERG_API_KEY! });
+const client = new KreuzbergCloud({ apiKey: process.env.XBERG_API_KEY! });
 
 const data = await readFile("invoice.pdf");
 const job = await client.extract({
@@ -163,7 +163,7 @@ console.log(result.result?.content);
 from pathlib import Path
 from xberg_enterprise import KreuzbergCloud
 
-with KreuzbergCloud(api_key=os.environ["KREUZBERG_API_KEY"]) as client:
+with KreuzbergCloud(api_key=os.environ["XBERG_API_KEY"]) as client:
     job = client.extract(file=Path("invoice.pdf"))
     print(job.id, job.status)
 ```

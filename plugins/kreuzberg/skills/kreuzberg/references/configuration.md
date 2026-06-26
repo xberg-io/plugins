@@ -318,8 +318,8 @@ The following environment variables can override configuration:
 
 | Variable         | Purpose                             | Example     |
 | ---------------- | ----------------------------------- | ----------- |
-| `KREUZBERG_HOST` | Server bind address (serve command) | `127.0.0.1` |
-| `KREUZBERG_PORT` | Server port (serve command)         | `8080`      |
+| `XBERG_HOST` | Server bind address (serve command) | `127.0.0.1` |
+| `XBERG_PORT` | Server port (serve command)         | `8080`      |
 
 ## Configuration Merging
 

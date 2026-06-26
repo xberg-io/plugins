@@ -49,11 +49,11 @@ After 24 hours or 50 pages — whichever comes first — the key returns
 ### Mint and use
 
 ```bash
-KREUZBERG_API_KEY=$(curl -sX POST https://api.xberg.io/v1/sandbox/key \
+XBERG_API_KEY=$(curl -sX POST https://api.xberg.io/v1/sandbox/key \
   | jq -r .api_key)
 
 curl -sX POST https://api.xberg.io/v1/extract \
-  -H "Authorization: Bearer $KREUZBERG_API_KEY" \
+  -H "Authorization: Bearer $XBERG_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "documents":[{"filename":"hi.txt","mime_type":"text/plain","data":"aGVsbG8="}],

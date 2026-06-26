@@ -69,7 +69,7 @@ Three options, in order of preference for production:
    api_key = "sk_live_..."
    ```
 
-The plugin's `SessionStart` hook checks `KREUZBERG_API_KEY` env var first,
+The plugin's `SessionStart` hook checks `XBERG_API_KEY` env var first,
 then `~/.kreuzberg/cloud.toml`, and emits a setup reminder if neither is
 present.
 
@@ -79,7 +79,7 @@ Every request — except `POST /v1/sandbox/key` — uses a Bearer token:
 
 ```bash
 curl https://api.xberg.io/v1/usage \
-  -H "Authorization: Bearer $KREUZBERG_API_KEY"
+  -H "Authorization: Bearer $XBERG_API_KEY"
 ```
 
 Both `sk_live_*` and `sk_sandbox_*` go in the same header. The server
@@ -314,7 +314,7 @@ async with await AsyncKreuzbergCloud.from_sandbox() as client:
 ```bash
 # 1. Submit.
 JOB_ID=$(curl -sX POST https://api.xberg.io/v1/extract \
-  -H "Authorization: Bearer $KREUZBERG_API_KEY" \
+  -H "Authorization: Bearer $XBERG_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "documents": [
@@ -326,7 +326,7 @@ JOB_ID=$(curl -sX POST https://api.xberg.io/v1/extract \
 
 # 2. Poll until terminal.
 curl -s https://api.xberg.io/v1/jobs/$JOB_ID \
-  -H "Authorization: Bearer $KREUZBERG_API_KEY"
+  -H "Authorization: Bearer $XBERG_API_KEY"
 ```
 
 ## Other skills

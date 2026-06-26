@@ -19,12 +19,12 @@ Every request needs a Bearer token in the `Authorization` header:
 
 ```bash
 curl https://api.xberg.io/v1/usage \
-  -H "Authorization: Bearer $KREUZBERG_API_KEY"
+  -H "Authorization: Bearer $XBERG_API_KEY"
 ```
 
 Provision the key one of two ways:
 
-1. Export `KREUZBERG_API_KEY` in your shell or session.
+1. Export `XBERG_API_KEY` in your shell or session.
 2. Write `~/.kreuzberg/cloud.toml` with `api_key = "sk_live_..."`.
 
 The plugin's `SessionStart` hook checks both on every session and emits a

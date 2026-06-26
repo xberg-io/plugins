@@ -19,7 +19,7 @@ Pick webhooks when you can't block, or when the job runs minutes long.
 
 ```text
 GET https://api.xberg.io/v1/jobs/{id}
-Authorization: Bearer $KREUZBERG_API_KEY
+Authorization: Bearer $XBERG_API_KEY
 ```
 
 Accepts both extraction job IDs (from `job_ids`) and crawl job IDs (from
@@ -77,7 +77,7 @@ JOB_ID="$1"
 delay=1
 while true; do
   body=$(curl -fsS \
-    -H "Authorization: Bearer $KREUZBERG_API_KEY" \
+    -H "Authorization: Bearer $XBERG_API_KEY" \
     "https://api.xberg.io/v1/jobs/$JOB_ID")
   status=$(echo "$body" | jq -r .status)
   case "$status" in
@@ -95,7 +95,7 @@ The SDK does the backoff for you:
 
 ```ts
 import { KreuzbergCloud } from "@kreuzberg/cloud";
-const client = new KreuzbergCloud({ apiKey: process.env.KREUZBERG_API_KEY! });
+const client = new KreuzbergCloud({ apiKey: process.env.XBERG_API_KEY! });
 
 const result = await client.waitForJob(jobId, {
   timeoutMs: 5 * 60_000,

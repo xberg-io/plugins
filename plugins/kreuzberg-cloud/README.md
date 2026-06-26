@@ -26,7 +26,7 @@ The plugin v0.1.0 ships **skills and documentation only; no MCP server**. The `x
 
 ### API key requirement
 
-Set the `KREUZBERG_API_KEY` environment variable or write `~/.kreuzberg/cloud.toml`:
+Set the `XBERG_API_KEY` environment variable or write `~/.kreuzberg/cloud.toml`:
 
 ```toml
 api_key = "sk_live_..."
@@ -55,7 +55,7 @@ MCP wiring lands in v0.2.0. Until then, the v0.1.0 skills document the REST API 
 ### Environment variable
 
 ```bash
-export KREUZBERG_API_KEY="sk_live_..."
+export XBERG_API_KEY="sk_live_..."
 ```
 
 ### Config file
@@ -75,7 +75,7 @@ Submit a document for extraction via curl:
 
 ```text
 curl -X POST https://api.xberg.io/v1/extract \
-  -H "Authorization: Bearer $KREUZBERG_API_KEY" \
+  -H "Authorization: Bearer $XBERG_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"url":"https://example.com/document.pdf"}'
 ```
@@ -84,7 +84,7 @@ Poll a job for completion with the TypeScript SDK:
 
 ```text
 import { CloudClient } from "@kreuzberg/cloud";
-const client = new CloudClient({ apiKey: process.env.KREUZBERG_API_KEY });
+const client = new CloudClient({ apiKey: process.env.XBERG_API_KEY });
 const job = await client.getJob(jobId);
 console.log(job.status);  // "pending" | "processing" | "completed" | "failed"
 ```
@@ -93,7 +93,7 @@ Check quota with the Python SDK:
 
 ```text
 from xberg_enterprise_sdk import Client
-client = Client(api_key=os.getenv("KREUZBERG_API_KEY"))
+client = Client(api_key=os.getenv("XBERG_API_KEY"))
 usage = client.get_usage()
 print(f"Pages processed: {usage.pages_processed}, Quota: {usage.quota}")
 ```

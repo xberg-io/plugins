@@ -951,7 +951,7 @@ Discover extraction configuration from the environment (deprecated).
 
 Attempts to locate a Kreuzberg configuration file using:
 
-1. KREUZBERG_CONFIG_PATH environment variable
+1. XBERG_CONFIG_PATH environment variable
 2. Search for kreuzberg.toml, kreuzberg.yaml, or kreuzberg.json in current and parent directories
 
 **Returns:** ExtractionConfig if found, None otherwise
@@ -969,7 +969,7 @@ result = extract_file_sync("document.pdf", config=config)
 
 # Auto-discover configuration
 import os
-os.environ["KREUZBERG_CONFIG_PATH"] = "config/kreuzberg.yaml"
+os.environ["XBERG_CONFIG_PATH"] = "config/kreuzberg.yaml"
 # Then extraction will use the discovered config
 ```
 

@@ -8,7 +8,7 @@
 # likely already has. Every step FALLS THROUGH to the next on any failure, so
 # the launcher self-heals as more distribution channels come online.
 #
-# Resolution order (override with KREUZBERG_LAUNCHER=auto|npx|uvx|brew|download):
+# Resolution order (override with XBERG_LAUNCHER=auto|npx|uvx|brew|download):
 #
 #   a) An existing kreuzberg on PATH, or cached at $PLUGIN_ROOT/bin — any working
 #      binary is accepted (no version match: the CLI release line and the plugin
@@ -53,10 +53,10 @@ die() {
   exit 1
 }
 
-LAUNCHER="${KREUZBERG_LAUNCHER:-auto}"
+LAUNCHER="${XBERG_LAUNCHER:-auto}"
 case "$LAUNCHER" in
 auto | npx | uvx | brew | download) ;;
-*) die "invalid KREUZBERG_LAUNCHER='$LAUNCHER' (expected auto|npx|uvx|brew|download)" ;;
+*) die "invalid XBERG_LAUNCHER='$LAUNCHER' (expected auto|npx|uvx|brew|download)" ;;
 esac
 
 want() { [ "$LAUNCHER" = "auto" ] || [ "$LAUNCHER" = "$1" ]; }

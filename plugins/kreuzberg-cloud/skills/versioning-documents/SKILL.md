@@ -29,7 +29,7 @@ job UUID.
 
 ```bash
 curl -s https://api.xberg.io/v1/documents/$DOC_ID \
-  -H "Authorization: Bearer $KREUZBERG_API_KEY"
+  -H "Authorization: Bearer $XBERG_API_KEY"
 ```
 
 Returns the latest version's extraction result (same `result` shape as
@@ -39,7 +39,7 @@ Returns the latest version's extraction result (same `result` shape as
 
 ```bash
 curl -s https://api.xberg.io/v1/documents/$DOC_ID/versions \
-  -H "Authorization: Bearer $KREUZBERG_API_KEY"
+  -H "Authorization: Bearer $XBERG_API_KEY"
 ```
 
 Returns an array of `DocumentVersionEntry` (paginated). Each entry carries
@@ -50,7 +50,7 @@ a `from`/`to` value when diffing.
 
 ```bash
 curl -s "https://api.xberg.io/v1/documents/$DOC_ID/diff?from=1&to=3" \
-  -H "Authorization: Bearer $KREUZBERG_API_KEY"
+  -H "Authorization: Bearer $XBERG_API_KEY"
 ```
 
 The diff is computed **synchronously** and returned inline as `200` when it
@@ -85,7 +85,7 @@ at ~30s — until terminal:
 
 ```bash
 curl -s https://api.xberg.io/v1/documents/$DOC_ID/diff/$DIFF_JOB_ID \
-  -H "Authorization: Bearer $KREUZBERG_API_KEY"
+  -H "Authorization: Bearer $XBERG_API_KEY"
 ```
 
 Treat both `200` (inline) and `202` (queued) as success at submit time;

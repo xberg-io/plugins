@@ -264,7 +264,7 @@ kreuzberg serve [FLAGS]
 ## Configuration Precedence
 
 1. CLI arguments (`--host`, `--port`)
-2. Environment variables (`KREUZBERG_HOST`, `KREUZBERG_PORT`)
+2. Environment variables (`XBERG_HOST`, `XBERG_PORT`)
 3. Config file (`[server]` section)
 4. Built-in defaults (`127.0.0.1:8000`)
 
@@ -281,7 +281,7 @@ kreuzberg serve --host 0.0.0.0 --port 3000
 kreuzberg serve --config kreuzberg.toml
 
 # Start server (environment variables override defaults)
-KREUZBERG_HOST=192.168.1.100 KREUZBERG_PORT=8080 kreuzberg serve
+XBERG_HOST=192.168.1.100 XBERG_PORT=8080 kreuzberg serve
 ```
 
 ### mcp
@@ -390,8 +390,8 @@ The CLI validates input and provides clear error messages:
 ## Environment Variables
 
 - `RUST_LOG` — Set logging level (e.g., `RUST_LOG=debug`)
-- `KREUZBERG_HOST` — Server bind host (used by `serve` command)
-- `KREUZBERG_PORT` — Server bind port (used by `serve` command)
+- `XBERG_HOST` — Server bind host (used by `serve` command)
+- `XBERG_PORT` — Server bind port (used by `serve` command)
 
 ## Common Patterns
 

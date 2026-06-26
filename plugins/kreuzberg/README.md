@@ -92,7 +92,7 @@ All extraction tools accept an optional `config` object to override defaults.
 
 Kreuzberg auto-discovers `kreuzberg.toml` from the current directory upward. Set config via:
 
-1. **Environment variable**: `KREUZBERG_CONFIG_JSON='{"output_format":"markdown"}'`
+1. **Environment variable**: `XBERG_CONFIG_JSON='{"output_format":"markdown"}'`
 2. **Config file** (TOML): `kreuzberg.toml` in cwd or a parent directory.
 3. **CLI flag**: `kreuzberg extract doc.pdf --content-format markdown`
 

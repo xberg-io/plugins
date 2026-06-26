@@ -157,7 +157,7 @@ Each plugin shells out to a real CLI. Install whichever you use:
 | liter-llm | `liter-llm` | `brew install xberg-io/tap/liter-llm` |
 | tree-sitter-language-pack | `tree-sitter-language-pack` | `brew install xberg-io/tap/tree-sitter-language-pack` |
 
-For `xberg-enterprise`, set the API key via `KREUZBERG_API_KEY` environment variable or `~/.kreuzberg/cloud.toml`.
+For `xberg-enterprise`, set the API key via `XBERG_API_KEY` environment variable or `~/.kreuzberg/cloud.toml`.
 
 ## How Agent Skills Work
 

@@ -5,11 +5,11 @@
 set -euo pipefail
 
 # Detect credentials.
-# Precedence: KREUZBERG_API_KEY env var > ~/.kreuzberg/cloud.toml api_key field.
+# Precedence: XBERG_API_KEY env var > ~/.kreuzberg/cloud.toml api_key field.
 config_file="${HOME}/.kreuzberg/cloud.toml"
 has_key=0
 
-if [ -n "${KREUZBERG_API_KEY:-}" ]; then
+if [ -n "${XBERG_API_KEY:-}" ]; then
   has_key=1
 elif [ -f "$config_file" ] && grep -qE '^[[:space:]]*api_key[[:space:]]*=[[:space:]]*"[^"]+"' "$config_file" 2>/dev/null; then
   has_key=1
@@ -23,7 +23,7 @@ fi
 # No key found — emit a one-line setup reminder via the platform-appropriate
 # JSON shape. Same dispatch as superpowers' session-start.
 
-message='Xberg Enterprise: set KREUZBERG_API_KEY or write ~/.kreuzberg/cloud.toml to enable cloud extraction. See https://xberg.io/cloud for keys.'
+message='Xberg Enterprise: set XBERG_API_KEY or write ~/.kreuzberg/cloud.toml to enable cloud extraction. See https://xberg.io/cloud for keys.'
 
 # Escape string for JSON embedding using bash parameter substitution.
 escape_for_json() {
