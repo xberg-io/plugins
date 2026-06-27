@@ -32,9 +32,8 @@
 # the launcher prefers prebuilt channels. `cargo install --git` builds the
 # unreleased repo HEAD. Both appear in the final guidance below.
 #
-# Note on npx/uvx: the liter-llm npm and PyPI CLI packages are being rolled out
-# (the package self-installs/runs the binary, basemind-style). They may not be
-# published yet, so each is PROBED first and falls through cleanly if absent.
+# Note on npx/uvx: the liter-llm npm and PyPI CLI packages self-install/run the binary
+# (basemind-style). Each is PROBED first and falls through cleanly if absent.
 # The `@xberg-io/*` / `liter-llm` binding packages (NAPI-RS / PyO3) are language
 # SDKs, NOT the CLI — they are not used here.
 #

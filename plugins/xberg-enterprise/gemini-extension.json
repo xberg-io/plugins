@@ -1,6 +1,0 @@
-{
-  "name": "xberg-enterprise",
-  "description": "Managed Xberg document intelligence on api.xberg.io — async extraction with OCR, URL crawling, presigned uploads, document versioning and diffing, signed webhooks, and usage tracking.",
-  "version": "0.2.2",
-  "contextFileName": "GEMINI.md"
-}

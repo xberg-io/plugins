@@ -7,7 +7,7 @@
 
 # Xberg Plugins Marketplace
 
-Document-intelligence plugins for coding agents. Install any of the six into Claude Code, Codex CLI, Cursor, Gemini CLI, Factory Droid, GitHub Copilot CLI, or opencode.
+Document-intelligence plugins for coding agents. Install any of the five into Claude Code, Codex CLI, Cursor, Gemini CLI, Factory Droid, GitHub Copilot CLI, or opencode.
 
 ## Badges
 
@@ -22,7 +22,6 @@ Document-intelligence plugins for coding agents. Install any of the six into Cla
 |--------|-------------------|--------|
 | **xberg** | Local document extraction from 91+ formats (PDF, Office, images with OCR, HTML, email, archives, academic) | Stable — v0.2.2 |
 | **crawlberg** | Web crawling and scraping with HTML→Markdown and headless-Chrome fallback | Stable — v0.2.2 |
-| **xberg-enterprise** | Managed extraction via `api.xberg.io` | Skills-only — MCP server in a later release |
 | **html-to-markdown** | Fast, lossless HTML→Markdown with structured metadata and tables | Stable — v0.2.2 |
 | **liter-llm** | Universal LLM API client for 143 providers (chat, streaming, tools, embeddings) | Stable — v0.2.2 |
 | **tree-sitter-language-pack** | Parse and extract code intelligence from 300+ languages | Stable — v0.2.2 |
@@ -37,7 +36,6 @@ Once approved by the marketplace:
 ```text
 /plugin install xberg@claude-community
 /plugin install crawlberg@claude-community
-/plugin install xberg-enterprise@claude-community
 /plugin install html-to-markdown@claude-community
 /plugin install liter-llm@claude-community
 /plugin install tree-sitter-language-pack@claude-community
@@ -49,7 +47,6 @@ Self-host (works today):
 /plugin marketplace add xberg-io/plugins
 /plugin install xberg@xberg
 /plugin install crawlberg@xberg
-/plugin install xberg-enterprise@xberg
 /plugin install html-to-markdown@xberg
 /plugin install liter-llm@xberg
 /plugin install tree-sitter-language-pack@xberg
@@ -61,13 +58,13 @@ Pending review for official Claude marketplace.
 <details>
 <summary><strong>Codex CLI</strong></summary>
 
-Codex CLI marketplace is not yet open for third-party submissions. Use self-hosted install:
+Self-host install:
 
 ```text
 /plugins add https://github.com/xberg-io/plugins
 ```
 
-Then search for the plugin you want — e.g. `xberg`, `crawlberg`, `html-to-markdown`, `liter-llm`, `tree-sitter-language-pack`, or `xberg-enterprise` — and select "Install Plugin".
+Then search for the plugin you want — e.g. `xberg`, `crawlberg`, `html-to-markdown`, `liter-llm`, or `tree-sitter-language-pack` — and select "Install Plugin".
 </details>
 
 <details>
@@ -98,7 +95,6 @@ Self-host install:
 droid plugin marketplace add https://github.com/xberg-io/plugins
 droid plugin install xberg@xberg
 droid plugin install crawlberg@xberg
-droid plugin install xberg-enterprise@xberg
 droid plugin install html-to-markdown@xberg
 droid plugin install liter-llm@xberg
 droid plugin install tree-sitter-language-pack@xberg
@@ -116,7 +112,6 @@ Self-host install:
 copilot plugin marketplace add https://github.com/xberg-io/plugins
 copilot plugin install xberg@xberg
 copilot plugin install crawlberg@xberg
-copilot plugin install xberg-enterprise@xberg
 copilot plugin install html-to-markdown@xberg
 copilot plugin install liter-llm@xberg
 copilot plugin install tree-sitter-language-pack@xberg
@@ -141,7 +136,7 @@ Add the published packages to `opencode.json`:
 }
 ```
 
-`liter-llm` and `xberg-enterprise` are not yet published as opencode packages.
+`liter-llm` has no opencode package.
 </details>
 
 ## Binary Requirements
@@ -152,18 +147,15 @@ Each plugin shells out to a real CLI. Install whichever you use:
 |--------|--------|---------|
 | xberg | `xberg` | `brew install xberg-io/tap/xberg` |
 | crawlberg | `crawlberg` | `brew install xberg-io/tap/crawlberg` |
-| xberg-enterprise | `xberg-enterprise` (v0.2.0) | — (skills-only in v0.1.0) |
 | html-to-markdown | `html-to-markdown` | `brew install xberg-io/tap/html-to-markdown` |
 | liter-llm | `liter-llm` | `brew install xberg-io/tap/liter-llm` |
 | tree-sitter-language-pack | `tree-sitter-language-pack` | `brew install xberg-io/tap/tree-sitter-language-pack` |
-
-For `xberg-enterprise`, set the API key via `XBERG_API_KEY` environment variable or `~/.xberg/cloud.toml`.
 
 ## How Agent Skills Work
 
 Each plugin ships SKILL.md files describing what it can do. Agent harnesses auto-load skills based on the `description:` frontmatter in each file. When you ask your agent to extract a document or crawl a site, the matching skill fires automatically — you don't invoke skills directly.
 
-Example: when you say "extract text and tables from this PDF", the `xberg` skill detects the request and loads the `extract` MCP tool from the local `xberg` binary. The agent then calls that tool with your document, getting back structured text, tables, and metadata. The same pattern applies to web crawling with `crawlberg` and cloud extraction with `xberg-enterprise`.
+Example: when you say "extract text and tables from this PDF", the `xberg` skill detects the request and loads the `extract` MCP tool from the local `xberg` binary. The agent then calls that tool with your document, getting back structured text, tables, and metadata. The same pattern applies to web crawling with `crawlberg`.
 
 Skills are loaded at agent startup. Their descriptions stay in context so agents can decide when to use them. This means skills consume zero tokens unless the agent decides to invoke them.
 
@@ -177,9 +169,7 @@ Skills are loaded at agent startup. Their descriptions stay in context so agents
 plugins/
 ├── xberg/
 │   └── plugin.json            # MCP server config
-├── crawlberg/
-│   └── plugin.json
-└── xberg-enterprise/
+└── crawlberg/
     └── plugin.json
 scripts/
 ├── bump-version.sh            # lockstep version bump
@@ -221,10 +211,6 @@ Yes. Fork the repo, edit the skill SKILL.md, and use `/plugin marketplace add <l
 **How do I report a broken skill?**
 
 Open an issue at [xberg-io/plugins](https://github.com/xberg-io/plugins/issues) with the plugin name, agent harness, and exact request that failed.
-
-**When will the xberg-enterprise MCP server arrive?**
-
-Iteration 3, no firm date. The v0.1.0 skills-only release is functional now and will gain MCP transport in v0.2.0.
 
 ## License
 

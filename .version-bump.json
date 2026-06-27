@@ -33,10 +33,6 @@
       "field": "plugins.4.version"
     },
     {
-      "path": ".github/plugin/marketplace.json",
-      "field": "plugins.5.version"
-    },
-    {
       "path": "plugins/xberg/.claude-plugin/plugin.json",
       "field": "version"
     },
@@ -90,34 +86,6 @@
     },
     {
       "path": "plugins/crawlberg/package.json",
-      "field": "version"
-    },
-    {
-      "path": "plugins/xberg-enterprise/.claude-plugin/plugin.json",
-      "field": "version"
-    },
-    {
-      "path": "plugins/xberg-enterprise/.codex-plugin/plugin.json",
-      "field": "version"
-    },
-    {
-      "path": "plugins/xberg-enterprise/.cursor-plugin/plugin.json",
-      "field": "version"
-    },
-    {
-      "path": "plugins/xberg-enterprise/.factory-plugin/plugin.json",
-      "field": "version"
-    },
-    {
-      "path": "plugins/xberg-enterprise/.github/plugin/plugin.json",
-      "field": "version"
-    },
-    {
-      "path": "plugins/xberg-enterprise/gemini-extension.json",
-      "field": "version"
-    },
-    {
-      "path": "plugins/xberg-enterprise/package.json",
       "field": "version"
     },
     {

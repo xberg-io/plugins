@@ -32,9 +32,8 @@
 # repo — see the final guidance below. The CLI's `mcp` subcommand lives behind
 # a non-default feature, so the from-source command uses `--features all`.
 #
-# Note on npx/uvx: the crawlberg npm and PyPI CLI packages are being rolled out
-# (the package self-installs/runs the binary, basemind-style). They may not be
-# published yet, so each is PROBED first and falls through cleanly if absent.
+# Note on npx/uvx: the crawlberg npm and PyPI CLI packages self-install/run the binary
+# (basemind-style). Each is PROBED first and falls through cleanly if absent.
 # The `@xberg-io/crawlberg` npm package and the importable pip package are
 # language SDKs/bindings, NOT the CLI — they are not used here.
 #

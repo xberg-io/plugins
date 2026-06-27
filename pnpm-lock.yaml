@@ -32,8 +32,6 @@ importers:
         specifier: ^1.17.8
         version: 1.17.8
 
-  plugins/xberg-enterprise: {}
-
 packages:
 
   '@msgpackr-extract/msgpackr-extract-darwin-arm64@3.0.4':

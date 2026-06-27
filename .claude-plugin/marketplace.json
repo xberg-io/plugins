@@ -17,11 +17,6 @@
       "description": "Web crawling and scraping with HTML→Markdown and headless-Chrome fallback."
     },
     {
-      "name": "xberg-enterprise",
-      "source": "./plugins/xberg-enterprise",
-      "description": "Managed Xberg document intelligence on api.xberg.io: async extraction with OCR, URL crawling, presigned uploads, document versioning and diffing, signed webhooks, and usage tracking."
-    },
-    {
       "name": "html-to-markdown",
       "source": "./plugins/html-to-markdown",
       "description": "Fast, lossless HTML→Markdown conversion with structured metadata, tables, and document-structure extraction."

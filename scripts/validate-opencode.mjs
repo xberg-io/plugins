@@ -16,11 +16,6 @@ const plugins = [
     tools: ["crawlberg_scrape", "crawlberg_crawl", "crawlberg_map"],
   },
   {
-    path: "plugins/xberg-enterprise/.opencode/plugins/xberg-enterprise.js",
-    exportName: "XbergEnterprisePlugin",
-    tools: [],
-  },
-  {
     path: "plugins/html-to-markdown/.opencode/plugins/html-to-markdown.js",
     exportName: "HtmlToMarkdownPlugin",
     tools: ["html_to_markdown_convert", "html_to_markdown_fetch_url", "html_to_markdown_extract"],

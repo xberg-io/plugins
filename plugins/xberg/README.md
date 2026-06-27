@@ -130,4 +130,4 @@ MIT. The skill content uses Elastic-2.0 references to the upstream [xberg](https
 
 - **Marketplace**: [xberg-io/plugins](https://github.com/xberg-io/plugins)
 - **Upstream**: [xberg-io/xberg](https://github.com/xberg-io/xberg)
-- **Sibling plugins**: [crawlberg](../crawlberg/README.md), [xberg-enterprise](../xberg-enterprise/README.md)
+- **Sibling plugins**: [crawlberg](../crawlberg/README.md)

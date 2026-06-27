@@ -187,4 +187,4 @@ MIT. The upstream [tree-sitter-language-pack](https://github.com/xberg-io/tree-s
 
 - **Marketplace**: [xberg-io/plugins](https://github.com/xberg-io/plugins)
 - **Upstream**: [xberg-io/tree-sitter-language-pack](https://github.com/xberg-io/tree-sitter-language-pack)
-- **Sibling plugins**: [xberg](../xberg/README.md), [crawlberg](../crawlberg/README.md), [xberg-enterprise](../xberg-enterprise/README.md)
+- **Sibling plugins**: [xberg](../xberg/README.md), [crawlberg](../crawlberg/README.md)
