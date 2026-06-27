@@ -1,6 +1,6 @@
 {
   "name": "@xberg-io/opencode-tree-sitter-language-pack",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "OpenCode tools for parsing and code intelligence with the ts-pack CLI.",
   "keywords": [
     "chunking",

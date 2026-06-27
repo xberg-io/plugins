@@ -178,13 +178,22 @@ scripts/
 
 ## Releasing
 
+Two independent version lines:
+
+- **Marketplace plugins** (Claude / Codex / Cursor / Factory / GitHub / Gemini manifests) track `VERSION`.
+- **opencode npm packages** (`@xberg-io/opencode-*`) track `OPENCODE_VERSION` and publish to npm.
+
+`bump-version.sh` writes the version file and every manifest in that group; `validate-manifests.sh` checks both groups.
+
 ```bash
-echo 0.2.0 > VERSION
-scripts/bump-version.sh "$(cat VERSION)"
+scripts/bump-version.sh 0.2.3                    # marketplace plugins (default group)
+scripts/bump-version.sh --group opencode 0.1.1   # opencode npm packages
 scripts/validate-manifests.sh
-git commit -am "chore: release v$(cat VERSION)"
-git tag "v$(cat VERSION)" && git push --tags
+git commit -am "chore: release"
+git tag vX.Y.Z && git push --tags
 ```
+
+The opencode packages publish from `.github/workflows/publish.yaml` (npm Trusted Publishing, with provenance) when a GitHub release is published. The first release was done locally with `scripts/publish-opencode.sh`.
 
 ## Contributing
 

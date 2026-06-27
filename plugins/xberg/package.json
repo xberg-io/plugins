@@ -1,6 +1,6 @@
 {
   "name": "@xberg-io/opencode-xberg",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "OpenCode tools for local document extraction with the xberg CLI.",
   "keywords": [
     "document-intelligence",
