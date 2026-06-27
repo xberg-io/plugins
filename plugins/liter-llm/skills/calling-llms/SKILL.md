@@ -5,22 +5,25 @@ description: Use when sending chat completions through liter-llm and routing to 
 
 # Calling LLMs
 
-Send a chat completion with `client.chat(...)`. The model string is
-`provider/model`; the prefix selects the backend.
+Build a `ChatCompletionRequest` and send it with `client.chat(request)`. Create
+the client with `create_client(...)`. The model string is `provider/model`; the
+prefix selects the backend.
 
 ```python
-import asyncio, os
-from liter_llm import LlmClient
+import asyncio, json, os
+from liter_llm import create_client
+from liter_llm._internal_bindings import ChatCompletionRequest
 
 async def main() -> None:
-    client = LlmClient(api_key=os.environ["OPENAI_API_KEY"])
-    response = await client.chat(
-        model="openai/gpt-4o",
-        messages=[
+    client = create_client(api_key=os.environ["OPENAI_API_KEY"])
+    request = ChatCompletionRequest.from_json(json.dumps({
+        "model": "openai/gpt-4o",
+        "messages": [
             {"role": "system", "content": "You are concise."},
             {"role": "user", "content": "Name three Rust crates for HTTP."},
         ],
-    )
+    }))
+    response = await client.chat(request)
     print(response.choices[0].message.content)
 
 asyncio.run(main())
@@ -28,19 +31,23 @@ asyncio.run(main())
 
 ## Provider routing
 
+The model string's prefix selects the provider; build a request per backend:
+
 ```python
-await client.chat(model="anthropic/claude-sonnet-4-20250514", messages=[...])
-await client.chat(model="google/gemini-2.0-flash", messages=[...])
-await client.chat(model="groq/llama3-70b", messages=[...])
-await client.chat(model="mistral/mistral-large-latest", messages=[...])
-await client.chat(model="bedrock/anthropic.claude-v2", messages=[...])
+ChatCompletionRequest.from_json('{"model":"anthropic/claude-sonnet-4-20250514","messages":[...]}')
+ChatCompletionRequest.from_json('{"model":"google/gemini-2.0-flash","messages":[...]}')
+ChatCompletionRequest.from_json('{"model":"groq/llama3-70b","messages":[...]}')
+ChatCompletionRequest.from_json('{"model":"mistral/mistral-large-latest","messages":[...]}')
+ChatCompletionRequest.from_json('{"model":"bedrock/anthropic.claude-v2","messages":[...]}')
 ```
 
 Set `model_hint` at construction to drop the prefix on every call:
 
 ```python
-client = LlmClient(api_key="sk-...", model_hint="openai")
-await client.chat(model="gpt-4o", messages=[...])  # routes to OpenAI
+client = create_client(api_key="sk-...", model_hint="openai")
+# the request model can now omit the provider prefix:
+request = ChatCompletionRequest.from_json('{"model":"gpt-4o","messages":[...]}')
+await client.chat(request)  # routes to OpenAI
 ```
 
 ## Notes
@@ -48,6 +55,8 @@ await client.chat(model="gpt-4o", messages=[...])  # routes to OpenAI
 - Keys come from env vars (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, …); never
   hardcode them.
 - Without a prefix and without `model_hint`, routing fails.
-- Errors share a category: `Authentication`, `RateLimited`, `BadRequest`,
-  `ContextWindowExceeded`, `ContentPolicy`, `NotFound`, `Server`,
-  `ServiceUnavailable`, `Timeout`, `BudgetExceeded`.
+- Python errors are typed exceptions exported from `liter_llm`:
+  `AuthenticationError`, `RateLimitedError`, `BadRequestError`,
+  `ContextWindowExceededError`, `ContentPolicyError`, `NotFoundError`,
+  `ServerError`, `ServiceUnavailableError`, `LiterLlmTimeoutError`,
+  `BudgetExceededError` — all subclasses of `LiterLlmError`.

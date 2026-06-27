@@ -10,6 +10,7 @@ Python requirement: 3.10+
 def convert(
     html: str,
     options: ConversionOptions | None = None,
+    visitor: HtmlVisitor | None = None,
 ) -> ConversionResult:
     ...
 ```
@@ -46,11 +47,12 @@ from html_to_markdown import ConversionResult
 @dataclass
 class ConversionResult:
     content: str | None = None           # Converted markdown/djot/plain text
-    document: Any | None = None          # Document structure (populated when include_document_structure=True)
-    metadata: Any | None = None          # HtmlMetadata or None
-    tables: list[Any] = field(default_factory=list)   # Extracted tables
-    images: list[str] = field(default_factory=list)   # Extracted inline images (if extract_images=True)
-    warnings: list[Any] = field(default_factory=list) # Non-fatal warnings
+    document: Any | None = None          # DocumentStructure (populated when include_document_structure=True)
+    metadata: Any = None                 # HtmlMetadata
+    tables: list[Any] = field(default_factory=list)   # list[TableData]
+    warnings: list[Any] = field(default_factory=list) # list[ProcessingWarning]
+    # Note: the Python ConversionResult has no `images` field. Inline-image binary
+    # extraction is exposed only in the Rust core (the `inline-images` feature).
 ```
 
 ## ConversionOptions (dataclass)
@@ -150,9 +152,9 @@ class PreprocessingOptions:
     remove_forms: bool = True
 ```
 
-## New Public Types in v3.2.0
+## Public Types
 
-The following types are now exported from `html_to_markdown` directly:
+The following types are exported from `html_to_markdown` directly:
 
 ```python
 from html_to_markdown import (
@@ -191,11 +193,6 @@ print(meta.links)
 # Tables — always present in result
 for table in result.tables:
     print(table.markdown)
-
-# Inline images — set extract_images=True
-result = convert(html, ConversionOptions(extract_images=True))
-for image in result.images:
-    print(image)
 
 # Document structure — set include_document_structure=True
 result = convert(html, ConversionOptions(include_document_structure=True))

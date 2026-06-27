@@ -24,7 +24,7 @@ binding for your language installs separately:
 
 ```bash
 # the CLI (proxy + MCP server):
-brew install xberg-io/tap/liter-llm   # or: npx @xberg-io/liter-llm-cli / uvx --from liter-llm liter-llm
+brew install xberg-io/tap/liter-llm   # or: npx @xberg-io/liter-llm-cli / uvx --from liter-llm-cli liter-llm
 # language SDKs/bindings (libraries, not the CLI):
 pip install liter-llm                      # Python binding
 pnpm add @xberg-io/liter-llm               # Node.js binding

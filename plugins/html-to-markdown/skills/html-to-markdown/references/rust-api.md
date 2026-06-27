@@ -12,9 +12,8 @@ html-to-markdown-rs = "3"
 #   metadata       - HtmlMetadata extraction (default)
 #   inline-images  - Inline image/SVG extraction
 #   visitor        - Custom element visitor pattern
-#   async-visitor  - Async visitor support (implies visitor)
 #   serde          - Serde serialize/deserialize for options/results
-#   full           - All features: inline-images, metadata, visitor, async-visitor, serde
+#   full           - All features: inline-images, metadata, visitor, serde
 ```
 
 ## Primary Function
@@ -50,7 +49,8 @@ let result = convert("<h1>Hello</h1>", Some(opts))?;
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct ConversionResult {
     /// Converted text output (Markdown, Djot, or plain text).
-    /// None only when output_format is OutputFormat::None (extraction-only mode).
+    /// None in extraction-only mode (content output suppressed). `OutputFormat`
+    /// has only Markdown, Djot, and Plain — there is no `None` variant.
     pub content: Option<String>,
 
     /// Structured document tree. Populated when include_document_structure = true.

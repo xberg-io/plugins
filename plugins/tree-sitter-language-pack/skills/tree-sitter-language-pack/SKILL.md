@@ -18,15 +18,15 @@ metadata:
 
 tree-sitter-language-pack is a polyglot code parsing and analysis library
 with a high-performance Rust core and native bindings for Python,
-Node.js/TypeScript, Ruby, Go, Java, C#, PHP, Elixir, and WebAssembly. It
-compiles 306 tree-sitter grammars into efficient parsers and exposes code
-intelligence on top of them.
+Node.js/TypeScript, Ruby, Go, Java, C#, PHP, Elixir, Dart, Kotlin (Android),
+Swift, Zig, and WebAssembly. It compiles 306 tree-sitter grammars into
+efficient parsers and exposes code intelligence on top of them.
 
 ## Capabilities
 
 - **Parse 306 languages** into concrete syntax trees (s-expression or JSON).
 - **Extract structure** — functions, classes, methods, modules with line
-  and byte spans, parent nesting, and visibility.
+  and byte spans, child nesting, and visibility.
 - **Extract imports and exports** — statements, sources, exported kinds.
 - **Extract symbols** — all identifiers, for search and indexing.
 - **Extract docstrings and comments** — attached to definitions or standalone.
@@ -38,7 +38,7 @@ intelligence on top of them.
   (SDK only).
 - **Parser cache management** — download, list, inspect, and clean the
   on-demand parser cache for offline/CI use.
-- **Distribution** — 10 language bindings plus a WebAssembly build and the
+- **Distribution** — 12 language bindings plus a WebAssembly build and the
   `ts-pack` CLI.
 
 Use this skill when writing code that parses source in any supported
@@ -62,8 +62,9 @@ documents (PDF, Office, HTML), use Xberg instead.
 - **SDK** — embed parsing in an application, run custom tree-sitter
   queries, detect a language from raw content (not just a path), or hold
   parsers across many calls. Use the Rust core or the Python/Node bindings.
-- **MCP server (`ts-pack mcp`)** — exposes `parse`/`process`/`detect` as agent
-  tools, so an MCP client can parse and analyze code directly with no shell-out.
+- **MCP server (`ts-pack mcp`)** — exposes `parse`/`process`/`detect_language`
+  (plus language and cache tools) as agent tools, so an MCP client can parse
+  and analyze code directly with no shell-out.
   This plugin auto-registers it; see the **using-the-mcp-server** skill.
 
 Prefer the CLI for ad-hoc work in an agent session; prefer the SDK when the
@@ -109,7 +110,7 @@ tree-sitter-language-pack = { version = "1", features = ["download"] }
 ```
 
 Other bindings: Ruby (`gem install tree_sitter_language_pack`), Go, Java,
-C#, PHP, Elixir, and WebAssembly
+C#, PHP, Elixir, Dart, Kotlin (Android), Swift, Zig, and WebAssembly
 (`npm install @xberg-io/tree-sitter-language-pack-wasm`). See
 <https://github.com/xberg-io/tree-sitter-language-pack>.
 
@@ -170,10 +171,10 @@ ts-pack process src/app.ts --diagnostics
 ```python
 from tree_sitter_language_pack import process, ProcessConfig, detect_language_from_path
 
-config = ProcessConfig("python").all()
+config = ProcessConfig("python", symbols=True, docstrings=True)  # structure/imports/exports default to True
 result = process(source_code, config)
-for item in result["structure"]:
-    print(item["kind"], item["name"], item["start_line"])
+for item in result.structure:                 # ProcessResult is an object, not a dict
+    print(item.kind, item.name, item.span.start_line)
 
 # Path-based detection (use detect_language_from_content for raw text;
 # see the detecting-languages skill):
@@ -211,7 +212,7 @@ See the `managing-parsers` skill for the full cache workflow.
 - `chunking-for-llms` — `--chunk-size` syntax-aware splitting.
 - `detecting-languages` — detect by path, extension, or content.
 - `managing-parsers` — download/clean/list/info parser-cache management.
-- `using-the-mcp-server` — call `parse`/`process`/`detect` over MCP instead of
-  the CLI.
+- `using-the-mcp-server` — call `parse`/`process`/`detect_language` over MCP
+  instead of the CLI.
 
 Full documentation: <https://github.com/xberg-io/tree-sitter-language-pack>

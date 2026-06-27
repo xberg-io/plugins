@@ -20,7 +20,7 @@ The CLI must be installed separately:
 brew install xberg-io/tap/xberg
 # or run it without a persistent install (self-installs the binary):
 npx @xberg-io/xberg-cli --help
-uvx --from xberg xberg --help
+uvx --from xberg-cli xberg --help
 # or download a prebuilt binary from the latest GitHub release, or build from source:
 cargo install --git https://github.com/xberg-io/xberg xberg-cli
 ```

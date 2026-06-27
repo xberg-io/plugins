@@ -58,17 +58,18 @@ ts-pack process big_module.py --chunk-size 2500 \
 
 ## SDK equivalent
 
-The SDK exposes chunking through the process config. Use `with_chunking`
-to set the maximum chunk size — the config field `chunk_max_size` is
-read-only (the CLI flag is `--chunk-size`):
+The SDK exposes chunking through the process config: set the
+`chunk_max_size` field (in bytes) on `ProcessConfig` — the same value the
+CLI's `--chunk-size` flag sets. `ProcessConfig` is a frozen dataclass, so
+pass it to the constructor:
 
 ```python
 from tree_sitter_language_pack import process, ProcessConfig
 
-config = ProcessConfig("python").with_chunking(2500)
+config = ProcessConfig("python", chunk_max_size=2500)
 result = process(source_code, config)
-for chunk in result["chunks"]:
-    send_to_llm(chunk)
+for chunk in result.chunks:          # ProcessResult is an object, not a dict
+    send_to_llm(chunk.content)
 ```
 
 ## When not to chunk

@@ -39,7 +39,8 @@ ts-pack mcp        # for Claude Code / Claude Desktop (stdio)
 
 - **parse** — syntax tree (s-expression or JSON), auto-detecting language from path or explicit.
 - **process** — code intelligence: structure, imports, exports, symbols, docstrings, comments, diagnostics, chunks. Use `all` flag to enable all features.
-- **detect_language** — identify language by path, extension, or content.
+- **detect_language** — identify language by `path` or `content` (those are
+  the only two parameters; extension detection is implicit in `path`).
 
 **Language and cache management:**
 

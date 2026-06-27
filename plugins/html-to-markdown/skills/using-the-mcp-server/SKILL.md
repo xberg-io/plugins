@@ -9,9 +9,9 @@ description: >-
 
 # Using the MCP Server
 
-The `html-to-markdown` MCP server exposes the converter's `convert` and
-extraction capabilities as MCP tools, so an MCP-compatible client (Claude Code,
-Claude Desktop) can convert HTML and pull structured metadata/tables directly,
+The `html-to-markdown` MCP server exposes the converter's conversion and
+metadata-extraction capabilities as MCP tools, so an MCP-compatible client (Claude
+Code, Claude Desktop) can convert HTML and pull structured metadata directly,
 with no CLI invocation or glue code.
 
 ## How it runs in this plugin
@@ -35,13 +35,18 @@ html-to-markdown mcp        # for Claude Code / Claude Desktop (stdio)
 
 ## The tools
 
-- **convert** — HTML (string, file, or fetched URL) → Markdown, Djot, or plain
-  text, honoring the same `ConversionOptions` as the CLI/SDK.
-- **extract** — pull structured metadata, tables, document structure, and inline
-  images from HTML (the `--json` extraction surface), without the Markdown body.
+- **convert_html** — convert an HTML string to Markdown, Djot, or plain text.
+  Takes `html` (the HTML string), an optional `config` object mirroring
+  `ConversionOptions`, and an optional `json` flag. With `json: true` it returns
+  the full `ConversionResult` (content, tables, metadata, document structure,
+  inline images, warnings) instead of the bare converted text.
+- **extract_metadata** — pull structured metadata (document info, Open
+  Graph / Twitter / JSON-LD / Microdata, headers, links, images) from an HTML
+  string. Takes only `html`.
 
-The exact tool names and argument schemas come from the running server; ask the
-client to list tools to see the live surface.
+Both tools accept an HTML **string** — the MCP server does not fetch URLs or read
+files (that is CLI-only). The exact argument schemas come from the running
+server; ask the client to list tools to see the live surface.
 
 ## When to prefer MCP over the CLI or SDK
 

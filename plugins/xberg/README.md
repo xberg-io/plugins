@@ -32,13 +32,13 @@ npx @xberg-io/xberg-cli --help
 uvx --from xberg-cli xberg --help
 ```
 
-Or download a prebuilt binary from the [latest GitHub release](https://github.com/xberg-io/xberg/releases/latest), or build from source:
+Or download a prebuilt binary from the [latest GitHub release](https://github.com/xberg-io/xberg/releases/latest), or build from source (the `xberg-cli` crate is not published to crates.io, so install from git):
 
 ```bash
-cargo install xberg-cli --features mcp
+cargo install --git https://github.com/xberg-io/xberg xberg-cli --features mcp
 ```
 
-The Python (`xberg`) and Node (`@xberg-io/xberg`) packages are language SDKs/bindings, not the CLI. The `xberg` CLI binary includes the MCP server by default.
+The Python (`xberg`) and Node (`@xberg-io/xberg`) packages are language SDKs/bindings, not the CLI. The prebuilt CLI binaries (brew, GitHub release) include the MCP server; a source build enables it with `--features mcp` (`mcp` is not in the CLI's default feature set).
 
 OCR ships with Tesseract by default. Install language packs for non-English documents:
 
@@ -74,19 +74,15 @@ sudo apt install tesseract-ocr-*   # Debian/Ubuntu
 
 ## MCP tools
 
-Run `xberg mcp` to start the MCP server over stdio. The server exposes 13 tools:
+Run `xberg mcp` to start the MCP server over stdio. The server exposes 9 tools:
 
-**Extraction:** `extract_file`, `extract_bytes`, `batch_extract_files`, `detect_mime_type`, `extract_structured`
-
-**Embeddings:** `embed_text`
-
-**Chunking:** `chunk_text`
+**Extraction:** `extract`, `extract_batch`, `detect_mime_type`
 
 **Cache:** `cache_stats`, `cache_clear`, `cache_manifest`, `cache_warm`
 
 **Metadata:** `list_formats`, `get_version`
 
-All extraction tools accept an optional `config` object to override defaults.
+The `extract` and `extract_batch` tools accept an optional `config` object to override defaults and a `response_format` of `json` (default) or `toon`. There is no separate `extract_bytes` tool — `extract`/`extract_batch` take an `input` object whose `kind` is `bytes` or `uri`. The MCP server is gated behind the CLI's `mcp` build feature.
 
 ## Configuration
 

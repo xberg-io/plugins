@@ -311,7 +311,7 @@ config = ExtractionConfig(force_ocr=True)  # OCR even if text is extractable
 | Images       | `result.images`             | `result.images`            | `result.images`             | Extracted images (if enabled)                 |
 | Elements     | `result.elements`           | `result.elements`          | `result.elements`           | Semantic elements (if element_based format)   |
 | Pages        | `result.pages`              | `result.pages`             | `result.pages`              | Per-page content (if page extraction enabled) |
-| Keywords     | `result.keywords`           | `result.keywords`          | `result.keywords`           | Extracted keywords (if enabled)               |
+| Keywords     | `result.extracted_keywords` | `result.extractedKeywords` | `result.extracted_keywords` | Extracted keywords (if enabled)               |
 
 ## Error Handling
 

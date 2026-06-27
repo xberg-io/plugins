@@ -319,7 +319,7 @@ Generate vector embeddings for text chunks using ONNX-based models. Embeddings e
 
     # List available embedding presets
     presets = list_embedding_presets()
-    print(f"Available presets: {presets}")  # ['balanced', 'compact', 'large']
+    print(f"Available presets: {presets}")  # ['fast', 'balanced', 'quality', 'multilingual']
 
     # Get details about a preset
     preset_info = get_embedding_preset("balanced")
@@ -386,7 +386,7 @@ Generate vector embeddings for text chunks using ONNX-based models. Embeddings e
 
     // List available embedding presets
     const presets = listEmbeddingPresets();
-    console.log(`Available presets: ${presets}`);  // ['balanced', 'compact', 'large']
+    console.log(`Available presets: ${presets}`);  // ['fast', 'balanced', 'quality', 'multilingual']
 
     // Get details about a preset
     const preset = getEmbeddingPreset("balanced");
@@ -488,8 +488,8 @@ Extract important keywords and phrases from documents using YAKE (Yet Another Ke
     result = extract_file_sync("document.pdf", config=config)
 
     # Access extracted keywords
-    if result.keywords:
-        for keyword in result.keywords:
+    if result.extracted_keywords:
+        for keyword in result.extracted_keywords:
             print(f"Text: {keyword.text}")
             print(f"Score: {keyword.score}")
             print(f"Algorithm: {keyword.algorithm}")

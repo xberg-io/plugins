@@ -42,7 +42,7 @@ html-to-markdown --json --no-content input.html | jq '.tables'
 ```bash
 # How many tables, and the row count of each
 html-to-markdown --json input.html \
-  | jq '.tables | to_entries | map({index: .key, rows: (.value.grid | length)})'
+  | jq '.tables | to_entries | map({index: .key, rows: .value.grid.rows, cols: .value.grid.cols})'
 
 # Just the rendered markdown of the first table
 html-to-markdown --json input.html | jq -r '.tables[0].markdown'
@@ -63,17 +63,18 @@ from html_to_markdown import convert
 
 result = convert(html)
 for table in result.tables:
-    print(table.markdown)      # rendered GFM markdown
-    print(table.grid[0][0])    # first cell
+    print(table.markdown)            # rendered GFM markdown
+    print(table.grid.cells[0].content)  # first cell (grid is a TableGrid)
 ```
 
 ```typescript
 import { convert } from "@xberg-io/html-to-markdown";
 
-// Node's convert() returns a JSON string — JSON.parse() it first.
-const result = JSON.parse(convert(html));
-for (const table of result.tables) {
-  console.log(table.markdown);
+// Node's convert() returns a ConversionResult object directly.
+const result = convert(html);
+for (const table of result.tables ?? []) {
+  console.log(table.markdown);   // rendered table
+  // table.grid is a TableGrid: { rows, cols, cells: GridCell[] }
 }
 ```
 

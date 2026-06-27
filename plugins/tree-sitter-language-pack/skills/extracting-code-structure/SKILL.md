@@ -35,7 +35,7 @@ off that default set, so list every feature you want.
 
 | Flag | Extracts |
 | ---- | -------- |
-| `--structure` | Functions, classes, methods, modules (spans, parent, visibility). |
+| `--structure` | Functions, classes, methods, modules (spans, nesting, visibility). |
 | `--imports` | Import statements and their sources. |
 | `--exports` | Exported symbols and their kinds. |
 | `--comments` | Inline and block comments. |
@@ -53,7 +53,7 @@ off that default set, so list every feature you want.
 ```json
 {
   "language": "python",
-  "metrics": { "total_lines": 0, "code_lines": 0, "comment_lines": 0, "blank_lines": 0, "total_bytes": 0, "error_count": 0 },
+  "metrics": { "total_lines": 0, "code_lines": 0, "comment_lines": 0, "blank_lines": 0, "total_bytes": 0, "node_count": 0, "error_count": 0, "max_depth": 0 },
   "structure": [],
   "imports": [],
   "exports": [],
@@ -66,21 +66,27 @@ off that default set, so list every feature you want.
 ```
 
 `metrics` is populated whenever any processing runs. `chunks` appears only
-when `--chunk-size` is set.
+when `--chunk-size` is set. Empty collections are omitted from the JSON
+(the `skip_serializing_if` wire contract), so absent keys mean "nothing
+found", not an error.
 
 ### Structure items
 
-Each `structure` entry has `kind` ("function", "class", "method",
-"module", ...), `name`, `start_line`/`end_line` (1-indexed),
-`start_byte`/`end_byte`, `parent` (enclosing class/module or null),
-`docstring` (when `--docstrings`), and `visibility`.
+Each `structure` entry has `kind` (a capitalized string —
+`"Function"`, `"Class"`, `"Method"`, `"Module"`, `"Struct"`, `"Trait"`,
+…; language-specific kinds serialize as `{"Other": "<kind>"}`), `name`,
+`visibility`, and a nested `span` object with `start_byte`/`end_byte` and
+**zero-indexed** `start_line`/`start_column`/`end_line`/`end_column`.
+Nesting is expressed via `children` (e.g. methods inside a class), not a
+`parent` pointer. Optional fields: `decorators`, `doc_comment` (the
+attached doc comment), `signature`, and `body_span`.
 
 ## Examples
 
 ```bash
 # Function and class names with line numbers
 ts-pack process src/service.py --structure \
-  | jq '.structure[] | {kind, name, line: .start_line}'
+  | jq '.structure[] | {kind, name, line: .span.start_line}'
 
 # Import sources only
 ts-pack process src/app.ts --imports \
@@ -101,14 +107,19 @@ done
 ```python
 from tree_sitter_language_pack import process, ProcessConfig
 
-config = ProcessConfig("python").all()        # or set fields via the constructor
+# ProcessConfig is a frozen dataclass — set fields in the constructor.
+# structure/imports/exports default to True; add the rest you want.
+config = ProcessConfig("python", symbols=True, docstrings=True)
 result = process(source_code, config)
-for item in result["structure"]:
-    print(item["kind"], item["name"], item["start_line"])
+for item in result.structure:                 # ProcessResult is an object, not a dict
+    print(item.kind, item.name, item.span.start_line)
 ```
 
-The SDK additionally supports custom tree-sitter query patterns via the
-`extractions` config field — not exposed on the CLI.
+The SDK also exposes the parsed tree (`get_parser(...)` → `Parser`/`Tree`/
+`Node`) for running your own tree-sitter queries, and a `data_extraction`
+config flag that pulls a hierarchical key/value tree from data-format files
+(JSON, YAML, TOML, …) into the result's `data` field — neither is exposed
+on the CLI.
 
 ## When to reach for parse instead
 

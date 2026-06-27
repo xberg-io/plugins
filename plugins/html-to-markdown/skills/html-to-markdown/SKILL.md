@@ -71,15 +71,15 @@ npm install @xberg-io/html-to-markdown-wasm                 # WASM
 ```
 
 - Java (Maven): `io.xberg:html-to-markdown`
-- Elixir: `{:html_to_markdown, "~> 3.6"}` in `mix.exs`
+- Elixir: `{:html_to_markdown, "~> 3.8"}` in `mix.exs`
 - R: `install.packages("htmltomarkdown", repos = "https://xberg-io.r-universe.dev")`
 - C (FFI): pre-built `.so` / `.dll` / `.dylib` from GitHub releases
 
 ## CLI vs SDK — which to use
 
-- **CLI** — one-shot conversions, shell pipelines, fetching a single URL, ad-hoc metadata/table extraction via `--json | jq`. Flags only, no subcommands. `FILE` is positional; omit or use `-` for stdin.
+- **CLI** — one-shot conversions, shell pipelines, fetching a single URL, ad-hoc metadata/table extraction via `--json | jq`. Flags only for conversion (`FILE` is positional; omit or use `-` for stdin); the only subcommand is `mcp`.
 - **SDK** — embedding conversion in application code, batch processing, custom element conversion (visitor pattern, Rust), and tight loops where process spawn overhead matters.
-- **MCP server** — `html-to-markdown mcp` exposes `convert`/`extract` as agent tools, so an MCP client can convert HTML directly with no shell-out. This plugin auto-registers it; see the **using-the-mcp-server** skill.
+- **MCP server** — `html-to-markdown mcp` exposes `convert_html` and `extract_metadata` as agent tools, so an MCP client can convert an HTML string directly with no shell-out. This plugin auto-registers it; see the **using-the-mcp-server** skill.
 
 Both share the same `ConversionResult` shape, so output is interchangeable.
 
@@ -145,8 +145,8 @@ print(result.metadata)  # title, links, headers, …
 ```typescript
 import { convert } from "@xberg-io/html-to-markdown";
 
-// Node's convert() returns a JSON string — always JSON.parse() it.
-const result = JSON.parse(convert("<h1>Hello World</h1><p>A paragraph.</p>"));
+// Node's convert() returns a ConversionResult object directly.
+const result = convert("<h1>Hello World</h1><p>A paragraph.</p>");
 console.log(result.content);
 ```
 
@@ -171,7 +171,7 @@ All languages expose the same ~30 options. See [references/configuration.md](ref
 | ------ | ------ | ------- |
 | `heading_style` | `atx`, `underlined`, `atx-closed` | `atx` |
 | `code_block_style` | `backticks`, `indented`, `tildes` | `backticks` |
-| `output_format` | `markdown`, `djot` | `markdown` |
+| `output_format` | `markdown`, `djot`, `plain` | `markdown` |
 | `wrap` / `wrap_width` | bool / 20–500 | off / `80` |
 | `autolinks` (SDK) / `--no-autolinks` (CLI) | bool / flag | `true` (on); disable in CLI with `--no-autolinks` |
 | preprocessing | `minimal` / `standard` / `aggressive` | off |
@@ -216,12 +216,11 @@ Enable structure extraction (`--include-structure` on the CLI, `include_document
 
 ## Common pitfalls
 
-1. **`convert()` returns a result object, not a string.** Access `.content` for the Markdown text.
-2. **Node.js `convert()` returns a JSON string.** Always `JSON.parse(convert(html))` — NAPI-RS serializes the result for performance.
-3. **`--json` outputs JSON, not Markdown.** Omit `--json` for plain Markdown.
-4. **`--include-structure`, `--extract-inline-images`, and `--no-content` require `--json`.**
-5. **CLI has no subcommands.** Everything is a flag; `FILE` is positional.
-6. **`--preset`, `--keep-navigation`, `--keep-forms` require `--preprocess`.**
+1. **`convert()` returns a result object, not a string.** Access `.content` for the Markdown text. This holds for Node.js too — `convert()` returns a `ConversionResult` object directly; do **not** `JSON.parse()` it.
+2. **`--json` outputs JSON, not Markdown.** Omit `--json` for plain Markdown.
+3. **`--include-structure`, `--extract-inline-images`, and `--no-content` require `--json`.**
+4. **The conversion CLI is flags-only.** `FILE` is positional; the only subcommand is `mcp` (starts the MCP server).
+5. **`--preset`, `--keep-navigation`, `--keep-forms` require `--preprocess`.**
 
 ## Additional resources
 

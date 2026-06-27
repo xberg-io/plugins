@@ -8,7 +8,7 @@ Comprehensive command-line interface for the Xberg document intelligence library
 brew install xberg-io/tap/xberg
 # or run without a persistent install (self-installs the binary):
 npx @xberg-io/xberg-cli --help
-uvx --from xberg xberg --help
+uvx --from xberg-cli xberg --help
 ```
 
 Or download a pre-built binary from the [latest GitHub Release](https://github.com/xberg-io/xberg/releases/latest), or build from source:
@@ -37,10 +37,10 @@ xberg extract <path> [FLAGS]
 - `--config-json <json>` — Inline JSON configuration (merged after config file, before CLI flags).
 - `--config-json-base64 <base64>` — Base64-encoded JSON configuration.
 - `-m, --mime-type <type>` — MIME type hint (auto-detected if not provided).
-- `-f, --format <text|json>` — CLI output format (default: `text`). Controls how results display, not extraction content format.
-- `--content-format <plain|markdown|djot|html>` — Extraction content format (default: `plain`). Controls format of extracted content. (Note: `--output-format` is a deprecated alias.)
+- `-f, --format <text|json|toon>` — CLI output format (default: `text`). Controls how results display, not extraction content format.
+- `--content-format <plain|markdown|djot|html|json>` — Extraction content format (default: `plain`). Controls format of extracted content. (Note: `--output-format` is a hidden deprecated alias.)
 - `--ocr <bool>` — Enable OCR processing.
-- `--ocr-backend <BACKEND>` — OCR backend: `tesseract`, `paddle-ocr`, `easyocr`.
+- `--ocr-backend <BACKEND>` — OCR backend: `tesseract`, `paddle-ocr`, `vlm`, `candle-trocr`, `candle-paddleocr-vl`, `candle-glm-ocr`, `candle-hunyuan-ocr`, `candle-deepseek-ocr`.
 - `--ocr-language <LANG>` — OCR language code.
 - `--ocr-auto-rotate <bool>` — Auto-rotate images before OCR.
 - `--force-ocr <bool>` — Force OCR even if text extraction succeeds.
@@ -119,7 +119,7 @@ xberg batch <paths...> [FLAGS]
 - `-c, --config <path>` — Path to config file (TOML, YAML, or JSON). Auto-discovers `xberg.{toml,yaml,json}` in current and parent directories if omitted.
 - `--config-json <json>` — Inline JSON configuration (merged after config file, before CLI flags).
 - `--config-json-base64 <base64>` — Base64-encoded JSON configuration.
-- `-f, --format <text|json>` — CLI output format (default: `json`). Controls how results display, not extraction content format.
+- `-f, --format <text|json|toon>` — CLI output format (default: `json`). Controls how results display, not extraction content format.
 - All extraction override flags from `extract` are also supported (e.g., `--content-format`, `--ocr`, `--layout`, `--force-ocr`, `--no-cache`, `--quality`, `--acceleration`, etc.). See the `extract` command flags for the full list.
 
 ## Notes
@@ -160,7 +160,7 @@ xberg detect <path> [FLAGS]
 
 ## Flags
 
-- `-f, --format <text|json>` — Output format (default: `text`)
+- `-f, --format <text|json|toon>` — Output format (default: `text`)
 
 ## Examples
 
@@ -182,7 +182,7 @@ xberg version [FLAGS]
 
 ## Flags
 
-- `-f, --format <text|json>` — Output format (default: `text`)
+- `-f, --format <text|json|toon>` — Output format (default: `text`)
 
 ## Examples
 
@@ -209,7 +209,7 @@ xberg cache stats [FLAGS]
 ## Flags
 
 - `--cache-dir <path>` — Cache directory (default: `.xberg` in current directory)
-- `-f, --format <text|json>` — Output format (default: `text`)
+- `-f, --format <text|json|toon>` — Output format (default: `text`)
 
 ## Examples
 
@@ -235,7 +235,7 @@ xberg cache clear [FLAGS]
 ## Flags
 
 - `--cache-dir <path>` — Cache directory (default: `.xberg` in current directory)
-- `-f, --format <text|json>` — Output format (default: `text`)
+- `-f, --format <text|json|toon>` — Output format (default: `text`)
 
 ## Examples
 

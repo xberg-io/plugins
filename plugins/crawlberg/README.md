@@ -76,7 +76,7 @@ For complex configs, use JSON:
 
 ```bash
 crawlberg crawl https://example.com \
-  --config '{"depth":3,"max_pages":200,"concurrent":8,"respect_robots_txt":true}'
+  --config '{"max_depth":3,"max_pages":200,"max_concurrent":8,"respect_robots_txt":true}'
 ```
 
 See the `crawlberg` and `crawling-a-site` skills for the full flag surface.

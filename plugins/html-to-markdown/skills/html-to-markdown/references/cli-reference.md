@@ -157,7 +157,7 @@ Metadata is returned in `result.metadata` within the JSON output (use `--json` t
 
 | Flag                       | Short | Values             | Default    | Description           |
 | -------------------------- | ----- | ------------------ | ---------- | --------------------- |
-| `--output-format <FORMAT>` | `-f`  | `markdown`, `djot` | `markdown` | Output markup format. |
+| `--output-format <FORMAT>` | `-f`  | `markdown`, `djot`, `plain` | `markdown` | Output markup format. |
 
 ## JSON Output
 

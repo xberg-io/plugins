@@ -26,8 +26,9 @@ ships with an optional headless-Chrome backend driven by chromiumoxide.
 The engine fetches statically, then inspects the response. It launches
 headless Chrome and re-fetches when it sees:
 
-- WAF responses from one of 8 detected vendors (Cloudflare, Akamai, AWS WAF,
-  Imperva, DataDome, PerimeterX, Sucuri, F5).
+- WAF responses from one of 8 detected vendor fingerprints (Cloudflare,
+  Akamai, AWS WAF, Imperva, DataDome, PerimeterX, F5, plus a generic
+  catch-all).
 - SPA shells: `<noscript>` warnings, near-empty `<body>` with heavy JS.
 - Heuristic JS-render-required signals.
 
@@ -117,14 +118,15 @@ Pass via `--config` JSON when you need control:
 
 ```bash
 crawlberg scrape https://example.com --browser-mode always \
-  --config '{"browser":{"wait_strategy":{"type":"Selector","selector":".article-body"}}}'
+  --config '{"browser":{"wait":"selector","wait_selector":".article-body"}}'
 ```
 
-Supported strategies:
+Supported strategies (the `browser.wait` field is a string enum; pair
+`"selector"` with a sibling `wait_selector`):
 
-- `NetworkIdle` (default) — wait until the network goes quiet.
-- `Selector` — wait until a CSS selector resolves.
-- `Fixed` — wait a fixed duration.
+- `network_idle` (default) — wait until the network goes quiet.
+- `selector` — wait until the CSS selector in `wait_selector` resolves.
+- `fixed` — wait a fixed duration.
 
 `extra_wait` adds milliseconds on top of the wait strategy if the page
 keeps loading content after the primary signal.

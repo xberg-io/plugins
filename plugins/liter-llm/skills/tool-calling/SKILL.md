@@ -12,35 +12,37 @@ the result back as a `tool` message.
 ## Python
 
 ```python
-import asyncio, os
-from liter_llm import LlmClient
+import asyncio, json, os
+from liter_llm import create_client
+from liter_llm._internal_bindings import ChatCompletionRequest
 
-tools = [
-    {
-        "type": "function",
-        "function": {
-            "name": "get_weather",
-            "description": "Get the current weather for a location",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "location": {"type": "string", "description": "City name"},
+payload = {
+    "model": "openai/gpt-4o",
+    "messages": [{"role": "user", "content": "What is the weather in Berlin?"}],
+    "tools": [
+        {
+            "type": "function",
+            "function": {
+                "name": "get_weather",
+                "description": "Get the current weather for a location",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "location": {"type": "string", "description": "City name"},
+                    },
+                    "required": ["location"],
                 },
-                "required": ["location"],
             },
-        },
-    }
-]
+        }
+    ],
+    "tool_choice": "auto",
+}
 
 async def main() -> None:
-    client = LlmClient(api_key=os.environ["OPENAI_API_KEY"])
-    response = await client.chat(
-        model="openai/gpt-4o",
-        messages=[{"role": "user", "content": "Weather in Berlin?"}],
-        tools=tools,
-    )
-    choice = response.choices[0]
-    for call in choice.message.tool_calls or []:
+    client = create_client(api_key=os.environ["OPENAI_API_KEY"])
+    request = ChatCompletionRequest.from_json(json.dumps(payload))
+    response = await client.chat(request)
+    for call in response.choices[0].message.tool_calls or []:
         print(call.function.name, call.function.arguments)  # arguments is a JSON string
 
 asyncio.run(main())
@@ -51,11 +53,12 @@ asyncio.run(main())
 Request strict JSON with `response_format`:
 
 ```python
-response = await client.chat(
-    model="openai/gpt-4o",
-    messages=[{"role": "user", "content": "Extract name and age as JSON."}],
-    response_format={"type": "json_object"},
-)
+request = ChatCompletionRequest.from_json(json.dumps({
+    "model": "openai/gpt-4o",
+    "messages": [{"role": "user", "content": "Extract name and age as JSON."}],
+    "response_format": {"type": "json_object"},
+}))
+response = await client.chat(request)
 ```
 
 ## Notes

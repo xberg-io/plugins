@@ -52,7 +52,7 @@ pip install tree-sitter-language-pack                  # Python
 npm install @xberg-io/tree-sitter-language-pack       # Node.js / TypeScript
 ```
 
-Rust, Ruby, Go, Java, C#, PHP, Elixir, and WebAssembly bindings are also published.
+Rust, Ruby, Go, Java, C#, PHP, Elixir, Dart, Kotlin (Android), Swift, Zig, and WebAssembly bindings are also published.
 
 ## Skills shipped
 
@@ -77,7 +77,7 @@ discovery; a code-analysis prompt; and language-name completions.
 
 - **parse** — syntax tree (s-expression or JSON), auto-detecting language from path or explicit.
 - **process** — code intelligence: structure, imports, exports, symbols, docstrings, comments, diagnostics, chunks. Use `all` flag for all features.
-- **detect_language** — identify language by path, extension, or content.
+- **detect_language** — identify language by path or content (the tool takes `path` and `content` only).
 - **list_languages** — available, downloaded, or manifest languages; filter by name.
 - **info** — show language availability and cache status.
 - **download** — prefetch parsers: specific languages, groups, all, or fresh updates.
@@ -130,9 +130,9 @@ the SDK (`detect_language_from_content`).
 ```python
 from tree_sitter_language_pack import process, ProcessConfig
 
-result = process(source_code, ProcessConfig("python").all())
-for item in result["structure"]:
-    print(item["kind"], item["name"], item["start_line"])
+result = process(source_code, ProcessConfig("python", symbols=True, docstrings=True))
+for item in result.structure:  # ProcessResult is an object, not a dict
+    print(item.kind, item.name, item.span.start_line)
 ```
 
 ```typescript

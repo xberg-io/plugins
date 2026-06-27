@@ -10,9 +10,9 @@ downstream code stays simple.
 
 | Knob                | What it controls                                  | Values                                 | Default          |
 | ------------------- | ------------------------------------------------- | -------------------------------------- | ---------------- |
-| `--format`          | How the CLI prints the result                     | `text`, `json`                         | `text` (`extract`), `json` (`batch`) |
-| `--content-format`  | How extracted content is rendered inside `result` | `plain`, `markdown`, `djot`, `html`    | `plain`          |
-| `--token-reduction` | Strip whitespace / boilerplate for LLM contexts   | `off`, `light`, `moderate`, `aggressive` | `off`          |
+| `--format`          | How the CLI prints the result                     | `text`, `json`, `toon`                 | `text` (`extract`), `json` (`batch`) |
+| `--content-format`  | How extracted content is rendered inside `result` | `plain`, `markdown`, `djot`, `html`, `json` | `plain`     |
+| `--token-reduction` | Strip whitespace / boilerplate for LLM contexts   | `off`, `light`, `moderate`, `aggressive`, `maximum` | `off`  |
 
 `--format json` always returns the full `ExtractionResult` (content +
 metadata + tables + images). `--format text` prints just `content`.

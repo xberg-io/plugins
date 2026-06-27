@@ -145,8 +145,8 @@ Node.js mirrors this with `batchExtractFiles`; Rust uses
 ## MCP
 
 When the `xberg` MCP server is registered, prefer the
-`batch_extract_files` tool over shelling out — it takes the file list and a
-config object and returns structured results directly.
+`extract_batch` tool over shelling out — it takes an array of input objects
+and a config object and returns structured results directly.
 
 ## Common pitfalls
 

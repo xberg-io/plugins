@@ -26,7 +26,7 @@ Gemini, Groq, Mistral, Cohere, AWS Bedrock, Azure, and many more).
 
 - **Modalities** — chat completions, streaming, tool/function calling,
   structured outputs, embeddings, image generation, audio (speech,
-  transcription, translation), moderation, web search, OCR, reranking, batch,
+  transcription), moderation, web search, OCR, reranking, batch,
   and file operations.
 - **Provider routing** — `provider/model` prefix selects the backend
   (`openai/gpt-4o`, `anthropic/claude-sonnet-4-20250514`,
@@ -86,7 +86,7 @@ docker pull ghcr.io/xberg-io/liter-llm
 | Go | `go get github.com/xberg-io/liter-llm/packages/go` |
 | Ruby | `gem install liter_llm` |
 | PHP | `composer require xberg-io/liter-llm` |
-| C# | `dotnet add package LiterLlm` |
+| C# | `dotnet add package XbergIo.LiterLlm` |
 | WASM | `pnpm add @xberg-io/liter-llm-wasm` |
 
 ## Quick start (Python, async)
@@ -94,14 +94,15 @@ docker pull ghcr.io/xberg-io/liter-llm
 ```python
 import asyncio
 import os
-from liter_llm import LlmClient
+from liter_llm import create_client
+from liter_llm._internal_bindings import ChatCompletionRequest
 
 async def main() -> None:
-    client = LlmClient(api_key=os.environ["OPENAI_API_KEY"])
-    response = await client.chat(
-        model="openai/gpt-4o",
-        messages=[{"role": "user", "content": "Hello!"}],
+    client = create_client(api_key=os.environ["OPENAI_API_KEY"])
+    request = ChatCompletionRequest.from_json(
+        '{"model":"openai/gpt-4o","messages":[{"role":"user","content":"Hello!"}]}'
     )
+    response = await client.chat(request)
     print(response.choices[0].message.content)
 
 asyncio.run(main())
@@ -109,13 +110,13 @@ asyncio.run(main())
 
 ## Provider routing
 
-The prefix before `/` selects the provider:
+The prefix before `/` in the request's `model` selects the provider:
 
 ```python
-await client.chat(model="openai/gpt-4o", messages=[...])
-await client.chat(model="anthropic/claude-sonnet-4-20250514", messages=[...])
-await client.chat(model="google/gemini-2.0-flash", messages=[...])
-await client.chat(model="groq/llama3-70b", messages=[...])
+ChatCompletionRequest.from_json('{"model":"openai/gpt-4o","messages":[...]}')
+ChatCompletionRequest.from_json('{"model":"anthropic/claude-sonnet-4-20250514","messages":[...]}')
+ChatCompletionRequest.from_json('{"model":"google/gemini-2.0-flash","messages":[...]}')
+ChatCompletionRequest.from_json('{"model":"groq/llama3-70b","messages":[...]}')
 ```
 
 API keys come from environment variables: `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`,
@@ -124,8 +125,10 @@ credentials for Bedrock.
 
 ## Configuration
 
-Pass options to the constructor, or create a `liter-llm.toml` (SDK) /
-`liter-llm-proxy.toml` (proxy) — both auto-discover from the cwd upward.
+Pass basic options to `create_client(...)` (`api_key`, `base_url`,
+`timeout_secs`, `max_retries`, `model_hint`), or set the full surface in a
+`liter-llm.toml` (SDK) / `liter-llm-proxy.toml` (proxy) — both auto-discover
+from the cwd upward.
 
 ```toml
 # liter-llm.toml
@@ -152,7 +155,7 @@ tpm = 100000
 | `api_key` | required | Provider key, wrapped in `SecretString` (never logged). |
 | `base_url` | from registry | Override the provider base URL. |
 | `model_hint` | none | Pre-resolve a provider, skipping the prefix lookup. |
-| `timeout` | 60s | Request timeout. |
+| `timeout_secs` | 60 | Request timeout in seconds. |
 | `max_retries` | 3 | Retries on 429/5xx with exponential backoff. |
 | `cache` | none | `max_entries`, `ttl_seconds`. |
 | `budget` | none | `global_limit`, `model_limits`, `enforcement`. |

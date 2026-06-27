@@ -15,16 +15,17 @@ Uses cgo with the C FFI layer. Options are passed as JSON strings internally.
 ```go
 import "github.com/xberg-io/html-to-markdown/packages/go/v3/htmltomarkdown"
 
-// Primary function — returns *ConversionResult
-result, err := htmltomarkdown.Convert(html)
+// Primary function — func Convert(html string, options *ConversionOptions) (*ConversionResult, error)
+// Pass nil for defaults.
+result, err := htmltomarkdown.Convert(html, nil)
 if err != nil {
     log.Fatal(err)
 }
-fmt.Println(result.Content)        // markdown string
+fmt.Println(*result.Content)       // Content is *string
 fmt.Println(len(result.Tables))    // extracted tables
 fmt.Println(len(result.Warnings))  // processing warnings
 
-// With options (variadic)
+// With options
 result, err = htmltomarkdown.Convert(html, &htmltomarkdown.ConversionOptions{
     HeadingStyle: "atx",
 })
@@ -40,7 +41,7 @@ for _, table := range result.Tables {
 
 ### Go ConversionOptions
 
-Options are passed as a pointer to `ConversionOptions`. Fields use Go naming conventions (PascalCase). Pass `nil` or omit the argument for defaults.
+Options are passed as a pointer to `ConversionOptions`. Fields use Go naming conventions (PascalCase). Pass `nil` for defaults (the argument is required, not variadic).
 
 ---
 
@@ -50,53 +51,36 @@ Options are passed as a pointer to `ConversionOptions`. Fields use Go naming con
 **Install:** `gem install html-to-markdown`
 **Require:** `require 'html_to_markdown'`
 
-Uses Magnus (native extension via Rust).
+Uses Magnus (native extension via Rust). The native module is `HtmlToMarkdownRs`
+(the top-level `html_to_markdown` require loads it).
 
 ```ruby
 require 'html_to_markdown'
 
-# Primary function — returns a Hash
-result = HtmlToMarkdown.convert(html)
-puts result[:content]          # markdown string
-puts result[:tables].length    # extracted tables
-puts result[:warnings].length  # processing warnings
-puts result[:metadata]         # metadata hash (or nil)
+# Primary function — returns a HtmlToMarkdownRs::ConversionResult OBJECT (methods, not a Hash)
+result = HtmlToMarkdownRs.convert(html)
+puts result.content          # markdown string
+puts result.tables.length    # extracted tables
+puts result.warnings.length  # processing warnings
+puts result.metadata         # metadata object (or nil)
 
-# With options (Hash)
-result = HtmlToMarkdown.convert(html, {
+# With options — pass a Hash (it is serialized to ConversionOptions) or a ConversionOptions object
+result = HtmlToMarkdownRs.convert(html, {
     heading_style: "atx",
     code_block_style: "backticks",
     autolinks: true,
 })
 
-# Metadata — in result[:metadata]
-result = HtmlToMarkdown.convert(html)
-metadata = result[:metadata]
-
-# Inline images — set extract_images: true
-result = HtmlToMarkdown.convert(html, { extract_images: true })
-images = result[:images]
-
-# Tables — always in result[:tables]
-result[:tables].each { |t| puts t[:markdown] }
-
-# Reusable options handle (performance)
-handle = HtmlToMarkdown.options({ heading_style: "atx" })
-result = HtmlToMarkdown.convert(html, handle)
+# Tables — always in result.tables; each is a TableData with .markdown and .grid
+result.tables.each { |t| puts t.markdown }
 ```
 
-### Ruby convert() return Hash
+### Ruby convert() return object
 
-```ruby
-{
-    content: String,              # markdown text
-    document: nil,                # not yet wired
-    metadata: Hash | nil,         # HtmlMetadata
-    tables: Array,                # [{grid: {...}, markdown: "..."}]
-    images: Array,                # inline images (if extract_images: true)
-    warnings: Array               # [{message: "...", kind: "..."}]
-}
-```
+`HtmlToMarkdownRs.convert` returns a `HtmlToMarkdownRs::ConversionResult` with
+accessor methods: `content`, `document`, `metadata`, `tables`, `warnings`.
+There is no reusable options handle and no top-level `images` accessor — only the
+`convert` module function is exposed.
 
 ---
 
@@ -104,29 +88,30 @@ result = HtmlToMarkdown.convert(html, handle)
 
 **Composer:** `xberg-io/html-to-markdown`
 **Install:** `composer require xberg-io/html-to-markdown`
-**PHP requirement:** 8.4+
+**PHP requirement:** 8.2+
 
-Uses ext-php-rs (native PHP extension). The facade class is `HtmlToMarkdownRs` under the `Html\To\Markdown\Rs` namespace.
+Uses ext-php-rs (native PHP extension). The facade class is `HtmlToMarkdown` under
+the `HtmlToMarkdown` namespace. Conversion failures throw
+`HtmlToMarkdown\HtmlToMarkdownException`. Option properties are camelCase.
 
 ```php
 <?php
 declare(strict_types=1);
 
-use Html\To\Markdown\Rs\HtmlToMarkdownRs;
+use HtmlToMarkdown\HtmlToMarkdown;
+use HtmlToMarkdown\ConversionOptions;
 
-// Primary function — returns ConversionResult with content, metadata, tables, images, warnings
-$result = HtmlToMarkdownRs::convert('<h1>Hello</h1>');
+// Primary function — public static function convert(string $html, ?ConversionOptions $options = null): ConversionResult
+$result = HtmlToMarkdown::convert('<h1>Hello</h1>');
 $markdown = $result->content;
 
-// With options (ConversionOptions object)
-use Html\To\Markdown\Rs\ConversionOptions;
-
+// With options (ConversionOptions object, camelCase properties)
 $options = new ConversionOptions();
 $options->headingStyle = 'atx';
 $options->codeBlockStyle = 'backticks';
 $options->autolinks = true;
 
-$result = HtmlToMarkdownRs::convert('<h1>Hello</h1>', $options);
+$result = HtmlToMarkdown::convert('<h1>Hello</h1>', $options);
 
 // Metadata — in $result->metadata
 $metadata = $result->metadata;
@@ -136,11 +121,6 @@ echo $metadata->document->title;
 foreach ($result->tables as $table) {
     echo $table->markdown;
 }
-
-// Inline images — set extractImages: true in options
-$options->extractImages = true;
-$result = HtmlToMarkdownRs::convert('<img src="data:..." />', $options);
-$images = $result->images;
 ```
 
 ---
@@ -150,13 +130,13 @@ $images = $result->images;
 **Maven:** `io.xberg:html-to-markdown`
 **GroupId:** `io.xberg`
 **ArtifactId:** `html-to-markdown`
-**Java requirement:** 21+ (uses Panama FFM API)
+**Java requirement:** 25+ (uses Panama FFM API)
 
 ```xml
 <dependency>
   <groupId>io.xberg</groupId>
   <artifactId>html-to-markdown</artifactId>
-  <version>3.2.0</version>
+  <version>3.8.0</version>
 </dependency>
 ```
 
@@ -195,26 +175,26 @@ for (var table : result.tables()) {
 
 **NuGet:** `XbergIo.HtmlToMarkdown`
 **Install:** `dotnet add package XbergIo.HtmlToMarkdown`
-**.NET requirement:** 6+
+**.NET requirement:** 10 (`net10.0`)
 
-The static entry point class is `HtmlToMarkdownRs`. The exception type is `HtmlToMarkdownRsException`.
+Namespace is `HtmlToMarkdown`. The static entry-point class is
+`HtmlToMarkdownConverter`. The exception type is `HtmlToMarkdownRsException`.
+`ConversionResult` is a record with `Content`, `Document`, `Metadata`, `Tables`,
+and `Warnings`.
 
 ```csharp
 using HtmlToMarkdown;
 
-// Primary function
-var result = HtmlToMarkdownRs.Convert("<h1>Hello</h1>", null);
+// Primary function — public static ConversionResult Convert(string html, ConversionOptions? options)
+var result = HtmlToMarkdownConverter.Convert("<h1>Hello</h1>", null);
 Console.WriteLine(result.Content);         // markdown string
 Console.WriteLine(result.Tables.Count);    // table count
 Console.WriteLine(result.Warnings.Count);  // warning count
 Console.WriteLine(result.Metadata?.Document?.Title);  // metadata (when enabled)
 
-// With options
-var options = new ConversionOptions { ExtractImages = true };
-var result2 = HtmlToMarkdownRs.Convert(html, options);
-foreach (var image in result2.Images) {
-    Console.WriteLine(image.Format);
-}
+// With options (enum-typed fields use the HeadingStyle/etc. enums, PascalCase)
+var options = new ConversionOptions { HeadingStyle = HeadingStyle.Atx };
+var result2 = HtmlToMarkdownConverter.Convert(html, options);
 
 // Tables — always in result.Tables
 foreach (var table in result.Tables) {
@@ -226,7 +206,7 @@ foreach (var table in result.Tables) {
 
 ```csharp
 try {
-    var result = HtmlToMarkdownRs.Convert(html, null);
+    var result = HtmlToMarkdownConverter.Convert(html, null);
 } catch (HtmlToMarkdownRsException e) {
     Console.Error.WriteLine($"Conversion failed: {e.Message}");
 }
@@ -242,146 +222,120 @@ try {
 
 ```elixir
 # mix.exs
-{:html_to_markdown, "~> 3.0"}
+{:html_to_markdown, "~> 3.8"}
 ```
 
 ```elixir
-# Primary function — returns {:ok, map()} | {:error, term()}
+# Primary function — convert(html, options \\ nil)
+# returns {:ok, map()} | {:error, atom, String.t()}
 {:ok, result} = HtmlToMarkdown.convert("<h1>Hello</h1>")
 IO.puts result.content      # markdown string
 IO.inspect result.tables    # list of table maps
 IO.inspect result.warnings  # list of warning maps
 IO.inspect result.metadata  # metadata map (when enabled)
 
-# Bang variant (raises on error)
-result = HtmlToMarkdown.convert!("<h1>Hello</h1>")
-
-# With options
+# With options — pass a map
 {:ok, result} = HtmlToMarkdown.convert(html, %{
     heading_style: "atx",
     code_block_style: "backticks",
 })
 
-# Metadata — in result.metadata
-{:ok, result} = HtmlToMarkdown.convert(html)
-metadata = result.metadata
-
 # Tables — always in result.tables
 Enum.each(result.tables, fn table -> IO.puts table.markdown end)
-
-# Inline images — set extract_images: true
-{:ok, result} = HtmlToMarkdown.convert(html, %{extract_images: true})
-images = result.images
-
-# Options handle (reuse for performance)
-{:ok, handle} = HtmlToMarkdown.create_options_handle(%{heading_style: "atx"})
-{:ok, result} = HtmlToMarkdown.convert(html, handle)
 ```
+
+Only `convert/1` and `convert/2` are exposed — there is no `convert!` bang
+variant and no `create_options_handle`.
 
 ---
 
 ## R
 
-**CRAN:** `htmltomarkdown`
-**Install:** `install.packages("htmltomarkdown")`
-**R requirement:** 4.1+
+**Package:** `htmltomarkdown`
+**Install:** `install.packages("htmltomarkdown", repos = "https://xberg-io.r-universe.dev")`
+**R requirement:** 4.2+
 
 Uses extendr (Rust bindings for R).
 
 ```r
 library(htmltomarkdown)
 
-# Primary function
+# Primary function — convert(html, options = ConversionOptions$default())
 result <- convert("<h1>Hello</h1>")
 cat(result$content)          # markdown string
 length(result$tables)        # table count
 
-# With options (named list)
-result <- convert("<h1>Hello</h1>", list(
-    heading_style = "atx",
-    code_block_style = "backticks"
-))
+# With options — build a ConversionOptions object (no plain named list)
+opts <- ConversionOptions$from_json('{"heading_style":"atx","code_block_style":"backticks"}')
+result <- convert("<h1>Hello</h1>", opts)
 
 # Metadata — in result$metadata
-result <- convert("<h1>Hello</h1>")
 metadata <- result$metadata
 
 # Tables — always in result$tables
 for (table in result$tables) {
     cat(table$markdown)
 }
-
-# Inline images — set extract_images = TRUE
-result <- convert("<img src='data:...' />", list(extract_images = TRUE))
-images <- result$images
-
-# Options handle (performance)
-handle <- create_options_handle(list(heading_style = "atx"))
-result <- convert_handle("<h1>Hello</h1>", handle)
 ```
+
+Options are a `ConversionOptions` object, constructed via `ConversionOptions$default()`
+or `ConversionOptions$from_json(json)` — passing a bare R list is not supported.
+There are no `create_options_handle` / `convert_handle` functions.
 
 ---
 
 ## WASM
 
-**Package:** `@xberg-io/html-to-markdown-wasm` (built with wasm-pack)
+**Package:** `@xberg-io/html-to-markdown-wasm` (built with wasm-pack; nodejs, web,
+bundler, and deno targets)
+
+The only exported conversion function is `convert`, which returns a
+`WasmConversionResult` **object** (not a JSON string). On the web target you must
+`init()` the module first; the nodejs target loads synchronously.
 
 ```javascript
-import init, {
-  convert,
-  convertBytes,
-  createConversionOptionsHandle,
-  convertWithOptionsHandle,
-} from "@xberg-io/html-to-markdown-wasm";
+// web target: initialize first
+import init, { convert } from "@xberg-io/html-to-markdown-wasm";
+await init();
 
-await init(); // initialize WASM module
-
-// convert() — returns JSON string, always JSON.parse() the result
-const result = JSON.parse(convert("<h1>Hello</h1>", {}));
+// convert(html, options?) — returns a WasmConversionResult object
+const result = convert("<h1>Hello</h1>", { headingStyle: "Atx" });
 console.log(result.content); // markdown string
 console.log(result.tables); // extracted tables
 console.log(result.metadata); // metadata (when enabled)
-
-// convertBytes() — accepts Uint8Array
-const encoder = new TextEncoder();
-const bytes = encoder.encode("<h1>Hello</h1>");
-const result2 = JSON.parse(convertBytes(bytes, {}));
-
-// Metadata — in result.metadata when extract_metadata is enabled
-const result3 = JSON.parse(convert("<h1>Hello</h1>", { extractMetadata: true }));
-console.log(result3.metadata);
 
 // Tables — always in result.tables
 for (const table of result.tables) {
   console.log(table.markdown);
 }
-
-// Options handle (reuse for performance)
-const handle = createConversionOptionsHandle({ headingStyle: "atx" });
-const json = convertWithOptionsHandle("<h1>Hello</h1>", handle);
 ```
+
+Option fields are camelCase with PascalCase enum string values, matching the Node
+binding. There are no `convertBytes` / `createConversionOptionsHandle` /
+`convertWithOptionsHandle` exports.
 
 ---
 
 ## Node.js / npm
 
-**Package:** `@xberg-io/html-to-markdown-node`
-**Install:** `npm install @xberg-io/html-to-markdown-node`
+**Package:** `@xberg-io/html-to-markdown`
+**Install:** `npm install @xberg-io/html-to-markdown`
 
-Uses NAPI-RS. Platform-specific native binaries are delivered as optional dependencies.
+Uses NAPI-RS. Platform-specific native binaries are delivered as optional
+dependencies named `@xberg-io/html-to-markdown-<platform>`. See the
+[TypeScript API Reference](typescript-api.md) for the full surface.
 
 ```json
 {
   "optionalDependencies": {
-    "@xberg-io/html-to-markdown-node-darwin-arm64": "3.2.0",
-    "@xberg-io/html-to-markdown-node-darwin-x64": "3.2.0",
-    "@xberg-io/html-to-markdown-node-linux-arm64-gnu": "3.2.0",
-    "@xberg-io/html-to-markdown-node-linux-arm64-musl": "3.2.0",
-    "@xberg-io/html-to-markdown-node-linux-x64-gnu": "3.2.0",
-    "@xberg-io/html-to-markdown-node-linux-x64-musl": "3.2.0",
-    "@xberg-io/html-to-markdown-node-linux-arm-gnueabihf": "3.2.0",
-    "@xberg-io/html-to-markdown-node-win32-x64-msvc": "3.2.0",
-    "@xberg-io/html-to-markdown-node-win32-arm64-msvc": "3.2.0"
+    "@xberg-io/html-to-markdown-linux-x64-gnu": "3.8.0",
+    "@xberg-io/html-to-markdown-linux-arm64-gnu": "3.8.0",
+    "@xberg-io/html-to-markdown-linux-x64-musl": "3.8.0",
+    "@xberg-io/html-to-markdown-linux-arm64-musl": "3.8.0",
+    "@xberg-io/html-to-markdown-darwin-x64": "3.8.0",
+    "@xberg-io/html-to-markdown-darwin-arm64": "3.8.0",
+    "@xberg-io/html-to-markdown-win32-x64-msvc": "3.8.0",
+    "@xberg-io/html-to-markdown-win32-arm64-msvc": "3.8.0"
   }
 }
 ```

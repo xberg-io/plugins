@@ -103,7 +103,7 @@ Call the proxy like OpenAI:
 ```bash
 curl http://localhost:4000/v1/chat/completions \
   -H "Authorization: Bearer sk-your-key" \
-  -d '{"model": "openai/gpt-4o", "messages": [{"role": "user", "content": "Hello"}]}'
+  -d '{"model": "gpt-4o", "messages": [{"role": "user", "content": "Hello"}]}'
 ```
 
 ## Configuration
@@ -117,28 +117,29 @@ The proxy auto-discovers `liter-llm-proxy.toml`; the SDK auto-discovers
 host = "0.0.0.0"
 port = 4000
 
-[auth]
+[general]
 master_key = "${LITER_LLM_MASTER_KEY}"
 
-[[virtual_keys]]
-key = "sk-team-frontend"
-models = ["openai/*", "anthropic/*"]
-rpm = 60
-budget = 50.0
-
-[[providers]]
-name = "openai"
+[[models]]
+name = "gpt-4o"
+provider_model = "openai/gpt-4o"
 api_key = "${OPENAI_API_KEY}"
+
+[[keys]]
+key = "sk-team-frontend"
+models = ["gpt-4o"]
+rpm = 60
+budget_limit = 50.0
 ```
 
 See `skills/liter-llm/SKILL.md` for the full configuration surface.
 
 ## Examples
 
-Route a chat completion to a specific provider:
+Route a chat completion to a configured model name:
 
 ```text
-liter-llm proxy → POST /v1/chat/completions  {"model": "anthropic/claude-sonnet-4-20250514", ...}
+liter-llm proxy → POST /v1/chat/completions  {"model": "gpt-4o", ...}
 ```
 
 Through the MCP server, ask the agent to:

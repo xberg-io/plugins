@@ -4,7 +4,7 @@ All `ConversionOptions` fields with their types, defaults, and descriptions.
 
 In Rust, use `ConversionOptions::builder()` or direct struct construction.
 In Python, use the `ConversionOptions` dataclass.
-In TypeScript/Node.js, use `JsConversionOptions` interface (camelCase).
+In TypeScript/Node.js, use the `ConversionOptions` interface (camelCase fields, PascalCase enum string values).
 
 ## ConversionOptions Fields
 
@@ -45,7 +45,7 @@ In TypeScript/Node.js, use `JsConversionOptions` interface (camelCase).
 | `skip_images`                | `skip_images`                | `skipImages`                             | bool       | `false`       | Omit all `<img>` elements from output entirely                                                                               |
 | `max_depth`                  | `max_depth`                  | `maxDepth`                               | int/null   | `null`        | Silently truncate subtrees beyond this DOM nesting depth. `null` = unlimited depth.                                          |
 | `output_format`              | `output_format`              | `outputFormat`                           | enum       | `markdown`    | Output format: `markdown` (CommonMark), `djot`, `plain` (text only)                                                          |
-| `include_document_structure` | `include_document_structure` | n/a (Node: not in `JsConversionOptions`) | bool       | `false`       | Include structured document tree in `ConversionResult.document`. Python/Rust only.                                           |
+| `include_document_structure` | `include_document_structure` | `includeDocumentStructure`               | bool       | `false`       | Include structured document tree in `ConversionResult.document`. Available in Rust, Python, and Node.                                           |
 | `extract_images`             | `extract_images`             | `extractImages`                          | bool       | `false`       | Extract inline data URI images and SVGs. Requires `inline-images` Rust feature.                                              |
 | `max_image_size`             | `max_image_size`             | `maxImageSize`                           | u64/int    | `5242880`     | Maximum decoded image size in bytes (default 5 MiB). Requires `inline-images`.                                               |
 | `capture_svg`                | `capture_svg`                | `captureSvg`                             | bool       | `false`       | Capture `<svg>` elements as images. Requires `inline-images`.                                                                |
@@ -115,7 +115,7 @@ TypeScript values are PascalCase strings (NAPI-RS `const enum`).
 
 | Value       | Rust                          | Python           | TypeScript      | `<mark>text</mark>` becomes |
 | ----------- | ----------------------------- | ---------------- | --------------- | --------------------------- |
-| DoubleEqual | `HighlightStyle::DoubleEqual` | `"double-equal"` | `'DoubleEqual'` | `==text==` (default)        |
+| DoubleEqual | `HighlightStyle::DoubleEqual` | `"double_equal"` | `'DoubleEqual'` | `==text==` (default)        |
 | Html        | `HighlightStyle::Html`        | `"html"`         | `'Html'`        | `<mark>text</mark>`         |
 | Bold        | `HighlightStyle::Bold`        | `"bold"`         | `'Bold'`        | `**text**`                  |
 | None        | `HighlightStyle::None`        | `"none"`         | `'None'`        | `text` (plain)              |
@@ -144,8 +144,8 @@ Controls what metadata is extracted. Metadata is returned in `ConversionResult.m
 ## Notes
 
 - In **Python**, `PreprocessingOptions` is a separate `@dataclass` passed as the second argument to `convert()`, not nested inside `ConversionOptions`.
-- In **TypeScript/Node.js**, preprocessing is nested inside `JsConversionOptions.preprocessing`.
+- In **TypeScript/Node.js**, preprocessing is nested inside `ConversionOptions.preprocessing`.
 - In **Rust**, preprocessing is a field inside `ConversionOptions` struct (`options.preprocessing`).
 - The `metadata` feature is **enabled by default** in the Rust crate (`features = ["metadata"]`). In Python and Node.js bindings, metadata is always available.
 - TypeScript/Node.js enum values are **PascalCase strings** (e.g. `'Atx'` not `'atx'`). This is a NAPI-RS `const enum` requirement — lowercase values will be rejected at runtime.
-- Inline image extraction in Node.js is configured via `extractImages`, `maxImageSize`, `captureSvg`, and `inferDimensions` options passed to `convert()`. Extracted images appear in the result's `images` array.
+- The Node.js `ConversionResult` has no top-level `images` array. Image references appear as an inventory in `result.metadata.images` (`ImageMetadata`: `src`, `alt`, `title`, `dimensions`, `imageType`, `attributes`). The `extractImages` / `maxImageSize` / `captureSvg` / `inferDimensions` options exist on `ConversionOptions`, but extracted inline-image binary data is exposed only in the Rust core (the `inline-images` feature), not in the Node result.

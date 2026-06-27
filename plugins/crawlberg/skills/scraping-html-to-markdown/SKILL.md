@@ -87,9 +87,11 @@ you own or have authorisation for.
 
 ### Wrong charset
 
-Most pages declare UTF-8. Pages that lie about their charset surface as
-mojibake in `markdown.content`. Override via `--config '{"force_encoding":"latin-1"}'`
-or similar.
+Most pages declare UTF-8. Pages that lie about their charset can surface as
+mojibake in `markdown.content`. crawlberg exposes no encoding-override option
+(there is no `force_encoding`/charset field in `CrawlConfig`, and `--config`
+rejects unknown keys), so an incorrectly declared charset is a server-side defect —
+re-fetch the raw bytes and transcode them downstream if you hit it.
 
 ## Examples
 

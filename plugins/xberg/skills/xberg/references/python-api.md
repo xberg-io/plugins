@@ -499,7 +499,7 @@ Embedding model type selector with multiple configurations.
 def preset(name: str) -> EmbeddingModelType
 ```
 
-Use a preset configuration (recommended for most use cases). Available presets: balanced, compact, large.
+Use a preset configuration (recommended for most use cases). Available presets: fast, balanced, quality, multilingual.
 
 ```python
 @staticmethod

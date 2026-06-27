@@ -1,70 +1,63 @@
 # TypeScript / Node.js API Reference
 
-Package: `@xberg-io/html-to-markdown-node`
-The TypeScript package (`@xberg-io/html-to-markdown`) re-exports everything from `@xberg-io/html-to-markdown-node` (the native NAPI-RS binding) and adds file/stream helpers.
+Package: `@xberg-io/html-to-markdown`
+
+This is the NAPI-RS native binding. Platform-specific native binaries ship as
+optional dependencies (`@xberg-io/html-to-markdown-<platform>`, e.g.
+`@xberg-io/html-to-markdown-darwin-arm64`); the right one is selected
+automatically at install time. The package includes generated `index.d.ts` type
+definitions.
 
 ## Installation
 
 ```bash
-npm install @xberg-io/html-to-markdown-node
+npm install @xberg-io/html-to-markdown
 # or
-pnpm add @xberg-io/html-to-markdown-node
+pnpm add @xberg-io/html-to-markdown
 ```
 
 ## Primary Function
 
 ```typescript
-import { convert } from '@xberg-io/html-to-markdown-node';
+import { convert } from "@xberg-io/html-to-markdown";
 
-// convert() returns a JSON string — always JSON.parse() the result
-const result = JSON.parse(convert(html, options?));
-console.log(result.content);    // Markdown string or null
+// convert() returns a ConversionResult OBJECT (not a JSON string).
+const result = convert(html, options?);
+console.log(result.content);    // Markdown string or undefined
 console.log(result.tables);     // array of table objects
 console.log(result.warnings);   // array of warning objects
-console.log(result.metadata);   // metadata object or null
+console.log(result.metadata);   // metadata object (when metadata is present)
 ```
 
-**Important:** `convert()` returns a JSON-encoded string, not a parsed object. This is intentional — NAPI-RS serialization of deeply-nested objects is expensive. Always call `JSON.parse()` on the result.
+`convert()` returns a parsed `ConversionResult` object directly — do **not**
+`JSON.parse()` it. NAPI-RS maps the Rust struct straight to a JS object.
 
-## Function Signatures
-
-### Core (from `@xberg-io/html-to-markdown-node`)
+## Function Signature
 
 ```typescript
-// Primary conversion — returns JSON string, always JSON.parse() the result
-function convert(html: string, options?: JsConversionOptions): string;
+// The only exported function. Returns a ConversionResult object; throws on
+// parse failure or invalid UTF-8.
+export declare function convert(
+  html: string,
+  options?: ConversionOptions | undefined | null,
+): ConversionResult;
 ```
 
-### File and Stream Helpers (from `@xberg-io/html-to-markdown`)
-
-```typescript
-import {
-  convertFile,
-  convertStream,
-  wrapVisitorCallback,
-  wrapVisitorCallbacks,
-  hasMetadataSupport,
-} from "@xberg-io/html-to-markdown-node";
-import type { Readable } from "node:stream";
-
-// File helpers (async, return JSON string — JSON.parse() the result)
-async function convertFile(filePath: string, options?: JsConversionOptions | null): Promise<string>;
-
-// Stream helpers (async, return JSON string — JSON.parse() the result)
-async function convertStream(
-  stream: Readable | AsyncIterable<string | Buffer>,
-  options?: JsConversionOptions | null,
-): Promise<string>;
-```
+There are no `convertFile` / `convertStream` helpers in this package — read the
+file yourself and pass the string to `convert()`. The only other export is the
+`VisitorHandle` class (see Visitor Pattern below), plus the option/result types
+and string enums.
 
 ## Interfaces
 
-### JsConversionOptions
+### ConversionOptions
 
-All fields are optional. Defaults match Rust defaults. Enum values are PascalCase strings (e.g. `'Atx'`, `'Spaces'`).
+All fields are optional and camelCase. Defaults match the Rust core defaults.
+Enum-typed fields take **PascalCase** string values (NAPI-RS string enums) — see
+the note below.
 
 ```typescript
-interface JsConversionOptions {
+interface ConversionOptions {
   headingStyle?: "Atx" | "Underlined" | "AtxClosed";
   listIndentType?: "Spaces" | "Tabs";
   listIndentWidth?: number;
@@ -76,8 +69,10 @@ interface JsConversionOptions {
   escapeAscii?: boolean;
   codeLanguage?: string;
   autolinks?: boolean;
+  linkStyle?: "Inline" | "Reference";
   defaultTitle?: boolean;
   brInTables?: boolean;
+  compactTables?: boolean;
   highlightStyle?: "DoubleEqual" | "Html" | "Bold" | "None";
   extractMetadata?: boolean;
   whitespaceMode?: "Normalized" | "Strict";
@@ -90,134 +85,121 @@ interface JsConversionOptions {
   newlineStyle?: "Spaces" | "Backslash";
   codeBlockStyle?: "Indented" | "Backticks" | "Tildes";
   keepInlineImagesIn?: string[];
-  preprocessing?: JsPreprocessingOptions;
-  encoding?: string;
-  debug?: boolean;
   stripTags?: string[];
   preserveTags?: string[];
   skipImages?: boolean;
+  maxDepth?: number | null;
+  urlEscapeStyle?: "Angle" | "Percent";
   outputFormat?: "Markdown" | "Djot" | "Plain";
+  includeDocumentStructure?: boolean; // populates result.document
+  extractImages?: boolean;
+  maxImageSize?: number;
+  captureSvg?: boolean;
+  inferDimensions?: boolean;
+  encoding?: string;
+  debug?: boolean;
+  preprocessing?: PreprocessingOptions;
+  visitor?: VisitorHandle; // custom traversal (see below)
 }
 ```
 
-**Note on enum values:** NAPI-RS `const enum` values are PascalCase strings (e.g. `'Atx'` not `'atx'`, `'Spaces'` not `'spaces'`). Using lowercase will be rejected at runtime.
+**Note on enum values:** the NAPI-RS string-enum fields use PascalCase values
+matching the Rust variant names (e.g. `'Atx'` not `'atx'`, `'Spaces'` not
+`'spaces'`, `'DoubleEqual'` not `'double-equal'`). Lowercase values are rejected.
 
-### JsPreprocessingOptions
+### PreprocessingOptions
 
 ```typescript
-interface JsPreprocessingOptions {
+interface PreprocessingOptions {
   enabled?: boolean;
-  preset?: "minimal" | "standard" | "aggressive";
+  preset?: "Minimal" | "Standard" | "Aggressive";
   removeNavigation?: boolean;
   removeForms?: boolean;
 }
 ```
 
-### JsMetadataConfig
-
-Fields use camelCase (matching the NAPI-RS binding):
-
-```typescript
-interface JsMetadataConfig {
-  extractDocument?: boolean;
-  extractHeaders?: boolean;
-  extractLinks?: boolean;
-  extractImages?: boolean;
-  extractStructuredData?: boolean;
-  maxStructuredDataSize?: number;
-}
-```
-
-### JsInlineImage (in result.images)
-
-Inline images are extracted when `extractImages` is enabled in options. The result is in `result.images`:
-
-```typescript
-interface JsInlineImage {
-  data: Buffer;
-  format: string;
-  filename?: string;
-  description?: string;
-  dimensions?: number[]; // [width, height]
-  source: string; // "img_data_uri" | "svg_element"
-  attributes: Record<string, string>;
-}
-```
-
-## ConversionResult (from convert())
-
-The result of `JSON.parse(convert(html))`:
+## ConversionResult
 
 ```typescript
 interface ConversionResult {
-  content: string | null; // Markdown text
-  document: object | null; // structured document tree (null unless includeDocumentStructure enabled)
-  metadata: object | null; // HtmlMetadata if metadata feature enabled
-  tables: Array<{
-    cells: Array<Array<string>>; // rows x columns of cell text
-    markdown: string; // rendered table in target format
-    isHeaderRow: Array<boolean>; // per-row flag: true if row was inside <thead>
-  }>;
-  warnings: Array<{
-    message: string;
-    kind: string;
-  }>;
+  content?: string;                 // converted Markdown/Djot/plain text
+  document?: DocumentStructure;     // present only when includeDocumentStructure = true
+  metadata?: HtmlMetadata;          // title, OG, headers, links, images, structured data
+  tables?: TableData[];
+  warnings?: ProcessingWarning[];
+}
+
+interface TableData {
+  grid: TableGrid;     // structured cells
+  markdown: string;    // rendered table in the target format
+}
+
+interface TableGrid {
+  rows?: number;
+  cols?: number;
+  cells?: GridCell[];  // flat, sparse list ordered by (row, col); span origins only
+}
+
+interface GridCell {
+  content: string;
+  row: number;
+  col: number;
+  rowSpan: number;
+  colSpan: number;
+  isHeader: boolean;
+}
+
+interface ProcessingWarning {
+  message: string;
+  kind: string; // WarningKind
 }
 ```
 
-**Note on `tables`:** The Node.js binding uses a flat `cells: Array<Array<string>>` structure (no `grid` wrapper), plus `isHeaderRow` for header detection. This differs from the Rust `TableGrid` struct.
+**Note on tables:** the Node binding exposes `grid: TableGrid` (matching the Rust
+`TableData`), not a flat `cells: string[][]` array. `TableGrid.cells` is a sparse
+list of `GridCell`s — only the top-left origin of a spanning cell is present.
+
+**Note on inline images:** the Node `ConversionResult` has no top-level `images`
+field. Image references are reported as an inventory in
+`result.metadata?.images` (`ImageMetadata` with `src`, `alt`, `title`,
+`dimensions`, `imageType`, `attributes`).
 
 ## Visitor Pattern
 
-The visitor is passed as a third argument to `convert()`:
-
-```typescript
-import { convert } from "@xberg-io/html-to-markdown-node";
-import { wrapVisitorCallbacks } from "@xberg-io/html-to-markdown-node";
-
-const visitor = wrapVisitorCallbacks({
-  visitElementStart: (ctx) => {
-    // ctx.tagName, ctx.attributes available
-    return { type: "continue" };
-  },
-  visitText: (ctx, text) => {
-    return { type: "continue" };
-  },
-});
-
-const result = convert(html, options, visitor);
-```
-
-Visitor return types: `{ type: 'continue' }` | `{ type: 'skip' }` | `{ type: 'preserve_html' }` | `{ type: 'custom', output: string }` | `{ type: 'error', message: string }`.
+The visitor is supplied through `options.visitor` (a `VisitorHandle`), not as a
+third argument to `convert()`. Build a `VisitorHandle` from an `HtmlVisitor`
+callback object, whose methods return a `VisitResult`
+(`Continue` | `Skip` | `PreserveHtml` | custom). This is an advanced surface;
+consult the generated `index.d.ts` (`HtmlVisitor`, `VisitorHandle`,
+`VisitResult`, `NodeContext`) for the exact shapes.
 
 ## Examples
 
 ```typescript
-// Simple conversion
-import { convert } from "@xberg-io/html-to-markdown-node";
-const result = JSON.parse(convert("<h1>Hello</h1>"));
+import { convert } from "@xberg-io/html-to-markdown";
+
+// Simple conversion — result is an object
+const result = convert("<h1>Hello</h1>");
 console.log(result.content); // "# Hello\n"
 
-// Metadata extraction — enabled via extractMetadata option, result in result.metadata
-const result2 = JSON.parse(convert(html, { extractMetadata: true }));
-console.log(result2.metadata.document.title);
-console.log(result2.metadata.headers.length);
+// Metadata — enabled via extractMetadata (on by default); read result.metadata
+const result2 = convert(html, { extractMetadata: true });
+console.log(result2.metadata?.document?.title);
+console.log(result2.metadata?.headers?.length);
 
 // Tables — always in result.tables
-const result3 = JSON.parse(convert(html));
-for (const table of result3.tables) {
+const result3 = convert(html);
+for (const table of result3.tables ?? []) {
   console.log(table.markdown);
 }
 
-// Inline images — enable extractImages in options
-const result4 = JSON.parse(convert(html, { extractImages: true, captureSvg: true }));
-for (const image of result4.images) {
-  console.log(image.format, image.filename);
-}
+// Document structure — enable includeDocumentStructure
+const result4 = convert(html, { includeDocumentStructure: true });
+console.log(result4.document);
 
-// File conversion
-import { convertFile } from "@xberg-io/html-to-markdown-node";
-const json = await convertFile("./page.html", { headingStyle: "Atx" });
-const fileResult = JSON.parse(json);
-console.log(fileResult.content);
+// Reading a file: read it yourself, then convert
+import { readFile } from "node:fs/promises";
+const html5 = await readFile("./page.html", "utf8");
+const result5 = convert(html5, { headingStyle: "Atx" });
+console.log(result5.content);
 ```

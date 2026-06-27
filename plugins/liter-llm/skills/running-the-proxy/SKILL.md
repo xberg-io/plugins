@@ -24,23 +24,27 @@ The proxy auto-discovers `liter-llm-proxy.toml` in the current directory.
 host = "0.0.0.0"
 port = 4000
 
-[auth]
+[general]
 master_key = "${LITER_LLM_MASTER_KEY}"
 
-[[virtual_keys]]
-key = "sk-team-frontend"
-models = ["openai/*", "anthropic/*"]
-rpm = 60
-tpm = 100000
-budget = 50.0
-
-[[providers]]
-name = "openai"
+# Each [[models]] entry maps a routable name to a provider/model and its key.
+[[models]]
+name = "gpt-4o"
+provider_model = "openai/gpt-4o"
 api_key = "${OPENAI_API_KEY}"
 
-[[providers]]
-name = "anthropic"
+[[models]]
+name = "claude-sonnet"
+provider_model = "anthropic/claude-sonnet-4-20250514"
 api_key = "${ANTHROPIC_API_KEY}"
+
+# Virtual keys scope which configured model names a caller may use.
+[[keys]]
+key = "sk-team-frontend"
+models = ["gpt-4o", "claude-sonnet"]
+rpm = 60
+tpm = 100000
+budget_limit = 50.0
 ```
 
 `${ENV_VAR}` interpolation keeps secrets out of the file.
@@ -50,7 +54,7 @@ api_key = "${ANTHROPIC_API_KEY}"
 ```bash
 curl http://localhost:4000/v1/chat/completions \
   -H "Authorization: Bearer sk-team-frontend" \
-  -d '{"model": "openai/gpt-4o", "messages": [{"role": "user", "content": "Hello"}]}'
+  -d '{"model": "gpt-4o", "messages": [{"role": "user", "content": "Hello"}]}'
 ```
 
 ## Notes

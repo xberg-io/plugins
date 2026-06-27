@@ -62,7 +62,7 @@ from tree_sitter_language_pack import (
 
 detect_language_from_path("src/app.py")      # "python"
 detect_language_from_extension("rs")          # "rust"
-detect_language_from_content(open("x").read())  # best-effort from text
+detect_language_from_content(open("x").read())  # from the shebang line, if present
 ```
 
 ### Node.js / TypeScript

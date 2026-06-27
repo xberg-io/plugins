@@ -14,7 +14,8 @@ embeddings are produced by a dedicated `embed` command.
 
 Keyword extraction is configured via the `[keywords]` config block (or
 inline JSON) — there is no single `--keywords` CLI flag. When enabled,
-extracted keywords appear on `result.keywords`. Two algorithms are
+extracted keywords appear on `result.extracted_keywords` (`extractedKeywords`
+in Node.js; the CLI JSON field is `extracted_keywords`). Two algorithms are
 available:
 
 - **YAKE** (`"yake"`) — statistical, unsupervised single-document
@@ -25,7 +26,7 @@ available:
 > Feature-gated: keyword extraction requires the CLI to be built with the
 > `keywords-yake` and/or `keywords-rake` Cargo features (both are in the
 > default/`full` build). If the CLI was built without them, the `[keywords]`
-> config block is silently ignored — `result.keywords` simply stays empty
+> config block is silently ignored — `result.extracted_keywords` simply stays empty
 > rather than erroring. The `"yake"` algorithm needs `keywords-yake`; `"rake"`
 > needs `keywords-rake`.
 
@@ -34,7 +35,7 @@ Enable via inline JSON on the CLI:
 ```bash
 xberg extract paper.pdf --format json \
   --config-json '{"keywords":{"algorithm":"yake","max_keywords":15,"language":"en"}}' \
-  | jq '.keywords'
+  | jq '.extracted_keywords'
 ```
 
 Or in a config file:
@@ -49,7 +50,7 @@ language = "en"          # stopword language; omit to skip stopword filtering
 ```
 
 ```bash
-xberg extract report.pdf --config xberg.toml --format json | jq '.keywords'
+xberg extract report.pdf --config xberg.toml --format json | jq '.extracted_keywords'
 ```
 
 Field notes:
@@ -136,7 +137,7 @@ result = extract_file_sync(
     "paper.pdf",
     config=ExtractionConfig(),  # configure keywords/language_detection on the config
 )
-print(result.keywords)             # extracted keywords (when enabled)
+print(result.extracted_keywords)   # extracted keywords (when enabled)
 print(result.detected_languages)   # detected languages (when enabled)
 ```
 

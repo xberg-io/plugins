@@ -12,32 +12,34 @@ reranking through the same `provider/model` routing convention.
 
 ```python
 import asyncio, os
-from liter_llm import LlmClient
+from liter_llm import create_client
+from liter_llm._internal_bindings import EmbeddingRequest
 
 async def main() -> None:
-    client = LlmClient(api_key=os.environ["OPENAI_API_KEY"])
-    response = await client.embed(
-        model="openai/text-embedding-3-small",
-        input=["first document", "second document"],
+    client = create_client(api_key=os.environ["OPENAI_API_KEY"])
+    request = EmbeddingRequest.from_json(
+        '{"model":"openai/text-embedding-3-small","input":["first document","second document"]}'
     )
+    response = await client.embed(request)
     for item in response.data:
         print(len(item.embedding))
 
 asyncio.run(main())
 ```
 
-Many embedding models support dimension selection and base64 output; pass
-`dimensions` / `encoding_format` where the provider allows it.
+Many embedding models support dimension selection and base64 output; set
+`dimensions` / `encoding_format` in the request where the provider allows it.
 
 ## Web search (12 providers)
 
 ```python
-client = LlmClient(api_key=os.environ["BRAVE_API_KEY"])
-response = await client.search(
-    model="brave/web-search",
-    query="What is the Rust programming language?",
-    max_results=5,
+from liter_llm._internal_bindings import SearchRequest
+
+client = create_client(api_key=os.environ["BRAVE_API_KEY"])
+request = SearchRequest.from_json(
+    '{"model":"brave/web-search","query":"What is the Rust programming language?","max_results":5}'
 )
+response = await client.search(request)
 for result in response.results:
     print(result.title, result.url)
 ```
@@ -45,20 +47,24 @@ for result in response.results:
 ## OCR (4 providers)
 
 ```python
-client = LlmClient(api_key=os.environ["MISTRAL_API_KEY"])
-response = await client.ocr(
-    model="mistral/mistral-ocr-latest",
-    document={"type": "document_url", "url": "https://example.com/invoice.pdf"},
+from liter_llm._internal_bindings import OcrRequest
+
+client = create_client(api_key=os.environ["MISTRAL_API_KEY"])
+request = OcrRequest.from_json(
+    '{"model":"mistral/mistral-ocr-latest",'
+    '"document":{"type":"document_url","url":"https://example.com/invoice.pdf"}}'
 )
+response = await client.ocr(request)
 for page in response.pages:
     print(page.index, page.markdown[:100])
 ```
 
 ## Reranking
 
-Use `rerank(...)` to score and order candidate documents against a query for
-retrieval pipelines — combine it with `embed` for hybrid retrieval. Routing
-follows the same `provider/model` convention.
+Build a `RerankRequest` (model, query, documents) and call `client.rerank(request)`
+to score and order candidate documents against a query for retrieval pipelines —
+combine it with `embed` for hybrid retrieval. Each result carries `index` and
+`relevance_score`. Routing follows the same `provider/model` convention.
 
 ## Notes
 

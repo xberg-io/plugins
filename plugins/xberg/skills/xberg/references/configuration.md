@@ -216,7 +216,7 @@ name = "balanced"
 | `embedding.show_download_progress` | boolean | `true`                            | Show progress when downloading models                      |
 | `embedding.cache_dir`              | string  | `"~/.cache/xberg/embeddings"` | Directory for caching embeddings                           |
 | `embedding.model.type`             | string  | `"preset"`                        | Model type: preset, fastembed, or custom                   |
-| `embedding.model.name`             | string  | `"balanced"`                      | Preset model name (balanced, fast, accurate, multilingual) |
+| `embedding.model.name`             | string  | `"balanced"`                      | Preset model name (fast, balanced, quality, multilingual) |
 | `embedding.model.model`            | string  |                                   | FastEmbed model identifier                                 |
 | `embedding.model.model_id`         | string  |                                   | Custom HuggingFace model ID                                |
 | `embedding.model.dimensions`       | integer |                                   | Embedding dimensions                                       |
@@ -250,7 +250,7 @@ preserve_important_words = true
 
 | Option                     | Type    | Default | Description                               |
 | -------------------------- | ------- | ------- | ----------------------------------------- |
-| `mode`                     | string  | `"off"` | Mode: off, aggressive, moderate, minimal  |
+| `mode`                     | string  | `"off"` | Mode: off, light, moderate, aggressive, maximum |
 | `preserve_important_words` | boolean | `true`  | Preserve important words during reduction |
 
 ### Language Detection
@@ -388,7 +388,7 @@ cache_dir = "~/.cache/xberg/embeddings"
 
 [chunking.embedding.model]
 type = "preset"
-name = "accurate"
+name = "quality"
 
 [keywords]
 algorithm = "yake"

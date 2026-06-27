@@ -58,7 +58,7 @@ gem install html-to-markdown                   # Ruby
 | **extracting-metadata** | Use when extracting metadata from HTML — title, description, language, Open Graph, JSON-LD / Microdata / RDFa, headers, links, and images. Covers the `--json` output shape and the `--extract-metadata` flag. |
 | **extracting-tables** | Use when extracting tabular data from HTML. Covers GFM Markdown tables, the structured `tables` array (grid cells + pre-rendered markdown), and `<br>` handling in cells. |
 | **fetching-and-converting-urls** | Use when fetching a live URL and converting it to Markdown. Covers `--url`, custom user agents, preprocessing for noisy pages, and the `--json` ConversionResult shape. |
-| **using-the-mcp-server** | Use when converting HTML and extracting metadata/tables through the MCP server's `convert`/`extract` tools instead of the CLI. Covers the tool surface and the auto-installing launcher. |
+| **using-the-mcp-server** | Use when converting HTML and extracting metadata through the MCP server's `convert_html`/`extract_metadata` tools instead of the CLI. Covers the tool surface and the auto-installing launcher. |
 
 **Reference materials** (linked from the `html-to-markdown` skill):
 
@@ -74,10 +74,11 @@ gem install html-to-markdown                   # Ruby
 ## MCP server
 
 The plugin auto-registers an MCP server named `html-to-markdown`, launched via
-`scripts/mcp-launch.sh` (which execs `html-to-markdown mcp`). It exposes the
-converter as tools — `convert` (HTML → Markdown/Djot/plain text) and `extract`
-(metadata, tables, document structure, inline images) — so the agent can convert
-HTML directly without shelling out to the CLI. The launcher auto-installs a
+`scripts/mcp-launch.sh` (which execs `html-to-markdown mcp`). It exposes two
+tools — `convert_html` (HTML string → Markdown/Djot/plain text, or the full
+`ConversionResult` JSON with `json: true`) and `extract_metadata` (structured
+metadata from an HTML string) — so the agent can convert HTML directly without
+shelling out to the CLI. The launcher auto-installs a
 binary on first run (override with
 `HTML_TO_MARKDOWN_LAUNCHER=auto|npx|uvx|brew|download`). The `mcp` subcommand
 ships in a recent release of the tool; an older binary on `PATH` may need an
@@ -85,7 +86,7 @@ upgrade to expose it. See the **using-the-mcp-server** skill for details.
 
 ## CLI / SDK usage
 
-The CLI takes **flags only** — there are no subcommands. `FILE` is positional; omit it (or use `-`) to read HTML from stdin.
+The conversion CLI takes **flags only** — `FILE` is positional; omit it (or use `-`) to read HTML from stdin. (The one subcommand is `mcp`, which starts the MCP server.)
 
 ```bash
 html-to-markdown input.html                    # convert file to stdout
@@ -108,8 +109,8 @@ print(result.metadata)  # title, links, headers, …
 ```typescript
 import { convert } from "@xberg-io/html-to-markdown";
 
-// Node's convert() returns a JSON string — always JSON.parse() it.
-const result = JSON.parse(convert("<h1>Hello</h1><p>World</p>"));
+// Node's convert() returns a ConversionResult object directly.
+const result = convert("<h1>Hello</h1><p>World</p>");
 console.log(result.content);  // # Hello\n\nWorld
 ```
 
@@ -121,7 +122,7 @@ All conversion behavior is controlled by CLI flags (or the matching `ConversionO
 
 | Flag | Values | Default | Purpose |
 |------|--------|---------|---------|
-| `--output-format` / `-f` | `markdown`, `djot` | `markdown` | Output markup format. |
+| `--output-format` / `-f` | `markdown`, `djot`, `plain` | `markdown` | Output markup format. |
 | `--heading-style` | `atx`, `underlined`, `atx-closed` | `atx` | Heading rendering. |
 | `--code-block-style` | `backticks`, `indented`, `tildes` | `backticks` | Code fence style. |
 | `--preprocess` / `-p` | flag | off | Strip nav, ads, forms before converting. |

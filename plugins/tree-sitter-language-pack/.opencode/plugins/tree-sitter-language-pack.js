@@ -42,7 +42,7 @@ function runCli(args, context) {
         resolve({
           title: "ts-pack CLI not found",
           output:
-            "Install the ts-pack CLI with `brew install xberg-io/tap/ts-pack`, or run it via `npx ts-pack` (the npm package's bin is `tspack`).",
+            "Install the ts-pack CLI with `brew install xberg-io/tap/ts-pack`, or run it via `npx @xberg-io/ts-pack-cli` (the CLI proxy's bin is `ts-pack`).",
           metadata: { exitCode: 127, command: "ts-pack", subcommand: args[0] },
         });
         return;
