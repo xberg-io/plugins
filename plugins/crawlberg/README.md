@@ -14,7 +14,7 @@ Self-host:
 
 ```text
 /plugin marketplace add xberg-io/plugins
-/plugin install crawlberg@kreuzberg
+/plugin install crawlberg@xberg
 ```
 
 ### Binary requirement
@@ -26,13 +26,13 @@ To install the CLI yourself (recommended for direct CLI use, and reused by the l
 ```bash
 brew install xberg-io/tap/crawlberg
 # or run it without a persistent install (the CLI proxy package self-installs the binary):
-npx @kreuzberg/crawlberg-cli --help
+npx @xberg-io/crawlberg-cli --help
 uvx --from crawlberg-cli crawlberg --help
 # or build from source (the mcp/api subcommands are non-default features):
 cargo install --git https://github.com/xberg-io/crawlberg crawlberg-cli --features all
 ```
 
-The published npm (`@kreuzberg/crawlberg`) and PyPI (`crawlberg`) packages are language *library* bindings, not the CLI — install via Homebrew or the from-source build above for the `crawlberg` binary.
+The published npm (`@xberg-io/crawlberg`) and PyPI (`crawlberg`) packages are language *library* bindings, not the CLI — install via Homebrew or the from-source build above for the `crawlberg` binary.
 
 Headless fallback requires Chrome/Chromium on your system. The CLI launches it on demand; skip the binary if you only plan to use `--browser-mode never`.
 
@@ -113,4 +113,4 @@ MIT.
 
 - **Marketplace**: [xberg-io/plugins](https://github.com/xberg-io/plugins)
 - **Upstream**: [xberg-io/crawlberg](https://github.com/xberg-io/crawlberg)
-- **Sibling plugins**: [kreuzberg](../kreuzberg/README.md), [xberg-enterprise](../xberg-enterprise/README.md)
+- **Sibling plugins**: [xberg](../xberg/README.md), [xberg-enterprise](../xberg-enterprise/README.md)

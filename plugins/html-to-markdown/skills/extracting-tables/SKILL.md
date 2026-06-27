@@ -68,7 +68,7 @@ for table in result.tables:
 ```
 
 ```typescript
-import { convert } from "@kreuzberg/html-to-markdown";
+import { convert } from "@xberg-io/html-to-markdown";
 
 // Node's convert() returns a JSON string — JSON.parse() it first.
 const result = JSON.parse(convert(html));

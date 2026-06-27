@@ -1,5 +1,5 @@
 {
-  "name": "kreuzberg",
+  "name": "xberg",
   "owner": {
     "name": "Kreuzberg, Inc.",
     "email": "contact@xberg.io"
@@ -10,10 +10,10 @@
   },
   "plugins": [
     {
-      "name": "kreuzberg",
+      "name": "xberg",
       "description": "Local document extraction: text, tables, metadata, images from 91+ formats with optional OCR.",
       "version": "0.2.2",
-      "source": "./plugins/kreuzberg"
+      "source": "./plugins/xberg"
     },
     {
       "name": "crawlberg",
@@ -23,7 +23,7 @@
     },
     {
       "name": "xberg-enterprise",
-      "description": "Managed Kreuzberg document intelligence on api.xberg.io: async extraction with OCR, URL crawling, presigned uploads, document versioning and diffing, signed webhooks, and usage tracking.",
+      "description": "Managed Xberg document intelligence on api.xberg.io: async extraction with OCR, URL crawling, presigned uploads, document versioning and diffing, signed webhooks, and usage tracking.",
       "version": "0.2.2",
       "source": "./plugins/xberg-enterprise"
     },

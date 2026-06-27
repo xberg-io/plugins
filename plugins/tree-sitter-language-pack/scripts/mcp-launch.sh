@@ -31,7 +31,7 @@
 # Note on npx/uvx: the ts-pack-cli npm and PyPI proxy packages are being rolled
 # out (the package self-installs/runs the binary, basemind-style). They may not
 # be published yet, so each is PROBED first and falls through cleanly if absent.
-# The `@kreuzberg/tree-sitter-language-pack` npm package and the importable
+# The `@xberg-io/tree-sitter-language-pack` npm package and the importable
 # `tree-sitter-language-pack` pip package are language SDKs/bindings, NOT the
 # CLI — they are not used here.
 #
@@ -51,7 +51,7 @@
 set -euo pipefail
 
 REPO="xberg-io/tree-sitter-language-pack"
-NPM_PKG="@kreuzberg/ts-pack-cli"
+NPM_PKG="@xberg-io/ts-pack-cli"
 PYPI_PKG="ts-pack-cli"
 
 log() { printf 'ts-pack-launch: %s\n' "$*" >&2; }

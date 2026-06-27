@@ -14,7 +14,7 @@ Self-host:
 
 ```text
 /plugin marketplace add xberg-io/plugins
-/plugin install liter-llm@kreuzberg
+/plugin install liter-llm@xberg
 ```
 
 ### Binary requirement
@@ -32,7 +32,7 @@ brew install xberg-io/tap/liter-llm
 # or from crates.io (compiles from source):
 cargo install liter-llm-cli
 # or run it without a persistent install (the CLI proxy package self-installs the binary):
-npx @kreuzberg/liter-llm-cli --help
+npx @xberg-io/liter-llm-cli --help
 uvx --from liter-llm-cli liter-llm --help
 # or download a prebuilt binary from the latest GitHub release:
 #   https://github.com/xberg-io/liter-llm/releases/latest
@@ -75,7 +75,7 @@ through to the next on any failure (override with
 `LITER_LLM_LAUNCHER=auto|npx|uvx|brew|download`):
 
 1. Any working `liter-llm` already cached in the plugin's `bin/` or on `PATH`.
-2. `npx @kreuzberg/liter-llm-cli` — the published npm CLI proxy package self-installs/runs
+2. `npx @xberg-io/liter-llm-cli` — the published npm CLI proxy package self-installs/runs
    the binary (probed first; falls through if not published yet).
 3. `uvx --from liter-llm-cli liter-llm` — the published PyPI CLI proxy package
    (probed first; falls through if not published yet).
@@ -85,7 +85,7 @@ through to the next on any failure (override with
    `SHA256SUMS-<latest-version>.txt`). The tool version is resolved from the
    GitHub API — it is independent of the plugin's own version.
 
-The `@kreuzberg/*` / `liter-llm` binding packages (NAPI-RS / PyO3) are language
+The `@xberg-io/*` / `liter-llm` binding packages (NAPI-RS / PyO3) are language
 SDKs, not the CLI. All launcher diagnostics go to stderr; stdout is the MCP
 protocol channel.
 
@@ -159,4 +159,4 @@ MIT. Skill content references the upstream [liter-llm](https://github.com/xberg-
 
 - **Marketplace**: [xberg-io/plugins](https://github.com/xberg-io/plugins)
 - **Upstream**: [xberg-io/liter-llm](https://github.com/xberg-io/liter-llm)
-- **Sibling plugins**: [kreuzberg](../kreuzberg/README.md), [crawlberg](../crawlberg/README.md), [xberg-enterprise](../xberg-enterprise/README.md)
+- **Sibling plugins**: [xberg](../xberg/README.md), [crawlberg](../crawlberg/README.md), [xberg-enterprise](../xberg-enterprise/README.md)

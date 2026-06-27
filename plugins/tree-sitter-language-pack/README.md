@@ -14,7 +14,7 @@ Self-host:
 
 ```text
 /plugin marketplace add xberg-io/plugins
-/plugin install tree-sitter-language-pack@kreuzberg
+/plugin install tree-sitter-language-pack@xberg
 ```
 
 ### Binary requirement
@@ -29,7 +29,7 @@ To install the `ts-pack` CLI yourself:
 ```bash
 brew install xberg-io/tap/ts-pack
 # or run it without a persistent install (the CLI proxy package self-installs the binary):
-npx @kreuzberg/ts-pack-cli --help
+npx @xberg-io/ts-pack-cli --help
 uvx --from ts-pack-cli ts-pack --help
 # or download a prebuilt binary from the latest GitHub release:
 #   https://github.com/xberg-io/tree-sitter-language-pack/releases/latest
@@ -49,7 +49,7 @@ ts-pack download python rust    # specific languages
 
 ```bash
 pip install tree-sitter-language-pack                  # Python
-npm install @kreuzberg/tree-sitter-language-pack       # Node.js / TypeScript
+npm install @xberg-io/tree-sitter-language-pack       # Node.js / TypeScript
 ```
 
 Rust, Ruby, Go, Java, C#, PHP, Elixir, and WebAssembly bindings are also published.
@@ -136,7 +136,7 @@ for item in result["structure"]:
 ```
 
 ```typescript
-import { process, detectLanguageFromPath } from "@kreuzberg/tree-sitter-language-pack";
+import { process, detectLanguageFromPath } from "@xberg-io/tree-sitter-language-pack";
 
 const lang = detectLanguageFromPath("src/app.ts");
 const result = process(source, { language: lang ?? "typescript", structure: true, imports: true });
@@ -187,4 +187,4 @@ MIT. The upstream [tree-sitter-language-pack](https://github.com/xberg-io/tree-s
 
 - **Marketplace**: [xberg-io/plugins](https://github.com/xberg-io/plugins)
 - **Upstream**: [xberg-io/tree-sitter-language-pack](https://github.com/xberg-io/tree-sitter-language-pack)
-- **Sibling plugins**: [kreuzberg](../kreuzberg/README.md), [crawlberg](../crawlberg/README.md), [xberg-enterprise](../xberg-enterprise/README.md)
+- **Sibling plugins**: [xberg](../xberg/README.md), [crawlberg](../crawlberg/README.md), [xberg-enterprise](../xberg-enterprise/README.md)

@@ -1,0 +1,35 @@
+{
+  "name": "@xberg-io/opencode-xberg-enterprise",
+  "version": "0.2.2",
+  "private": true,
+  "description": "Deferred OpenCode package placeholder for Xberg Enterprise.",
+  "keywords": [
+    "cloud",
+    "document-intelligence",
+    "extraction",
+    "opencode"
+  ],
+  "homepage": "https://github.com/xberg-io/plugins/tree/main/plugins/xberg-enterprise",
+  "bugs": {
+    "url": "https://github.com/xberg-io/plugins/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xberg-io/plugins.git",
+    "directory": "plugins/xberg-enterprise"
+  },
+  "files": [
+    ".opencode/",
+    "assets/",
+    "README.md"
+  ],
+  "type": "module",
+  "main": ".opencode/plugins/xberg-enterprise.js",
+  "exports": {
+    ".": "./.opencode/plugins/xberg-enterprise.js"
+  },
+  "engines": {
+    "node": ">=22.14.0"
+  }
+}

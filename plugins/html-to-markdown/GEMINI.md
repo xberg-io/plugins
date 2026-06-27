@@ -16,7 +16,7 @@ The CLI must be installed separately:
 ```bash
 brew install xberg-io/tap/html-to-markdown
 # or run without a persistent install (self-installs the binary):
-npx @kreuzberg/html-to-markdown-cli --help
+npx @xberg-io/html-to-markdown-cli --help
 uvx --from html-to-markdown html-to-markdown --help
 # or build from source:
 cargo install --git https://github.com/xberg-io/html-to-markdown html-to-markdown-cli
@@ -41,7 +41,7 @@ intent:
 
 - **html-to-markdown** — you already have HTML (a string, file, or single URL)
   and want clean Markdown plus structured extraction.
-- **kreuzberg** — you have documents (PDF, Office, images) and need full
+- **xberg** — you have documents (PDF, Office, images) and need full
   extraction with OCR.
 - **crawlberg** — you need to crawl or scrape many pages with headless-Chrome
   fallback.

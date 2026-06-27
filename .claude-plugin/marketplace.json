@@ -1,5 +1,5 @@
 {
-  "name": "kreuzberg",
+  "name": "xberg",
   "description": "Curated document-intelligence plugins by Kreuzberg, Inc.",
   "owner": {
     "name": "Kreuzberg, Inc.",
@@ -7,8 +7,8 @@
   },
   "plugins": [
     {
-      "name": "kreuzberg",
-      "source": "./plugins/kreuzberg",
+      "name": "xberg",
+      "source": "./plugins/xberg",
       "description": "Local document extraction: text, tables, metadata, images from 91+ formats with optional OCR."
     },
     {
@@ -19,7 +19,7 @@
     {
       "name": "xberg-enterprise",
       "source": "./plugins/xberg-enterprise",
-      "description": "Managed Kreuzberg document intelligence on api.xberg.io: async extraction with OCR, URL crawling, presigned uploads, document versioning and diffing, signed webhooks, and usage tracking."
+      "description": "Managed Xberg document intelligence on api.xberg.io: async extraction with OCR, URL crawling, presigned uploads, document versioning and diffing, signed webhooks, and usage tracking."
     },
     {
       "name": "html-to-markdown",

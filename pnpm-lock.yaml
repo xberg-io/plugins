@@ -8,21 +8,13 @@ importers:
 
   .: {}
 
-  plugins/html-to-markdown:
-    dependencies:
-      '@opencode-ai/plugin':
-        specifier: ^1.17.8
-        version: 1.17.8
-
-  plugins/kreuzberg:
-    dependencies:
-      '@opencode-ai/plugin':
-        specifier: ^1.17.8
-        version: 1.17.8
-
-  plugins/xberg-enterprise: {}
-
   plugins/crawlberg:
+    dependencies:
+      '@opencode-ai/plugin':
+        specifier: ^1.17.8
+        version: 1.17.8
+
+  plugins/html-to-markdown:
     dependencies:
       '@opencode-ai/plugin':
         specifier: ^1.17.8
@@ -33,6 +25,14 @@ importers:
       '@opencode-ai/plugin':
         specifier: ^1.17.8
         version: 1.17.8
+
+  plugins/xberg:
+    dependencies:
+      '@opencode-ai/plugin':
+        specifier: ^1.17.8
+        version: 1.17.8
+
+  plugins/xberg-enterprise: {}
 
 packages:
 

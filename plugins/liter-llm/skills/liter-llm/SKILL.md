@@ -10,7 +10,7 @@ description: >-
   middleware, and configuration.
 license: MIT
 metadata:
-  author: kreuzberg-dev
+  author: xberg-io
   version: "0.1.0"
   repository: https://github.com/xberg-io/liter-llm
 ---
@@ -63,7 +63,7 @@ building software; the proxy when centralizing access for multiple consumers.
 brew install xberg-io/tap/liter-llm
 
 # or run it without a persistent install (the CLI proxy package self-installs the binary)
-npx @kreuzberg/liter-llm-cli --help
+npx @xberg-io/liter-llm-cli --help
 uvx --from liter-llm-cli liter-llm --help
 
 # or download a prebuilt binary from the latest GitHub release:
@@ -81,13 +81,13 @@ docker pull ghcr.io/xberg-io/liter-llm
 | Language | Install |
 |----------|---------|
 | Python | `pip install liter-llm` |
-| Node.js | `pnpm add @kreuzberg/liter-llm-node` |
+| Node.js | `pnpm add @xberg-io/liter-llm` |
 | Rust | `cargo add liter-llm` |
 | Go | `go get github.com/xberg-io/liter-llm/packages/go` |
 | Ruby | `gem install liter_llm` |
 | PHP | `composer require xberg-io/liter-llm` |
 | C# | `dotnet add package LiterLlm` |
-| WASM | `pnpm add @kreuzberg/liter-llm-wasm` |
+| WASM | `pnpm add @xberg-io/liter-llm-wasm` |
 
 ## Quick start (Python, async)
 

@@ -6,9 +6,9 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 
 const plugins = [
   {
-    path: "plugins/kreuzberg/.opencode/plugins/kreuzberg.js",
-    exportName: "KreuzbergPlugin",
-    tools: ["kreuzberg_extract", "kreuzberg_detect", "kreuzberg_formats"],
+    path: "plugins/xberg/.opencode/plugins/xberg.js",
+    exportName: "XbergPlugin",
+    tools: ["xberg_extract", "xberg_detect", "xberg_formats"],
   },
   {
     path: "plugins/crawlberg/.opencode/plugins/crawlberg.js",
@@ -17,7 +17,7 @@ const plugins = [
   },
   {
     path: "plugins/xberg-enterprise/.opencode/plugins/xberg-enterprise.js",
-    exportName: "KreuzbergCloudPlugin",
+    exportName: "XbergEnterprisePlugin",
     tools: [],
   },
   {

@@ -10,12 +10,6 @@
   "homepage": "https://xberg.io",
   "repository": "https://github.com/xberg-io/plugins",
   "license": "MIT",
-  "keywords": [
-    "tree-sitter",
-    "code-intelligence",
-    "parsing",
-    "chunking",
-    "static-analysis"
-  ],
+  "keywords": ["tree-sitter", "code-intelligence", "parsing", "chunking", "static-analysis"],
   "skills": "./skills/"
 }

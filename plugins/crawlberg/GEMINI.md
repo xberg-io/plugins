@@ -24,7 +24,7 @@ The `crawlberg` binary must be on `PATH`. Install one of:
 ```bash
 brew install xberg-io/tap/crawlberg
 # or run without a persistent install (self-installs the binary):
-npx @kreuzberg/crawlberg-cli --help
+npx @xberg-io/crawlberg-cli --help
 uvx --from crawlberg crawlberg --help
 # or build from source (mcp/api subcommands are non-default features):
 cargo install --git https://github.com/xberg-io/crawlberg crawlberg-cli --features all

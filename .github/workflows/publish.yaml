@@ -49,18 +49,18 @@ jobs:
       - name: Pack opencode packages (validate)
         run: >-
           pnpm
-          --filter @kreuzberg/opencode-kreuzberg
-          --filter @kreuzberg/opencode-crawlberg
-          --filter @kreuzberg/opencode-html-to-markdown
-          --filter @kreuzberg/opencode-tree-sitter-language-pack
+          --filter @xberg-io/opencode-xberg
+          --filter @xberg-io/opencode-crawlberg
+          --filter @xberg-io/opencode-html-to-markdown
+          --filter @xberg-io/opencode-tree-sitter-language-pack
           publish --dry-run --no-git-checks
 
       - name: Publish opencode packages
         if: ${{ github.event_name == 'release' || inputs.dry_run != true }}
         run: >-
           pnpm
-          --filter @kreuzberg/opencode-kreuzberg
-          --filter @kreuzberg/opencode-crawlberg
-          --filter @kreuzberg/opencode-html-to-markdown
-          --filter @kreuzberg/opencode-tree-sitter-language-pack
+          --filter @xberg-io/opencode-xberg
+          --filter @xberg-io/opencode-crawlberg
+          --filter @xberg-io/opencode-html-to-markdown
+          --filter @xberg-io/opencode-tree-sitter-language-pack
           publish --access public --provenance --no-git-checks

@@ -1,20 +1,20 @@
 # TypeScript / Node.js API Reference
 
-Package: `@kreuzberg/html-to-markdown-node`
-The TypeScript package (`@kreuzberg/html-to-markdown`) re-exports everything from `@kreuzberg/html-to-markdown-node` (the native NAPI-RS binding) and adds file/stream helpers.
+Package: `@xberg-io/html-to-markdown-node`
+The TypeScript package (`@xberg-io/html-to-markdown`) re-exports everything from `@xberg-io/html-to-markdown-node` (the native NAPI-RS binding) and adds file/stream helpers.
 
 ## Installation
 
 ```bash
-npm install @kreuzberg/html-to-markdown-node
+npm install @xberg-io/html-to-markdown-node
 # or
-pnpm add @kreuzberg/html-to-markdown-node
+pnpm add @xberg-io/html-to-markdown-node
 ```
 
 ## Primary Function
 
 ```typescript
-import { convert } from '@kreuzberg/html-to-markdown-node';
+import { convert } from '@xberg-io/html-to-markdown-node';
 
 // convert() returns a JSON string — always JSON.parse() the result
 const result = JSON.parse(convert(html, options?));
@@ -28,14 +28,14 @@ console.log(result.metadata);   // metadata object or null
 
 ## Function Signatures
 
-### Core (from `@kreuzberg/html-to-markdown-node`)
+### Core (from `@xberg-io/html-to-markdown-node`)
 
 ```typescript
 // Primary conversion — returns JSON string, always JSON.parse() the result
 function convert(html: string, options?: JsConversionOptions): string;
 ```
 
-### File and Stream Helpers (from `@kreuzberg/html-to-markdown`)
+### File and Stream Helpers (from `@xberg-io/html-to-markdown`)
 
 ```typescript
 import {
@@ -44,7 +44,7 @@ import {
   wrapVisitorCallback,
   wrapVisitorCallbacks,
   hasMetadataSupport,
-} from "@kreuzberg/html-to-markdown-node";
+} from "@xberg-io/html-to-markdown-node";
 import type { Readable } from "node:stream";
 
 // File helpers (async, return JSON string — JSON.parse() the result)
@@ -172,8 +172,8 @@ interface ConversionResult {
 The visitor is passed as a third argument to `convert()`:
 
 ```typescript
-import { convert } from "@kreuzberg/html-to-markdown-node";
-import { wrapVisitorCallbacks } from "@kreuzberg/html-to-markdown-node";
+import { convert } from "@xberg-io/html-to-markdown-node";
+import { wrapVisitorCallbacks } from "@xberg-io/html-to-markdown-node";
 
 const visitor = wrapVisitorCallbacks({
   visitElementStart: (ctx) => {
@@ -194,7 +194,7 @@ Visitor return types: `{ type: 'continue' }` | `{ type: 'skip' }` | `{ type: 'pr
 
 ```typescript
 // Simple conversion
-import { convert } from "@kreuzberg/html-to-markdown-node";
+import { convert } from "@xberg-io/html-to-markdown-node";
 const result = JSON.parse(convert("<h1>Hello</h1>"));
 console.log(result.content); // "# Hello\n"
 
@@ -216,7 +216,7 @@ for (const image of result4.images) {
 }
 
 // File conversion
-import { convertFile } from "@kreuzberg/html-to-markdown-node";
+import { convertFile } from "@xberg-io/html-to-markdown-node";
 const json = await convertFile("./page.html", { headingStyle: "Atx" });
 const fileResult = JSON.parse(json);
 console.log(fileResult.content);

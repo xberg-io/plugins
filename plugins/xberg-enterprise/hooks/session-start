@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# SessionStart hook for xberg-enterprise plugin.
+# Checks whether an API key is configured; emits a one-line reminder if not.
+
+set -euo pipefail
+
+# Detect credentials.
+# Precedence: XBERG_API_KEY env var > ~/.xberg/cloud.toml api_key field.
+config_file="${HOME}/.xberg/cloud.toml"
+has_key=0
+
+if [ -n "${XBERG_API_KEY:-}" ]; then
+  has_key=1
+elif [ -f "$config_file" ] && grep -qE '^[[:space:]]*api_key[[:space:]]*=[[:space:]]*"[^"]+"' "$config_file" 2>/dev/null; then
+  has_key=1
+fi
+
+# If a key is already configured, emit nothing and exit cleanly.
+if [ "$has_key" -eq 1 ]; then
+  exit 0
+fi
+
+# No key found — emit a one-line setup reminder via the platform-appropriate
+# JSON shape. Same dispatch as superpowers' session-start.
+
+message='Xberg Enterprise: set XBERG_API_KEY or write ~/.xberg/cloud.toml to enable cloud extraction. See https://xberg.io/cloud for keys.'
+
+# Escape string for JSON embedding using bash parameter substitution.
+escape_for_json() {
+  local s="$1"
+  s="${s//\\/\\\\}"
+  s="${s//\"/\\\"}"
+  s="${s//$'\n'/\\n}"
+  s="${s//$'\r'/\\r}"
+  s="${s//$'\t'/\\t}"
+  printf '%s' "$s"
+}
+
+escaped=$(escape_for_json "$message")
+
+# Cursor hooks expect additional_context (snake_case).
+# Claude Code hooks expect hookSpecificOutput.additionalContext (nested).
+# Copilot CLI / others expect additionalContext (top-level).
+if [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then
+  printf '{\n  "additional_context": "%s"\n}\n' "$escaped"
+elif [ -n "${CLAUDE_PLUGIN_ROOT:-}" ] && [ -z "${COPILOT_CLI:-}" ]; then
+  printf '{\n  "hookSpecificOutput": {\n    "hookEventName": "SessionStart",\n    "additionalContext": "%s"\n  }\n}\n' "$escaped"
+else
+  printf '{\n  "additionalContext": "%s"\n}\n' "$escaped"
+fi
+
+exit 0

@@ -10,13 +10,7 @@
   "homepage": "https://xberg.io",
   "repository": "https://github.com/xberg-io/plugins",
   "license": "MIT",
-  "keywords": [
-    "llm",
-    "openai",
-    "proxy",
-    "embeddings",
-    "mcp"
-  ],
+  "keywords": ["llm", "openai", "proxy", "embeddings", "mcp"],
   "skills": "./skills/",
   "interface": {
     "displayName": "Liter-LLM",
@@ -24,10 +18,7 @@
     "longDescription": "Call 143 LLM providers through one unified interface — chat, streaming, tool calling, embeddings, image generation, audio, moderation, web search, OCR, and reranking. Routes by `provider/model` prefix with built-in caching, rate limiting, cost tracking, budgets, and fallback. Ships an OpenAI-compatible proxy server and an auto-installing MCP server exposing 22 tools. The plugin's MCP launcher locates or downloads a version-matched `liter-llm` binary on first run.",
     "developerName": "Kreuzberg, Inc.",
     "category": "developer-tools",
-    "capabilities": [
-      "Read",
-      "Write"
-    ],
+    "capabilities": ["Read", "Write"],
     "defaultPrompt": [
       "Send a chat completion to openai/gpt-4o",
       "Embed these documents and rank them",

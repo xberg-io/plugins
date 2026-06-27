@@ -9,7 +9,7 @@ description: >-
   MCP server over shelling out.
 license: MIT
 metadata:
-  author: kreuzberg-dev
+  author: xberg-io
   version: "0.1.0"
   repository: https://github.com/xberg-io/crawlberg
 ---
@@ -36,7 +36,7 @@ The plugin shells out to a `crawlberg` binary on `PATH`. Install one of:
 ```bash
 brew install xberg-io/tap/crawlberg
 # or run without a persistent install (the CLI proxy package self-installs the binary):
-npx @kreuzberg/crawlberg-cli --help
+npx @xberg-io/crawlberg-cli --help
 uvx --from crawlberg-cli crawlberg --help
 # or build from source:
 cargo install --git https://github.com/xberg-io/crawlberg crawlberg-cli --features all

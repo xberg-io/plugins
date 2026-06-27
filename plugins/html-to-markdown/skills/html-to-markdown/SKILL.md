@@ -8,7 +8,7 @@ description: >-
   tables, document structure, inline images, URL fetching, and CLI usage.
 license: MIT
 metadata:
-  author: kreuzberg-dev
+  author: xberg-io
   version: "0.1.0"
   repository: https://github.com/xberg-io/html-to-markdown
 ---
@@ -49,7 +49,7 @@ Use this skill when writing code that:
 brew trust xberg-io/tap
 brew install xberg-io/tap/html-to-markdown
 # or run without a persistent install (the CLI proxy package self-installs the binary):
-npx @kreuzberg/html-to-markdown-cli --help
+npx @xberg-io/html-to-markdown-cli --help
 uvx --from html-to-markdown-cli html-to-markdown --help
 # or download a prebuilt binary from the latest GitHub release:
 #   https://github.com/xberg-io/html-to-markdown/releases/latest
@@ -61,16 +61,16 @@ cargo install --git https://github.com/xberg-io/html-to-markdown html-to-markdow
 
 ```bash
 pip install html-to-markdown                                # Python
-npm install @kreuzberg/html-to-markdown                      # TypeScript / Node.js
+npm install @xberg-io/html-to-markdown                      # TypeScript / Node.js
 cargo add html-to-markdown-rs                                # Rust (features: metadata default; full = all)
 gem install html-to-markdown                                 # Ruby
 composer require xberg-io/html-to-markdown              # PHP
 go get github.com/xberg-io/html-to-markdown/packages/go/v3   # Go
-dotnet add package KreuzbergDev.HtmlToMarkdown               # C#
-npm install @kreuzberg/html-to-markdown-wasm                 # WASM
+dotnet add package XbergIo.HtmlToMarkdown               # C#
+npm install @xberg-io/html-to-markdown-wasm                 # WASM
 ```
 
-- Java (Maven): `dev.kreuzberg:html-to-markdown`
+- Java (Maven): `io.xberg:html-to-markdown`
 - Elixir: `{:html_to_markdown, "~> 3.6"}` in `mix.exs`
 - R: `install.packages("htmltomarkdown", repos = "https://xberg-io.r-universe.dev")`
 - C (FFI): pre-built `.so` / `.dll` / `.dylib` from GitHub releases
@@ -83,13 +83,13 @@ npm install @kreuzberg/html-to-markdown-wasm                 # WASM
 
 Both share the same `ConversionResult` shape, so output is interchangeable.
 
-## When to use html-to-markdown vs kreuzberg vs crawlberg
+## When to use html-to-markdown vs xberg vs crawlberg
 
 - **html-to-markdown** — you already have HTML (a string, a file, or a single URL) and want clean Markdown plus structured metadata/tables. No OCR, no document parsing, no crawling.
-- **kreuzberg** — you have *documents* (PDF, Office, images, email, archives) and need full text/table/metadata extraction with optional OCR. Use it when the input is not already HTML.
+- **xberg** — you have *documents* (PDF, Office, images, email, archives) and need full text/table/metadata extraction with optional OCR. Use it when the input is not already HTML.
 - **crawlberg** — you need to *crawl or scrape many pages*, follow links, and handle JS-rendered sites with a headless-Chrome fallback. It uses html-to-markdown internally for the HTML→Markdown step.
 
-Rule of thumb: single HTML in → Markdown out = html-to-markdown. Many URLs / a site = crawlberg. Non-HTML documents = kreuzberg.
+Rule of thumb: single HTML in → Markdown out = html-to-markdown. Many URLs / a site = crawlberg. Non-HTML documents = xberg.
 
 ## CLI quick start
 
@@ -143,7 +143,7 @@ print(result.metadata)  # title, links, headers, …
 ### TypeScript / Node.js
 
 ```typescript
-import { convert } from "@kreuzberg/html-to-markdown";
+import { convert } from "@xberg-io/html-to-markdown";
 
 // Node's convert() returns a JSON string — always JSON.parse() it.
 const result = JSON.parse(convert("<h1>Hello World</h1><p>A paragraph.</p>"));

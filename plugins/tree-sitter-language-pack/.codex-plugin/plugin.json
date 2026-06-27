@@ -10,13 +10,7 @@
   "homepage": "https://xberg.io",
   "repository": "https://github.com/xberg-io/plugins",
   "license": "MIT",
-  "keywords": [
-    "tree-sitter",
-    "code-intelligence",
-    "parsing",
-    "chunking",
-    "static-analysis"
-  ],
+  "keywords": ["tree-sitter", "code-intelligence", "parsing", "chunking", "static-analysis"],
   "skills": "./skills/",
   "interface": {
     "displayName": "Tree-Sitter Language Pack",
@@ -24,9 +18,7 @@
     "longDescription": "Parse source code and extract structure, imports, exports, symbols, docstrings, and comments from 306 programming languages using tree-sitter grammars. Produces syntax trees, language detection, syntax diagnostics, and syntax-aware chunking for LLM ingestion. Runs locally via the ts-pack CLI; SDKs ship for 10 languages plus WebAssembly. Plugin ships skills covering parsing, extraction, chunking, language detection, and parser-cache management.",
     "developerName": "Kreuzberg, Inc.",
     "category": "developer-tools",
-    "capabilities": [
-      "Read"
-    ],
+    "capabilities": ["Read"],
     "defaultPrompt": [
       "Parse this file into a syntax tree",
       "Extract the structure and imports from this source file",

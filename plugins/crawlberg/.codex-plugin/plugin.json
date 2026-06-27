@@ -10,12 +10,7 @@
   "homepage": "https://xberg.io",
   "repository": "https://github.com/xberg-io/plugins",
   "license": "MIT",
-  "keywords": [
-    "web-scraping",
-    "crawling",
-    "html-to-markdown",
-    "headless-chrome"
-  ],
+  "keywords": ["web-scraping", "crawling", "html-to-markdown", "headless-chrome"],
   "skills": "./skills/",
   "interface": {
     "displayName": "Crawlberg",
@@ -23,10 +18,7 @@
     "longDescription": "Scrape single pages, crawl entire sites, or map a domain's URLs through the local crawlberg CLI. Every page is converted to clean Markdown via the built-in HTML→Markdown engine. WAF-blocked or JS-heavy pages transparently fall back to a headless Chrome backend.",
     "developerName": "Kreuzberg, Inc.",
     "category": "web-scraping",
-    "capabilities": [
-      "Read",
-      "Write"
-    ],
+    "capabilities": ["Read", "Write"],
     "defaultPrompt": [
       "Crawl this site to markdown",
       "Scrape a single page",

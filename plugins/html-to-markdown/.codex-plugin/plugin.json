@@ -10,13 +10,7 @@
   "homepage": "https://xberg.io",
   "repository": "https://github.com/xberg-io/plugins",
   "license": "MIT",
-  "keywords": [
-    "html-to-markdown",
-    "markdown",
-    "html",
-    "conversion",
-    "metadata"
-  ],
+  "keywords": ["html-to-markdown", "markdown", "html", "conversion", "metadata"],
   "skills": "./skills/",
   "interface": {
     "displayName": "html-to-markdown",
@@ -24,10 +18,7 @@
     "longDescription": "Convert HTML to Markdown, Djot, or plain text with a single-pass Rust engine. Extracts metadata (title, OG tags, JSON-LD, headers, links, images), GFM tables, inline images, and a structured document tree. Fetches and converts live URLs. Runs locally via the html-to-markdown CLI; plugin ships skills covering conversion, metadata, tables, and URL fetching across CLI and 12 language bindings.",
     "developerName": "Kreuzberg, Inc.",
     "category": "developer-tools",
-    "capabilities": [
-      "Read",
-      "Write"
-    ],
+    "capabilities": ["Read", "Write"],
     "defaultPrompt": [
       "Convert this HTML file to Markdown",
       "Fetch a URL and convert it to Markdown",

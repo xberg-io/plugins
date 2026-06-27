@@ -15,7 +15,7 @@ For Claude Code:
 
 ```text
 /plugin marketplace add /path/to/plugins
-/plugin install kreuzberg@kreuzberg
+/plugin install xberg@xberg
 ```
 
 For other harnesses, use the equivalent self-hosted marketplace install command (see README).
@@ -40,11 +40,11 @@ block:
 
 ```yaml
 ---
-name: kreuzberg
+name: xberg
 description: "<capability summary>. Use when …"
 license: MIT
 metadata:
-  author: kreuzberg-dev
+  author: xberg-io
   version: "0.1.0"
   repository: https://github.com/xberg-io/<tool>
 ---
@@ -111,7 +111,7 @@ Keep skills and docs terse and imperative. Lead with what the agent should do, n
 - Good: "Extract text and tables from PDFs, Office files, and images."
 - Avoid: "This skill provides powerful document extraction capabilities."
 
-No emojis. Avoid adjectives like "powerful", "smart", "intelligent". Reference the [kreuzberg-dev communication style](../CLAUDE.md#communication-style) for guidance.
+No emojis. Avoid adjectives like "powerful", "smart", "intelligent". Reference the [xberg-io communication style](../CLAUDE.md#communication-style) for guidance.
 
 ## Conventional Commits
 

@@ -14,7 +14,7 @@ Self-host:
 
 ```text
 /plugin marketplace add xberg-io/plugins
-/plugin install html-to-markdown@kreuzberg
+/plugin install html-to-markdown@xberg
 ```
 
 ### Binary requirement
@@ -32,7 +32,7 @@ To install the CLI yourself:
 brew trust xberg-io/tap
 brew install xberg-io/tap/html-to-markdown
 # or run it without a persistent install (the CLI proxy package self-installs the binary):
-npx @kreuzberg/html-to-markdown-cli --help
+npx @xberg-io/html-to-markdown-cli --help
 uvx --from html-to-markdown-cli html-to-markdown --help
 # or download a prebuilt binary from the latest GitHub release:
 #   https://github.com/xberg-io/html-to-markdown/releases/latest
@@ -44,7 +44,7 @@ The skills also cover the language SDKs. Install the one you need:
 
 ```bash
 pip install html-to-markdown                  # Python
-npm install @kreuzberg/html-to-markdown        # TypeScript / Node.js
+npm install @xberg-io/html-to-markdown        # TypeScript / Node.js
 cargo add html-to-markdown-rs                  # Rust
 gem install html-to-markdown                   # Ruby
 ```
@@ -106,7 +106,7 @@ print(result.metadata)  # title, links, headers, …
 ```
 
 ```typescript
-import { convert } from "@kreuzberg/html-to-markdown";
+import { convert } from "@xberg-io/html-to-markdown";
 
 // Node's convert() returns a JSON string — always JSON.parse() it.
 const result = JSON.parse(convert("<h1>Hello</h1><p>World</p>"));
@@ -171,4 +171,4 @@ MIT. The skill content references the upstream [html-to-markdown](https://github
 
 - **Marketplace**: [xberg-io/plugins](https://github.com/xberg-io/plugins)
 - **Upstream**: [xberg-io/html-to-markdown](https://github.com/xberg-io/html-to-markdown)
-- **Sibling plugins**: [kreuzberg](../kreuzberg/README.md), [crawlberg](../crawlberg/README.md)
+- **Sibling plugins**: [xberg](../xberg/README.md), [crawlberg](../crawlberg/README.md)

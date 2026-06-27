@@ -24,5 +24,5 @@ checking the gallery within 7-10 days of publication.
 1. Open an issue at <https://github.com/google-gemini/extensions> asking for
    monorepo support, or
 2. Split the three `gemini-extension.json` files into three sibling repos
-   (`xberg-io/plugin-kreuzberg`, etc.) and have the marketplace
+   (`xberg-io/plugin-xberg`, etc.) and have the marketplace
    register them all.

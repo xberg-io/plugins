@@ -37,31 +37,31 @@
       "field": "plugins.5.version"
     },
     {
-      "path": "plugins/kreuzberg/.claude-plugin/plugin.json",
+      "path": "plugins/xberg/.claude-plugin/plugin.json",
       "field": "version"
     },
     {
-      "path": "plugins/kreuzberg/.codex-plugin/plugin.json",
+      "path": "plugins/xberg/.codex-plugin/plugin.json",
       "field": "version"
     },
     {
-      "path": "plugins/kreuzberg/.cursor-plugin/plugin.json",
+      "path": "plugins/xberg/.cursor-plugin/plugin.json",
       "field": "version"
     },
     {
-      "path": "plugins/kreuzberg/.factory-plugin/plugin.json",
+      "path": "plugins/xberg/.factory-plugin/plugin.json",
       "field": "version"
     },
     {
-      "path": "plugins/kreuzberg/.github/plugin/plugin.json",
+      "path": "plugins/xberg/.github/plugin/plugin.json",
       "field": "version"
     },
     {
-      "path": "plugins/kreuzberg/gemini-extension.json",
+      "path": "plugins/xberg/gemini-extension.json",
       "field": "version"
     },
     {
-      "path": "plugins/kreuzberg/package.json",
+      "path": "plugins/xberg/package.json",
       "field": "version"
     },
     {
@@ -202,11 +202,6 @@
     }
   ],
   "audit": {
-    "exclude": [
-      "CHANGELOG.md",
-      "RELEASE-NOTES.md",
-      "node_modules",
-      ".git"
-    ]
+    "exclude": ["CHANGELOG.md", "RELEASE-NOTES.md", "node_modules", ".git"]
   }
 }

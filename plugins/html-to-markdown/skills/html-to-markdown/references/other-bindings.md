@@ -147,23 +147,23 @@ $images = $result->images;
 
 ## Java
 
-**Maven:** `dev.kreuzberg.htmltomarkdown:html-to-markdown-rs`
-**GroupId:** `dev.kreuzberg.htmltomarkdown`
-**ArtifactId:** `html-to-markdown-rs`
+**Maven:** `io.xberg:html-to-markdown`
+**GroupId:** `io.xberg`
+**ArtifactId:** `html-to-markdown`
 **Java requirement:** 21+ (uses Panama FFM API)
 
 ```xml
 <dependency>
-  <groupId>dev.kreuzberg.htmltomarkdown</groupId>
-  <artifactId>html-to-markdown-rs</artifactId>
+  <groupId>io.xberg</groupId>
+  <artifactId>html-to-markdown</artifactId>
   <version>3.2.0</version>
 </dependency>
 ```
 
 ```java
-import dev.kreuzberg.htmltomarkdown.HtmlToMarkdown;
-import dev.kreuzberg.htmltomarkdown.ConversionResult;
-import dev.kreuzberg.htmltomarkdown.HtmlToMarkdownRsException;
+import io.xberg.htmltomarkdown.HtmlToMarkdown;
+import io.xberg.htmltomarkdown.ConversionResult;
+import io.xberg.htmltomarkdown.HtmlToMarkdownRsException;
 
 // Primary function — returns ConversionResult
 try {
@@ -177,7 +177,7 @@ try {
 }
 
 // With options
-import dev.kreuzberg.htmltomarkdown.ConversionOptions;
+import io.xberg.htmltomarkdown.ConversionOptions;
 
 ConversionOptions options = new ConversionOptions();
 options.setHeadingStyle("atx");
@@ -193,8 +193,8 @@ for (var table : result.tables()) {
 
 ## C# (.NET)
 
-**NuGet:** `KreuzbergDev.HtmlToMarkdown`
-**Install:** `dotnet add package KreuzbergDev.HtmlToMarkdown`
+**NuGet:** `XbergIo.HtmlToMarkdown`
+**Install:** `dotnet add package XbergIo.HtmlToMarkdown`
 **.NET requirement:** 6+
 
 The static entry point class is `HtmlToMarkdownRs`. The exception type is `HtmlToMarkdownRsException`.
@@ -324,7 +324,7 @@ result <- convert_handle("<h1>Hello</h1>", handle)
 
 ## WASM
 
-**Package:** `@kreuzberg/html-to-markdown-wasm` (built with wasm-pack)
+**Package:** `@xberg-io/html-to-markdown-wasm` (built with wasm-pack)
 
 ```javascript
 import init, {
@@ -332,7 +332,7 @@ import init, {
   convertBytes,
   createConversionOptionsHandle,
   convertWithOptionsHandle,
-} from "@kreuzberg/html-to-markdown-wasm";
+} from "@xberg-io/html-to-markdown-wasm";
 
 await init(); // initialize WASM module
 
@@ -365,23 +365,23 @@ const json = convertWithOptionsHandle("<h1>Hello</h1>", handle);
 
 ## Node.js / npm
 
-**Package:** `@kreuzberg/html-to-markdown-node`
-**Install:** `npm install @kreuzberg/html-to-markdown-node`
+**Package:** `@xberg-io/html-to-markdown-node`
+**Install:** `npm install @xberg-io/html-to-markdown-node`
 
 Uses NAPI-RS. Platform-specific native binaries are delivered as optional dependencies.
 
 ```json
 {
   "optionalDependencies": {
-    "@kreuzberg/html-to-markdown-node-darwin-arm64": "3.2.0",
-    "@kreuzberg/html-to-markdown-node-darwin-x64": "3.2.0",
-    "@kreuzberg/html-to-markdown-node-linux-arm64-gnu": "3.2.0",
-    "@kreuzberg/html-to-markdown-node-linux-arm64-musl": "3.2.0",
-    "@kreuzberg/html-to-markdown-node-linux-x64-gnu": "3.2.0",
-    "@kreuzberg/html-to-markdown-node-linux-x64-musl": "3.2.0",
-    "@kreuzberg/html-to-markdown-node-linux-arm-gnueabihf": "3.2.0",
-    "@kreuzberg/html-to-markdown-node-win32-x64-msvc": "3.2.0",
-    "@kreuzberg/html-to-markdown-node-win32-arm64-msvc": "3.2.0"
+    "@xberg-io/html-to-markdown-node-darwin-arm64": "3.2.0",
+    "@xberg-io/html-to-markdown-node-darwin-x64": "3.2.0",
+    "@xberg-io/html-to-markdown-node-linux-arm64-gnu": "3.2.0",
+    "@xberg-io/html-to-markdown-node-linux-arm64-musl": "3.2.0",
+    "@xberg-io/html-to-markdown-node-linux-x64-gnu": "3.2.0",
+    "@xberg-io/html-to-markdown-node-linux-x64-musl": "3.2.0",
+    "@xberg-io/html-to-markdown-node-linux-arm-gnueabihf": "3.2.0",
+    "@xberg-io/html-to-markdown-node-win32-x64-msvc": "3.2.0",
+    "@xberg-io/html-to-markdown-node-win32-arm64-msvc": "3.2.0"
   }
 }
 ```

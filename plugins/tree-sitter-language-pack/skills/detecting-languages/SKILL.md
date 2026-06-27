@@ -68,7 +68,7 @@ detect_language_from_content(open("x").read())  # best-effort from text
 ### Node.js / TypeScript
 
 ```typescript
-import { detectLanguageFromPath, detectLanguageFromContent } from "@kreuzberg/tree-sitter-language-pack";
+import { detectLanguageFromPath, detectLanguageFromContent } from "@xberg-io/tree-sitter-language-pack";
 
 const lang = detectLanguageFromPath("src/app.ts") ?? detectLanguageFromContent(source);
 ```

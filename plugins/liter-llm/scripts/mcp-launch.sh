@@ -35,7 +35,7 @@
 # Note on npx/uvx: the liter-llm npm and PyPI CLI packages are being rolled out
 # (the package self-installs/runs the binary, basemind-style). They may not be
 # published yet, so each is PROBED first and falls through cleanly if absent.
-# The `@kreuzberg/*` / `liter-llm` binding packages (NAPI-RS / PyO3) are language
+# The `@xberg-io/*` / `liter-llm` binding packages (NAPI-RS / PyO3) are language
 # SDKs, NOT the CLI — they are not used here.
 #
 # CRITICAL: stdout is the MCP stdio protocol channel. Every diagnostic in this
@@ -43,7 +43,7 @@
 set -euo pipefail
 
 REPO="xberg-io/liter-llm"
-NPM_PKG="@kreuzberg/liter-llm-cli"
+NPM_PKG="@xberg-io/liter-llm-cli"
 PYPI_PKG="liter-llm-cli"
 
 log() { printf 'liter-llm-launch: %s\n' "$*" >&2; }

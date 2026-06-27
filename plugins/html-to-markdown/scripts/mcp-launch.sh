@@ -31,7 +31,7 @@
 # Note on npx/uvx: the html-to-markdown-cli npm and PyPI proxy packages are being
 # rolled out (the package self-installs/runs the binary, basemind-style). They may
 # not be published yet, so each is PROBED first and falls through cleanly if
-# absent. The `@kreuzberg/html-to-markdown` npm package and the importable
+# absent. The `@xberg-io/html-to-markdown` npm package and the importable
 # `html-to-markdown` pip package are language SDKs/bindings, NOT the CLI — they
 # are not used here.
 #
@@ -51,7 +51,7 @@
 set -euo pipefail
 
 REPO="xberg-io/html-to-markdown"
-NPM_PKG="@kreuzberg/html-to-markdown-cli"
+NPM_PKG="@xberg-io/html-to-markdown-cli"
 PYPI_PKG="html-to-markdown-cli"
 
 log() { printf 'html-to-markdown-launch: %s\n' "$*" >&2; }

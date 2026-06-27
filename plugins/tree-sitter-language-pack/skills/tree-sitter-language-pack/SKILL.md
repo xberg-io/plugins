@@ -9,7 +9,7 @@ description: >-
   the CLI surface, the SDK surface, and parser-cache management.
 license: MIT
 metadata:
-  author: kreuzberg-dev
+  author: xberg-io
   version: "0.1.0"
   repository: https://github.com/xberg-io/tree-sitter-language-pack
 ---
@@ -51,7 +51,7 @@ Reach for tree-sitter-language-pack when you need a real syntax tree or
 structured code metadata — building a code index, feeding code to an LLM
 in semantically coherent chunks, linting for syntax errors across many
 languages, or detecting a file's language. For plain text extraction from
-documents (PDF, Office, HTML), use Kreuzberg instead.
+documents (PDF, Office, HTML), use Xberg instead.
 
 ## CLI vs SDK
 
@@ -77,7 +77,7 @@ should call parsing directly as a tool.
 ```bash
 brew install xberg-io/tap/ts-pack
 # or run without a persistent install (the CLI proxy package self-installs the binary):
-npx @kreuzberg/ts-pack-cli --help
+npx @xberg-io/ts-pack-cli --help
 uvx --from ts-pack-cli ts-pack --help
 # or download a prebuilt binary from the latest GitHub release:
 #   https://github.com/xberg-io/tree-sitter-language-pack/releases/latest
@@ -96,8 +96,8 @@ pip install tree-sitter-language-pack
 ### Node.js / TypeScript
 
 ```bash
-npm install @kreuzberg/tree-sitter-language-pack
-# or: pnpm add @kreuzberg/tree-sitter-language-pack
+npm install @xberg-io/tree-sitter-language-pack
+# or: pnpm add @xberg-io/tree-sitter-language-pack
 ```
 
 ### Rust
@@ -110,7 +110,7 @@ tree-sitter-language-pack = { version = "1", features = ["download"] }
 
 Other bindings: Ruby (`gem install tree_sitter_language_pack`), Go, Java,
 C#, PHP, Elixir, and WebAssembly
-(`npm install @kreuzberg/tree-sitter-language-pack-wasm`). See
+(`npm install @xberg-io/tree-sitter-language-pack-wasm`). See
 <https://github.com/xberg-io/tree-sitter-language-pack>.
 
 ## CLI surface
@@ -181,7 +181,7 @@ lang = detect_language_from_path("src/app.py")
 ```
 
 ```typescript
-import { process, detectLanguageFromPath } from "@kreuzberg/tree-sitter-language-pack";
+import { process, detectLanguageFromPath } from "@xberg-io/tree-sitter-language-pack";
 
 const lang = detectLanguageFromPath("src/app.ts");
 const result = process(source, { language: lang ?? "typescript", structure: true, imports: true });

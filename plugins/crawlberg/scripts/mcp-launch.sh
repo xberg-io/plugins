@@ -35,14 +35,14 @@
 # Note on npx/uvx: the crawlberg npm and PyPI CLI packages are being rolled out
 # (the package self-installs/runs the binary, basemind-style). They may not be
 # published yet, so each is PROBED first and falls through cleanly if absent.
-# The `@kreuzberg/crawlberg` npm package and the importable pip package are
+# The `@xberg-io/crawlberg` npm package and the importable pip package are
 # language SDKs/bindings, NOT the CLI — they are not used here.
 #
 # CRITICAL: stdout is the MCP stdio protocol channel. Every diagnostic in this
 # script MUST go to stderr (>&2). Only the exec'd binary may write to stdout.
 set -euo pipefail
 
-NPM_PKG="@kreuzberg/crawlberg-cli"
+NPM_PKG="@xberg-io/crawlberg-cli"
 PYPI_PKG="crawlberg-cli"
 
 log() { printf 'crawlberg-launch: %s\n' "$*" >&2; }
