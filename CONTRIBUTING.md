@@ -95,14 +95,15 @@ Install locally and test manually in your agent harness. Ask the agent to perfor
 
 ## Version Bumps
 
-Update VERSION, run the bump script, and tag:
+Set the target version with the bump script, then tag:
 
 ```bash
-echo X.Y.Z > VERSION
 scripts/bump-version.sh X.Y.Z
 git commit -am "chore: release vX.Y.Z"
 git tag vX.Y.Z && git push --tags
 ```
+
+For opencode packages, use `scripts/bump-version.sh --group opencode X.Y.Z` to bump or `scripts/bump-version.sh --group opencode` to re-sync from `OPENCODE_VERSION`.
 
 ## Prose Style
 

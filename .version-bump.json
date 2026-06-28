@@ -163,6 +163,10 @@
       "version_file": "OPENCODE_VERSION",
       "files": [
         {
+          "path": "OPENCODE_VERSION",
+          "field": "__raw__"
+        },
+        {
           "path": "plugins/xberg/package.json",
           "field": "version"
         },

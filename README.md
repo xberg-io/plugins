@@ -172,7 +172,7 @@ plugins/
 └── crawlberg/
     └── plugin.json
 scripts/
-├── bump-version.sh            # lockstep version bump
+├── bump-version.sh            # version bump/sync
 └── validate-manifests.sh      # CI parity check
 ```
 
@@ -183,11 +183,12 @@ Two independent version lines:
 - **Marketplace plugins** (Claude / Codex / Cursor / Factory / GitHub / Gemini manifests) track `VERSION`.
 - **opencode npm packages** (`@xberg-io/opencode-*`) track `OPENCODE_VERSION` and publish to npm.
 
-`bump-version.sh` writes the version file and every manifest in that group; `validate-manifests.sh` checks both groups.
+`bump-version.sh` writes the version file and every manifest in that group when given a version. Without a version, it syncs the group's manifests from its source-of-truth version file. `validate-manifests.sh` checks both groups.
 
 ```bash
 scripts/bump-version.sh 0.2.3                    # marketplace plugins (default group)
 scripts/bump-version.sh --group opencode 0.1.1   # opencode npm packages
+scripts/bump-version.sh --group opencode         # resync from OPENCODE_VERSION
 scripts/validate-manifests.sh
 git commit -am "chore: release"
 git tag vX.Y.Z && git push --tags
