@@ -29,6 +29,9 @@ venv/
 .coverage
 coverage/
 
+# polylint cache
+.polylint/
+
 # basemind index cache
 .basemind/
 
