@@ -20,6 +20,12 @@ For Claude Code:
 
 For other harnesses, use the equivalent self-hosted marketplace install command (see README).
 
+## Pre-commit hooks
+
+Install the git hooks with `poly hooks install`. On every commit, poly runs
+lint, format, and file-safety checks; the commit-msg hook validates the
+message. Run all hooks manually with `poly hooks run pre-commit --all-files`.
+
 ## Adding a Skill
 
 Create a new skill in `plugins/<plugin-name>/skills/<skill-name>/SKILL.md`. Use a **gerund-task**
