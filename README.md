@@ -26,6 +26,20 @@ Document-intelligence plugins for coding agents. Install any of the five into Cl
 | **liter-llm** | Universal LLM API client for 143 providers (chat, streaming, tools, embeddings) | Stable — v0.2.2 |
 | **tree-sitter-language-pack** | Parse and extract code intelligence from 300+ languages | Stable — v0.2.2 |
 
+## Platform Coverage
+
+Every plugin ships a bundled MCP server and installs into each supported agent from this one marketplace.
+
+| Plugin | Claude Code | Codex CLI | Cursor | Factory Droid | Gemini CLI | Copilot CLI | opencode | MCP server |
+|--------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| **xberg** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **crawlberg** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **html-to-markdown** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **liter-llm** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ |
+| **tree-sitter-language-pack** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+
+Version and manifest parity across every platform is kept in sync by `scripts/bump-version.sh` and enforced in CI by `scripts/validate-manifests.sh` (see [Releasing](#releasing)). `—` = not yet published (liter-llm opencode package is pending).
+
 ## Install
 
 <details open>
@@ -226,7 +240,7 @@ Open an issue at [xberg-io/plugins](https://github.com/xberg-io/plugins/issues) 
 
 MIT. See [LICENSE](LICENSE).
 
-## Part of Xberg.dev
+## Part of Xberg.io
 
 - [Xberg](https://github.com/xberg-io/xberg) — document intelligence: text, tables, metadata from 91+ formats with optional OCR.
 - [Xberg Enterprise](https://github.com/xberg-io/xberg-enterprise) — managed extraction API with SDKs, dashboards, and observability.
