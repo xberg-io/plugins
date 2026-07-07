@@ -52,9 +52,7 @@ function runCli(args, context) {
     child.on("close", (exitCode, signal) => {
       const stdoutText = Buffer.concat(stdout).toString("utf8").trim();
       const stderrText = Buffer.concat(stderr).toString("utf8").trim();
-      const output = [stdoutText, stderrText && `stderr:\n${stderrText}`]
-        .filter(Boolean)
-        .join("\n\n");
+      const output = [stdoutText, stderrText && `stderr:\n${stderrText}`].filter(Boolean).join("\n\n");
 
       resolve({
         title: exitCode === 0 ? `ts-pack ${args[0]}` : `ts-pack ${args[0]} failed`,

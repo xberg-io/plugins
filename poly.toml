@@ -19,7 +19,7 @@ trim_trailing_whitespace = true
 stages = ["pre-commit"]
 
 [hooks.builtin]
-polylint = { exclude = [
+lint = { exclude = [
     "**/*.lock",
     "**/Cargo.lock",
     "**/go.sum",
@@ -27,7 +27,7 @@ polylint = { exclude = [
     "**/pnpm-lock.yaml",
     "**/uv.lock",
 ] }
-polyfmt = { exclude = [
+fmt = { exclude = [
     "**/*.lock",
     "**/Cargo.lock",
     "**/go.sum",
@@ -55,3 +55,9 @@ enabled = true
 [tools.actionlint]
 enabled = true
 
+
+[lint.markdown.rumdl]
+disable = ["MD012", "MD013", "MD024", "MD033", "MD036", "MD041", "MD046", "MD051", "MD076"]
+
+[fmt.markdown.rumdl]
+disable = ["MD012", "MD013", "MD024", "MD033", "MD036", "MD041", "MD046", "MD051", "MD076"]

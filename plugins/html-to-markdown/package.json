@@ -2,13 +2,7 @@
   "name": "@xberg-io/opencode-html-to-markdown",
   "version": "0.1.1",
   "description": "OpenCode tools for HTML→Markdown conversion with the html-to-markdown CLI.",
-  "keywords": [
-    "conversion",
-    "html",
-    "html-to-markdown",
-    "markdown",
-    "opencode"
-  ],
+  "keywords": ["conversion", "html", "html-to-markdown", "markdown", "opencode"],
   "homepage": "https://github.com/xberg-io/plugins/tree/main/plugins/html-to-markdown",
   "bugs": {
     "url": "https://github.com/xberg-io/plugins/issues"
@@ -19,11 +13,7 @@
     "url": "git+https://github.com/xberg-io/plugins.git",
     "directory": "plugins/html-to-markdown"
   },
-  "files": [
-    ".opencode/",
-    "assets/",
-    "README.md"
-  ],
+  "files": [".opencode/", "assets/", "README.md"],
   "type": "module",
   "main": ".opencode/plugins/html-to-markdown.js",
   "exports": {

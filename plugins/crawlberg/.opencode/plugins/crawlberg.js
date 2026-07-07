@@ -3,10 +3,7 @@ import { tool } from "@opencode-ai/plugin";
 
 const schema = tool.schema;
 
-const outputFormat = schema
-  .enum(["json", "markdown"])
-  .default("json")
-  .describe("CLI output format.");
+const outputFormat = schema.enum(["json", "markdown"]).default("json").describe("CLI output format.");
 const browserMode = schema
   .enum(["auto", "always", "never"])
   .default("auto")
@@ -71,9 +68,7 @@ function runCli(args, context) {
     child.on("close", (exitCode, signal) => {
       const stdoutText = Buffer.concat(stdout).toString("utf8").trim();
       const stderrText = Buffer.concat(stderr).toString("utf8").trim();
-      const output = [stdoutText, stderrText && `stderr:\n${stderrText}`]
-        .filter(Boolean)
-        .join("\n\n");
+      const output = [stdoutText, stderrText && `stderr:\n${stderrText}`].filter(Boolean).join("\n\n");
 
       resolve({
         title: exitCode === 0 ? `crawlberg ${args[0]}` : `crawlberg ${args[0]} failed`,
@@ -107,19 +102,9 @@ export const CrawlbergPlugin = async () => ({
       args: {
         url: schema.string().url().describe("URL to scrape."),
         format: outputFormat,
-        timeout: schema
-          .number()
-          .int()
-          .positive()
-          .max(600000)
-          .default(30000)
-          .describe("Request timeout in ms."),
+        timeout: schema.number().int().positive().max(600000).default(30000).describe("Request timeout in ms."),
         browser_mode: browserMode,
-        browser_endpoint: schema
-          .string()
-          .url()
-          .optional()
-          .describe("Optional CDP WebSocket endpoint."),
+        browser_endpoint: schema.string().url().optional().describe("Optional CDP WebSocket endpoint."),
         user_agent: schema.string().min(1).optional().describe("Optional HTTP user agent."),
         proxy: schema.string().url().optional().describe("Optional proxy URL."),
         respect_robots_txt: schema.boolean().default(false).describe("Respect robots.txt."),
@@ -139,37 +124,13 @@ export const CrawlbergPlugin = async () => ({
         urls: schema.array(schema.string().url()).min(1).describe("Seed URLs to crawl."),
         depth: schema.number().int().min(0).max(20).default(2).describe("Maximum crawl depth."),
         max_pages: schema.number().int().positive().optional().describe("Maximum pages to crawl."),
-        concurrent: schema
-          .number()
-          .int()
-          .positive()
-          .max(256)
-          .default(10)
-          .describe("Maximum concurrent requests."),
-        rate_limit: schema
-          .number()
-          .int()
-          .min(0)
-          .default(200)
-          .describe("Delay between requests in ms."),
-        stay_on_domain: schema
-          .boolean()
-          .default(false)
-          .describe("Restrict crawling to the seed domain."),
+        concurrent: schema.number().int().positive().max(256).default(10).describe("Maximum concurrent requests."),
+        rate_limit: schema.number().int().min(0).default(200).describe("Delay between requests in ms."),
+        stay_on_domain: schema.boolean().default(false).describe("Restrict crawling to the seed domain."),
         format: outputFormat,
-        timeout: schema
-          .number()
-          .int()
-          .positive()
-          .max(600000)
-          .default(30000)
-          .describe("Request timeout in ms."),
+        timeout: schema.number().int().positive().max(600000).default(30000).describe("Request timeout in ms."),
         browser_mode: browserMode,
-        browser_endpoint: schema
-          .string()
-          .url()
-          .optional()
-          .describe("Optional CDP WebSocket endpoint."),
+        browser_endpoint: schema.string().url().optional().describe("Optional CDP WebSocket endpoint."),
         user_agent: schema.string().min(1).optional().describe("Optional HTTP user agent."),
         proxy: schema.string().url().optional().describe("Optional proxy URL."),
         respect_robots_txt: schema.boolean().default(false).describe("Respect robots.txt."),
@@ -178,14 +139,7 @@ export const CrawlbergPlugin = async () => ({
       async execute(args, context) {
         validateJson(args.config, "config");
 
-        const cliArgs = [
-          "crawl",
-          ...args.urls,
-          "--depth",
-          String(args.depth),
-          "--concurrent",
-          String(args.concurrent),
-        ];
+        const cliArgs = ["crawl", ...args.urls, "--depth", String(args.depth), "--concurrent", String(args.concurrent)];
         pushOption(cliArgs, "--max-pages", args.max_pages);
         pushOption(cliArgs, "--rate-limit", args.rate_limit);
         pushFlag(cliArgs, "--stay-on-domain", args.stay_on_domain);
@@ -200,19 +154,9 @@ export const CrawlbergPlugin = async () => ({
         limit: schema.number().int().positive().optional().describe("Maximum URLs to return."),
         search: schema.string().min(1).optional().describe("Filter URLs by substring."),
         format: outputFormat,
-        timeout: schema
-          .number()
-          .int()
-          .positive()
-          .max(600000)
-          .default(30000)
-          .describe("Request timeout in ms."),
+        timeout: schema.number().int().positive().max(600000).default(30000).describe("Request timeout in ms."),
         browser_mode: browserMode,
-        browser_endpoint: schema
-          .string()
-          .url()
-          .optional()
-          .describe("Optional CDP WebSocket endpoint."),
+        browser_endpoint: schema.string().url().optional().describe("Optional CDP WebSocket endpoint."),
         respect_robots_txt: schema.boolean().default(false).describe("Respect robots.txt."),
         config: schema.string().min(2).optional().describe("Optional CrawlConfig JSON."),
       },

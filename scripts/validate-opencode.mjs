@@ -42,9 +42,7 @@ for (const plugin of plugins) {
   const expected = plugin.tools.toSorted();
 
   if (JSON.stringify(actual) !== JSON.stringify(expected)) {
-    throw new Error(
-      `${plugin.path} tools ${JSON.stringify(actual)} != ${JSON.stringify(expected)}`,
-    );
+    throw new Error(`${plugin.path} tools ${JSON.stringify(actual)} != ${JSON.stringify(expected)}`);
   }
 
   for (const name of expected) {

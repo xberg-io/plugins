@@ -19,11 +19,7 @@
     "developerName": "Kreuzberg, Inc.",
     "category": "web-scraping",
     "capabilities": ["Read", "Write"],
-    "defaultPrompt": [
-      "Crawl this site to markdown",
-      "Scrape a single page",
-      "Fall back to headless mode"
-    ],
+    "defaultPrompt": ["Crawl this site to markdown", "Scrape a single page", "Fall back to headless mode"],
     "websiteURL": "https://xberg.io",
     "privacyPolicyURL": "https://xberg.io/privacy",
     "termsOfServiceURL": "https://xberg.io/terms",

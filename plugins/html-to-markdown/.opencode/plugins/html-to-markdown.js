@@ -13,10 +13,7 @@ const codeBlockStyle = schema
   .optional()
   .describe("Code block fence style. Default: backticks.");
 
-const outputFormat = schema
-  .enum(["markdown", "djot"])
-  .optional()
-  .describe("Output markup format. Default: markdown.");
+const outputFormat = schema.enum(["markdown", "djot"]).optional().describe("Output markup format. Default: markdown.");
 
 const preset = schema
   .enum(["minimal", "standard", "aggressive"])
@@ -70,9 +67,7 @@ function runCli(args, context, stdin) {
     child.on("close", (exitCode, signal) => {
       const stdoutText = Buffer.concat(stdout).toString("utf8").trim();
       const stderrText = Buffer.concat(stderr).toString("utf8").trim();
-      const output = [stdoutText, stderrText && `stderr:\n${stderrText}`]
-        .filter(Boolean)
-        .join("\n\n");
+      const output = [stdoutText, stderrText && `stderr:\n${stderrText}`].filter(Boolean).join("\n\n");
 
       resolve({
         title: exitCode === 0 ? "html-to-markdown" : "html-to-markdown failed",
@@ -103,18 +98,11 @@ export const HtmlToMarkdownPlugin = async () => ({
         "Convert an HTML file or HTML string to Markdown (or Djot) with the html-to-markdown CLI. Provide either `path` or `html`.",
       args: {
         path: schema.string().min(1).optional().describe("Path to a local HTML file."),
-        html: schema
-          .string()
-          .min(1)
-          .optional()
-          .describe("Inline HTML to convert (used when `path` is omitted)."),
+        html: schema.string().min(1).optional().describe("Inline HTML to convert (used when `path` is omitted)."),
         heading_style: headingStyle,
         code_block_style: codeBlockStyle,
         output_format: outputFormat,
-        preprocess: schema
-          .boolean()
-          .optional()
-          .describe("Strip navigation, ads, and forms before converting."),
+        preprocess: schema.boolean().optional().describe("Strip navigation, ads, and forms before converting."),
         preset,
       },
       async execute(args, context) {
@@ -132,23 +120,15 @@ export const HtmlToMarkdownPlugin = async () => ({
       },
     }),
     html_to_markdown_fetch_url: tool({
-      description:
-        "Fetch a URL and convert its HTML to Markdown (or Djot) with the html-to-markdown CLI.",
+      description: "Fetch a URL and convert its HTML to Markdown (or Djot) with the html-to-markdown CLI.",
       args: {
         url: schema.string().min(1).describe("URL to fetch and convert."),
         heading_style: headingStyle,
         code_block_style: codeBlockStyle,
         output_format: outputFormat,
-        preprocess: schema
-          .boolean()
-          .optional()
-          .describe("Strip navigation, ads, and forms before converting."),
+        preprocess: schema.boolean().optional().describe("Strip navigation, ads, and forms before converting."),
         preset,
-        user_agent: schema
-          .string()
-          .min(1)
-          .optional()
-          .describe("Custom User-Agent header for the fetch."),
+        user_agent: schema.string().min(1).optional().describe("Custom User-Agent header for the fetch."),
       },
       async execute(args, context) {
         const cliArgs = ["--url", args.url];

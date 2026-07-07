@@ -19,11 +19,7 @@
     "developerName": "Kreuzberg, Inc.",
     "category": "document-intelligence",
     "capabilities": ["Read"],
-    "defaultPrompt": [
-      "Extract text from this PDF",
-      "OCR a scanned image",
-      "List supported formats"
-    ],
+    "defaultPrompt": ["Extract text from this PDF", "OCR a scanned image", "List supported formats"],
     "websiteURL": "https://xberg.io",
     "privacyPolicyURL": "https://xberg.io/privacy",
     "termsOfServiceURL": "https://xberg.io/terms",
