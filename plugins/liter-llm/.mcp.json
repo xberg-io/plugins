@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "liter-llm": {
+      "command": "./scripts/mcp-launch.sh",
+      "args": [
+        "mcp",
+        "--transport",
+        "stdio"
+      ]
+    }
+  }
+}

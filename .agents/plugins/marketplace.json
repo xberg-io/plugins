@@ -1,0 +1,68 @@
+{
+  "name": "xberg",
+  "interface": {
+    "displayName": "xberg"
+  },
+  "plugins": [
+    {
+      "name": "xberg",
+      "source": {
+        "source": "local",
+        "path": "./plugins/xberg"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "document-intelligence"
+    },
+    {
+      "name": "crawlberg",
+      "source": {
+        "source": "local",
+        "path": "./plugins/crawlberg"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "web-scraping"
+    },
+    {
+      "name": "html-to-markdown",
+      "source": {
+        "source": "local",
+        "path": "./plugins/html-to-markdown"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "developer-tools"
+    },
+    {
+      "name": "liter-llm",
+      "source": {
+        "source": "local",
+        "path": "./plugins/liter-llm"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "developer-tools"
+    },
+    {
+      "name": "tree-sitter-language-pack",
+      "source": {
+        "source": "local",
+        "path": "./plugins/tree-sitter-language-pack"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "developer-tools"
+    }
+  ]
+}

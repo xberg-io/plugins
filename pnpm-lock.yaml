@@ -20,6 +20,12 @@ importers:
         specifier: ^1.17.8
         version: 1.17.8
 
+  plugins/liter-llm:
+    dependencies:
+      '@opencode-ai/plugin':
+        specifier: ^1.17.8
+        version: 1.17.8
+
   plugins/tree-sitter-language-pack:
     dependencies:
       '@opencode-ai/plugin':

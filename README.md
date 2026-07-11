@@ -12,7 +12,7 @@ Document-intelligence plugins for coding agents. Install any of the five into Cl
 ## Badges
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/xberg-io/plugins/blob/main/LICENSE)
-[![Version: 0.2.2](https://img.shields.io/badge/version-0.2.2-blue.svg)](https://github.com/xberg-io/plugins/releases)
+[![Version: 0.2.3](https://img.shields.io/badge/version-0.2.3-blue.svg)](https://github.com/xberg-io/plugins/releases)
 [![GitHub stars](https://img.shields.io/github/stars/xberg-io/plugins?style=social)](https://github.com/xberg-io/plugins)
 [![Discord](https://img.shields.io/badge/Discord-Chat-007ec6?logo=discord&logoColor=white)](https://discord.gg/xt9WY3GnKR)
 
@@ -20,11 +20,11 @@ Document-intelligence plugins for coding agents. Install any of the five into Cl
 
 | Plugin | Value Proposition | Status |
 |--------|-------------------|--------|
-| **xberg** | Local document extraction from 91+ formats (PDF, Office, images with OCR, HTML, email, archives, academic) | Stable — v0.2.2 |
-| **crawlberg** | Web crawling and scraping with HTML→Markdown and headless-Chrome fallback | Stable — v0.2.2 |
-| **html-to-markdown** | Fast, lossless HTML→Markdown with structured metadata and tables | Stable — v0.2.2 |
-| **liter-llm** | Universal LLM API client for 143 providers (chat, streaming, tools, embeddings) | Stable — v0.2.2 |
-| **tree-sitter-language-pack** | Parse and extract code intelligence from 300+ languages | Stable — v0.2.2 |
+| **xberg** | Local document extraction from 91+ formats (PDF, Office, images with OCR, HTML, email, archives, academic) | Stable — v0.2.3 |
+| **crawlberg** | Web crawling and scraping with HTML→Markdown and headless-Chrome fallback | Stable — v0.2.3 |
+| **html-to-markdown** | Fast, lossless HTML→Markdown with structured metadata and tables | Stable — v0.2.3 |
+| **liter-llm** | Universal LLM API client for 143 providers (chat, streaming, tools, embeddings) | Stable — v0.2.3 |
+| **tree-sitter-language-pack** | Parse and extract code intelligence from 300+ languages | Stable — v0.2.3 |
 
 ## Platform Coverage
 
@@ -35,10 +35,10 @@ Every plugin ships a bundled MCP server and installs into each supported agent f
 | **xberg** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **crawlberg** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **html-to-markdown** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **liter-llm** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ |
+| **liter-llm** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **tree-sitter-language-pack** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-Version and manifest parity across every platform is kept in sync by `scripts/bump-version.sh` and enforced in CI by `scripts/validate-manifests.sh` (see [Releasing](#releasing)). `—` = not yet published (liter-llm opencode package is pending).
+Version and manifest parity across every platform is kept in sync by ai-rulez generation and enforced in CI by `scripts/validate-manifests.sh` (see [Releasing](#releasing)).
 
 ## Install
 
@@ -145,12 +145,12 @@ Add the published packages to `opencode.json`:
     "@xberg-io/opencode-xberg",
     "@xberg-io/opencode-crawlberg",
     "@xberg-io/opencode-html-to-markdown",
+    "@xberg-io/opencode-liter-llm",
     "@xberg-io/opencode-tree-sitter-language-pack"
   ]
 }
 ```
 
-`liter-llm` has no opencode package.
 </details>
 
 ## Binary Requirements
@@ -192,23 +192,20 @@ scripts/
 
 ## Releasing
 
-Two independent version lines:
-
-- **Marketplace plugins** (Claude / Codex / Cursor / Factory / GitHub / Gemini manifests) track `VERSION`.
-- **opencode npm packages** (`@xberg-io/opencode-*`) track `OPENCODE_VERSION` and publish to npm.
-
-`bump-version.sh` writes the version file and every manifest in that group when given a version. Without a version, it syncs the group's manifests from its source-of-truth version file. `validate-manifests.sh` checks both groups.
+All generated runtime manifests and OpenCode npm packages track `VERSION`.
+Update the version in the ai-rulez plugin sources, regenerate, and use
+`validate-manifests.sh` to check parity.
+Each generated bundle includes `.ai-rulez-generated.json` with BLAKE3 hashes. JavaScript and Markdown outputs carry
+matching generated-file headers, while strict JSON and binary artifacts remain byte-identical.
 
 ```bash
-scripts/bump-version.sh 0.2.3                    # marketplace plugins (default group)
-scripts/bump-version.sh --group opencode 0.1.1   # opencode npm packages
-scripts/bump-version.sh --group opencode         # resync from OPENCODE_VERSION
+scripts/bump-version.sh 0.2.3
 scripts/validate-manifests.sh
 git commit -am "chore: release"
 git tag vX.Y.Z && git push --tags
 ```
 
-The opencode packages publish from `.github/workflows/publish.yaml` (npm Trusted Publishing, with provenance) when a GitHub release is published. The first release was done locally with `scripts/publish-opencode.sh`.
+The OpenCode packages publish from `.github/workflows/publish.yaml` with npm Trusted Publishing and provenance when a GitHub release is published.
 
 ## Contributing
 

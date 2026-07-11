@@ -1,6 +1,16 @@
 {
   "name": "tree-sitter-language-pack",
+  "version": "0.2.3",
   "description": "Parse and extract code intelligence from 300+ programming languages with tree-sitter — structure, imports, symbols, and syntax-aware chunking.",
-  "version": "0.2.2",
-  "contextFileName": "GEMINI.md"
+  "contextFileName": "GEMINI.md",
+  "mcpServers": {
+    "tree-sitter-language-pack": {
+      "command": "${extensionPath}/scripts/mcp-launch.sh",
+      "args": [
+        "mcp",
+        "--transport",
+        "stdio"
+      ]
+    }
+  }
 }

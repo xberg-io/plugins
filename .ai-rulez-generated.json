@@ -1,0 +1,12 @@
+{
+  "schema_version": "v1",
+  "source_hash": "blake3:4eb8edee37ea40d7562f6a5fe75924133dadeaff54519f06ee5b8b8e3a04b28b",
+  "outputs": {
+    ".agents/plugins/marketplace.json": {
+      "content_hash": "blake3:708b07b48b6a406c56f3638461873e52d12304e6e27fb7004b32e13b014c9277"
+    },
+    ".claude-plugin/marketplace.json": {
+      "content_hash": "blake3:427aabc9e3c211163c94490da489f10ace8d6848bd93f4c30ed1e7458fe13191"
+    }
+  }
+}

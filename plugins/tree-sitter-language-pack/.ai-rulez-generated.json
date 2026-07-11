@@ -1,0 +1,81 @@
+{
+  "schema_version": "v1",
+  "source_hash": "blake3:bfae27a85ee8ba17273541f8cb674bcbc63ec91a6a7fa0f51acee0c2dab1aad8",
+  "outputs": {
+    ".claude-plugin/plugin.json": {
+      "content_hash": "blake3:9a9c451b15c1f12fc4a5bc4756809d403e119cb561f4b6708a46d03ab814aee3"
+    },
+    ".codex-plugin/plugin.json": {
+      "content_hash": "blake3:eb0bc56db7cff7b9b7ae4b0338b5c16e92d6a49ef4f5e26d96c5498f235405d9"
+    },
+    ".cursor-plugin/plugin.json": {
+      "content_hash": "blake3:2f5bd268f8d7274f548fdf986ad035a2d346a544b058573000a071a7012f47c5"
+    },
+    ".cursor-plugin/skills/chunking-for-llms/SKILL.md": {
+      "content_hash": "blake3:194808ab41cbfc122dee398cccb0ecad135949fb11fd3201110a2ea6f8ec3369"
+    },
+    ".cursor-plugin/skills/detecting-languages/SKILL.md": {
+      "content_hash": "blake3:238fd217455937ea238427aaf5a01cc7670d448d9fc933db693f86aeda7e9eac"
+    },
+    ".cursor-plugin/skills/extracting-code-structure/SKILL.md": {
+      "content_hash": "blake3:c8eec823897235ca46c6c9a7940c1ef3faf3912b170c34c1f61570ba20cff11d"
+    },
+    ".cursor-plugin/skills/managing-parsers/SKILL.md": {
+      "content_hash": "blake3:6e456e7b331cbfaa263a01ad7c9c407c10cb105b605e6460b0192d9d035e2814"
+    },
+    ".cursor-plugin/skills/parsing-source/SKILL.md": {
+      "content_hash": "blake3:9033e2c6803385f116531b227b5f1274b5ec6fc035cd2ebf562f5eaf1f1c17fb"
+    },
+    ".cursor-plugin/skills/tree-sitter-language-pack/SKILL.md": {
+      "content_hash": "blake3:4dd5afb4092d88c3f73f3ddaaace755ef35ccf8f0f91efce63d44acf21e8d36b"
+    },
+    ".cursor-plugin/skills/using-the-mcp-server/SKILL.md": {
+      "content_hash": "blake3:b58ddb018fb05bdcd0f5ede16472d762aaa5acf5e7816a186899c0a085f1798b"
+    },
+    ".factory-plugin/plugin.json": {
+      "content_hash": "blake3:8dc10397ade554de59a18f22f266106fd51077d96e6cbb8c3d792656aac3dff2"
+    },
+    ".mcp.json": {
+      "content_hash": "blake3:d0ee058aa58bdfe1904a62afcf5dcd54a31fb0525850e382f16cb50f51e622bf"
+    },
+    ".opencode/plugins/tree-sitter-language-pack.js": {
+      "content_hash": "blake3:cae3d1cf0dc0728bb1bcd3b2edb25d275aa02bd272a638f35cba3b7f691aedc1"
+    },
+    "assets/icon.svg": {
+      "content_hash": "blake3:b0abe59064a94924a573822a11881a4f0627adea28c258f542abd97b88fa436d"
+    },
+    "assets/logo.svg": {
+      "content_hash": "blake3:edbce41f41812957f6f07afa54d73e3ebd3d57b4578384e74d4f8bdcb7d5483b"
+    },
+    "gemini-extension.json": {
+      "content_hash": "blake3:2cdf428a7676a3d31f50cb33a31a79c4088d8888469a4f8504fb3c79c619dc7c"
+    },
+    "kimi.plugin.json": {
+      "content_hash": "blake3:3bdda05cad3307ce6b17bbd958fe07eb596abfb6716469fb2cb6a4ae4995da15"
+    },
+    "package.json": {
+      "content_hash": "blake3:df723c2b99221b4984b23e0e13d5bba01f5ad59deeac5b2bfea2385d91d21c6f"
+    },
+    "skills/chunking-for-llms/SKILL.md": {
+      "content_hash": "blake3:194808ab41cbfc122dee398cccb0ecad135949fb11fd3201110a2ea6f8ec3369"
+    },
+    "skills/detecting-languages/SKILL.md": {
+      "content_hash": "blake3:238fd217455937ea238427aaf5a01cc7670d448d9fc933db693f86aeda7e9eac"
+    },
+    "skills/extracting-code-structure/SKILL.md": {
+      "content_hash": "blake3:c8eec823897235ca46c6c9a7940c1ef3faf3912b170c34c1f61570ba20cff11d"
+    },
+    "skills/managing-parsers/SKILL.md": {
+      "content_hash": "blake3:6e456e7b331cbfaa263a01ad7c9c407c10cb105b605e6460b0192d9d035e2814"
+    },
+    "skills/parsing-source/SKILL.md": {
+      "content_hash": "blake3:9033e2c6803385f116531b227b5f1274b5ec6fc035cd2ebf562f5eaf1f1c17fb"
+    },
+    "skills/tree-sitter-language-pack/SKILL.md": {
+      "content_hash": "blake3:4dd5afb4092d88c3f73f3ddaaace755ef35ccf8f0f91efce63d44acf21e8d36b"
+    },
+    "skills/using-the-mcp-server/SKILL.md": {
+      "content_hash": "blake3:b58ddb018fb05bdcd0f5ede16472d762aaa5acf5e7816a186899c0a085f1798b"
+    }
+  }
+}

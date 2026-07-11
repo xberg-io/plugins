@@ -2,14 +2,31 @@
   "name": "liter-llm",
   "displayName": "Liter-LLM",
   "description": "Universal LLM API client for 143 providers — chat, streaming, tools, embeddings, search, OCR, plus an OpenAI-compatible proxy and an MCP server.",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": {
     "name": "Kreuzberg, Inc.",
-    "email": "contact@xberg.io"
+    "email": "contact@xberg.io",
+    "url": "https://xberg.io"
   },
   "homepage": "https://xberg.io",
   "repository": "https://github.com/xberg-io/plugins",
   "license": "MIT",
-  "keywords": ["llm", "openai", "proxy", "embeddings", "mcp"],
-  "skills": "./skills/"
+  "keywords": [
+    "llm",
+    "openai",
+    "proxy",
+    "embeddings",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": {
+    "liter-llm": {
+      "command": "./scripts/mcp-launch.sh",
+      "args": [
+        "mcp",
+        "--transport",
+        "stdio"
+      ]
+    }
+  }
 }

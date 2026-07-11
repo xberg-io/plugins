@@ -1,0 +1,18 @@
+version = "4.0"
+name = "xberg-plugins"
+description = "Xberg plugin marketplace."
+
+[marketplace]
+name = "xberg"
+description = "Curated document-intelligence plugins by Kreuzberg, Inc."
+members = [
+    "plugins/xberg",
+    "plugins/crawlberg",
+    "plugins/html-to-markdown",
+    "plugins/liter-llm",
+    "plugins/tree-sitter-language-pack",
+]
+
+[marketplace.owner]
+name = "Kreuzberg, Inc."
+email = "contact@xberg.io"

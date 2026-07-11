@@ -1,6 +1,14 @@
 {
   "name": "crawlberg",
+  "version": "0.2.3",
   "description": "Web crawling and scraping with HTML→Markdown and headless-Chrome fallback.",
-  "version": "0.2.2",
-  "contextFileName": "GEMINI.md"
+  "contextFileName": "GEMINI.md",
+  "mcpServers": {
+    "crawlberg": {
+      "command": "${extensionPath}/scripts/mcp-launch.sh",
+      "args": [
+        "mcp"
+      ]
+    }
+  }
 }

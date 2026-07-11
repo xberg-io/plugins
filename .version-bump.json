@@ -37,6 +37,26 @@
           "field": "plugins.4.version"
         },
         {
+          "path": "plugins/xberg/.ai-rulez/config.toml",
+          "field": "plugin.version"
+        },
+        {
+          "path": "plugins/crawlberg/.ai-rulez/config.toml",
+          "field": "plugin.version"
+        },
+        {
+          "path": "plugins/html-to-markdown/.ai-rulez/config.toml",
+          "field": "plugin.version"
+        },
+        {
+          "path": "plugins/liter-llm/.ai-rulez/config.toml",
+          "field": "plugin.version"
+        },
+        {
+          "path": "plugins/tree-sitter-language-pack/.ai-rulez/config.toml",
+          "field": "plugin.version"
+        },
+        {
           "path": "plugins/xberg/.claude-plugin/plugin.json",
           "field": "version"
         },
@@ -155,16 +175,6 @@
         {
           "path": "plugins/tree-sitter-language-pack/gemini-extension.json",
           "field": "version"
-        }
-      ]
-    },
-    {
-      "name": "opencode",
-      "version_file": "OPENCODE_VERSION",
-      "files": [
-        {
-          "path": "OPENCODE_VERSION",
-          "field": "__raw__"
         },
         {
           "path": "plugins/xberg/package.json",
@@ -176,6 +186,10 @@
         },
         {
           "path": "plugins/html-to-markdown/package.json",
+          "field": "version"
+        },
+        {
+          "path": "plugins/liter-llm/package.json",
           "field": "version"
         },
         {

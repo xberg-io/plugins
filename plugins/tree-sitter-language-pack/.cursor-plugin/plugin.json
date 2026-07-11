@@ -2,14 +2,31 @@
   "name": "tree-sitter-language-pack",
   "displayName": "Tree-Sitter Language Pack",
   "description": "Parse and extract code intelligence from 300+ programming languages with tree-sitter — structure, imports, symbols, and syntax-aware chunking.",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": {
     "name": "Kreuzberg, Inc.",
-    "email": "contact@xberg.io"
+    "email": "contact@xberg.io",
+    "url": "https://xberg.io"
   },
   "homepage": "https://xberg.io",
   "repository": "https://github.com/xberg-io/plugins",
   "license": "MIT",
-  "keywords": ["tree-sitter", "code-intelligence", "parsing", "chunking", "static-analysis"],
-  "skills": "./skills/"
+  "keywords": [
+    "tree-sitter",
+    "code-intelligence",
+    "parsing",
+    "chunking",
+    "static-analysis"
+  ],
+  "skills": "./skills/",
+  "mcpServers": {
+    "tree-sitter-language-pack": {
+      "command": "./scripts/mcp-launch.sh",
+      "args": [
+        "mcp",
+        "--transport",
+        "stdio"
+      ]
+    }
+  }
 }

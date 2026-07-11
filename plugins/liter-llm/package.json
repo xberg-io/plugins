@@ -1,0 +1,27 @@
+{
+  "name": "@xberg-io/opencode-liter-llm",
+  "version": "0.2.3",
+  "description": "Universal LLM API client for 143 providers — chat, streaming, tools, embeddings, search, OCR, plus an OpenAI-compatible proxy and an MCP server.",
+  "keywords": [
+    "llm",
+    "openai",
+    "proxy",
+    "embeddings",
+    "mcp"
+  ],
+  "homepage": "https://xberg.io",
+  "license": "MIT",
+  "type": "module",
+  "main": ".opencode/plugins/liter-llm.js",
+  "exports": {
+    ".": "./.opencode/plugins/liter-llm.js"
+  },
+  "files": [
+    ".opencode/",
+    "assets/",
+    "README.md"
+  ],
+  "dependencies": {
+    "@opencode-ai/plugin": "^1.17.8"
+  }
+}

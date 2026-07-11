@@ -1,0 +1,81 @@
+{
+  "schema_version": "v1",
+  "source_hash": "blake3:4b510466c8c9e613b5a9c800fa5e6711fb9019d0804a3f763e8e0c73890ffbef",
+  "outputs": {
+    ".claude-plugin/plugin.json": {
+      "content_hash": "blake3:4668bcdbe162a259614c159d4002697179d5d214c5b4a768d3cdf0376e7f5f90"
+    },
+    ".codex-plugin/plugin.json": {
+      "content_hash": "blake3:abf836ad41d36afc3387e1b74a90e5fbef6e051cd24255c1c26f71b4c9a0cfb2"
+    },
+    ".cursor-plugin/plugin.json": {
+      "content_hash": "blake3:d684de138c4c0c43c6f1f292e629c602274ee9b6b8cbd1dcd1ba57cd341e404e"
+    },
+    ".cursor-plugin/skills/automating-the-browser/SKILL.md": {
+      "content_hash": "blake3:c099a207dd4d659bcbd8000afd8d104f51644c894a2073d064b670ad7e7dee10"
+    },
+    ".cursor-plugin/skills/crawlberg/SKILL.md": {
+      "content_hash": "blake3:2400d592929aaf450317f228f695638b76d0f7987f5996106372e06b9abce70d"
+    },
+    ".cursor-plugin/skills/crawling-a-site/SKILL.md": {
+      "content_hash": "blake3:87e62f8235715c6d9ff820d40d26b521d5d0e0fb9888f7d04589c7429d28da14"
+    },
+    ".cursor-plugin/skills/headless-fallback/SKILL.md": {
+      "content_hash": "blake3:9ce8ead27ee0f0b76d36ce4a455a5d17936077d6582e737c9b9a7ba46819b686"
+    },
+    ".cursor-plugin/skills/mapping-urls/SKILL.md": {
+      "content_hash": "blake3:f350881f7fc3fae75a1b3aec431fddcb0cd9fd62539b5f6ade1493d4b15a076b"
+    },
+    ".cursor-plugin/skills/scraping-html-to-markdown/SKILL.md": {
+      "content_hash": "blake3:d4aa39402d49ad2eada44eea60c4a03a463b56134d3b869b5119f23d06144211"
+    },
+    ".cursor-plugin/skills/serving-the-api/SKILL.md": {
+      "content_hash": "blake3:a011fca3e4de3a4e6442e1779c4425d884cafb3369765d37e52d2f01dd8671bb"
+    },
+    ".factory-plugin/plugin.json": {
+      "content_hash": "blake3:bc27bb0cf0e43673b098f07223595a60cfd64d35a6deeff128c18074efe077dd"
+    },
+    ".mcp.json": {
+      "content_hash": "blake3:f718cb4c11eefd1c5949d925d3412bed5250a3352c86029dd9584cc332ac0b06"
+    },
+    ".opencode/plugins/crawlberg.js": {
+      "content_hash": "blake3:7486175a604d72ad888bbc1cc05498071b10454f2db93a873a8ab9278ea3da28"
+    },
+    "assets/icon.svg": {
+      "content_hash": "blake3:2559f334b518fbb8c33ba0d97b0abe108b6cbc1e918f2b66f65046f740f24588"
+    },
+    "assets/logo.png": {
+      "content_hash": "blake3:dc62498695d3905dcec06f7efdbdecf346fac66daf775b4d60de2c6e7c833dd7"
+    },
+    "gemini-extension.json": {
+      "content_hash": "blake3:083a2ad07e5de7308de5f3057f076d647ef3396c6ec85dde8c648359ef50d024"
+    },
+    "kimi.plugin.json": {
+      "content_hash": "blake3:d734b2e0882c01a82bff485c8986ecdda18b0809b77f99756f57b0fced719eeb"
+    },
+    "package.json": {
+      "content_hash": "blake3:3d72bca6d1a5805c0d85cdd41f3732c47177179ef198008efdcf2a1a8f4ec322"
+    },
+    "skills/automating-the-browser/SKILL.md": {
+      "content_hash": "blake3:c099a207dd4d659bcbd8000afd8d104f51644c894a2073d064b670ad7e7dee10"
+    },
+    "skills/crawlberg/SKILL.md": {
+      "content_hash": "blake3:2400d592929aaf450317f228f695638b76d0f7987f5996106372e06b9abce70d"
+    },
+    "skills/crawling-a-site/SKILL.md": {
+      "content_hash": "blake3:87e62f8235715c6d9ff820d40d26b521d5d0e0fb9888f7d04589c7429d28da14"
+    },
+    "skills/headless-fallback/SKILL.md": {
+      "content_hash": "blake3:9ce8ead27ee0f0b76d36ce4a455a5d17936077d6582e737c9b9a7ba46819b686"
+    },
+    "skills/mapping-urls/SKILL.md": {
+      "content_hash": "blake3:f350881f7fc3fae75a1b3aec431fddcb0cd9fd62539b5f6ade1493d4b15a076b"
+    },
+    "skills/scraping-html-to-markdown/SKILL.md": {
+      "content_hash": "blake3:d4aa39402d49ad2eada44eea60c4a03a463b56134d3b869b5119f23d06144211"
+    },
+    "skills/serving-the-api/SKILL.md": {
+      "content_hash": "blake3:a011fca3e4de3a4e6442e1779c4425d884cafb3369765d37e52d2f01dd8671bb"
+    }
+  }
+}

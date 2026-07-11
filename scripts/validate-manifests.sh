@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Verify every manifest in .version-bump.json matches its group's version file
-# (marketplace -> VERSION, opencode -> OPENCODE_VERSION). Exits non-zero on drift.
+# Verify every generated manifest in .version-bump.json matches VERSION.
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -23,6 +22,8 @@ while IFS= read -r group; do
 		fi
 		if [ "$field" = "__raw__" ]; then
 			actual="$(tr -d '[:space:]' <"$abs")"
+		elif [[ "$relpath" == *.toml ]]; then
+			actual="$(perl -0ne 'print $1 if /\[plugin\][^\[]*?\nversion\s*=\s*"([^"]+)"/s' "$abs")"
 		else
 			actual="$(jq -r "$(dotted_to_jq_path "$field")" "$abs")"
 		fi

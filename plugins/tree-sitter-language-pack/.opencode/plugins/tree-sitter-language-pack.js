@@ -1,3 +1,8 @@
+// AI-RULEZ :: GENERATED FILE — DO NOT EDIT
+// Content-Hash: blake3:cae3d1cf0dc0728bb1bcd3b2edb25d275aa02bd272a638f35cba3b7f691aedc1
+// Source-Hash: blake3:bfae27a85ee8ba17273541f8cb674bcbc63ec91a6a7fa0f51acee0c2dab1aad8
+// Schema-Version: v1
+
 import { spawn } from "node:child_process";
 import { tool } from "@opencode-ai/plugin";
 

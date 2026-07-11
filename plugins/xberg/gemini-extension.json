@@ -1,6 +1,16 @@
 {
   "name": "xberg",
+  "version": "0.2.3",
   "description": "Local document extraction: text, tables, metadata, images from 91+ formats with optional OCR.",
-  "version": "0.2.2",
-  "contextFileName": "GEMINI.md"
+  "contextFileName": "GEMINI.md",
+  "mcpServers": {
+    "xberg": {
+      "command": "${extensionPath}/scripts/mcp-launch.sh",
+      "args": [
+        "mcp",
+        "--transport",
+        "stdio"
+      ]
+    }
+  }
 }

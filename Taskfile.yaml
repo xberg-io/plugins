@@ -1,0 +1,14 @@
+version: "3"
+
+tasks:
+  validate:codex:
+    desc: Validate generated Codex marketplace and plugin artifacts
+    cmds:
+      - python3 scripts/validate-codex.py
+
+  test:
+    desc: Run repository validation
+    cmds:
+      - bash scripts/validate-manifests.sh
+      - task: validate:codex
+      - pnpm validate:opencode

@@ -109,7 +109,9 @@ git commit -am "chore: release vX.Y.Z"
 git tag vX.Y.Z && git push --tags
 ```
 
-For opencode packages, use `scripts/bump-version.sh --group opencode X.Y.Z` to bump or `scripts/bump-version.sh --group opencode` to re-sync from `OPENCODE_VERSION`.
+OpenCode packages use the same `VERSION` as the other generated plugin manifests.
+Generated bundles include `.ai-rulez-generated.json`. Validation recomputes its BLAKE3 hashes and checks the
+generated headers on JavaScript and Markdown outputs; strict JSON manifests remain comment-free.
 
 ## Prose Style
 

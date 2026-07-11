@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 # Bump versions for a version group declared in .version-bump.json.
 # Usage: scripts/bump-version.sh [--group <name>] [new-semver]
-#   default group: marketplace (tracks VERSION — the claude/codex/cursor/factory
-#   /github/gemini plugin manifests). The opencode group tracks OPENCODE_VERSION
-#   (the @xberg-io/opencode-* npm packages, versioned independently).
-#   scripts/bump-version.sh 0.2.3                    # bump the marketplace plugins
-#   scripts/bump-version.sh --group opencode 0.1.1   # bump the npm packages
-#   scripts/bump-version.sh --group opencode         # sync packages from OPENCODE_VERSION
+#   default group: marketplace (tracks VERSION for every generated runtime manifest and OpenCode npm package).
+#   scripts/bump-version.sh 0.2.3
 set -euo pipefail
 
 command -v jq >/dev/null 2>&1 || {
@@ -80,6 +76,8 @@ while IFS=$'\t' read -r relpath field; do
 	fi
 	if [ "$field" = "__raw__" ]; then
 		printf '%s\n' "$NEW" >"$abs"
+	elif [[ "$relpath" == *.toml ]]; then
+		VERSION="$NEW" perl -0pi -e 's/(\[plugin\][^\[]*?\nversion\s*=\s*")[^"]+(" )/$1$ENV{VERSION}$2/s; s/(\[plugin\][^\[]*?\nversion\s*=\s*")[^"]+("\n)/$1$ENV{VERSION}$2/s' "$abs"
 	else
 		tmp="$(mktemp)"
 		jq --arg v "$NEW" "$(dotted_to_jq_path "$field") = \$v" "$abs" >"$tmp"
@@ -87,5 +85,9 @@ while IFS=$'\t' read -r relpath field; do
 	fi
 	written=$((written + 1))
 done < <(jq -r --arg g "$GROUP" '.groups[] | select(.name == $g) | .files[] | [.path, .field] | @tsv' "$CONFIG")
+
+if [ "$GROUP" = "marketplace" ] && [ -f "$REPO_ROOT/README.md" ]; then
+	VERSION="$NEW" perl -0pi -e 's/Version: [0-9]+\.[0-9]+\.[0-9]+/Version: $ENV{VERSION}/g; s/version-[0-9]+\.[0-9]+\.[0-9]+-blue/version-$ENV{VERSION}-blue/g; s/Stable — v[0-9]+\.[0-9]+\.[0-9]+/Stable — v$ENV{VERSION}/g' "$REPO_ROOT/README.md"
+fi
 
 echo "bump-version: group '$GROUP' -> $NEW (wrote $written files, $missing skipped)"

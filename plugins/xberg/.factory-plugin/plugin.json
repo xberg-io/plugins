@@ -1,6 +1,6 @@
 {
   "name": "xberg",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Local document extraction: text, tables, metadata, images from 91+ formats with optional OCR.",
   "author": {
     "name": "Kreuzberg, Inc.",
@@ -11,7 +11,13 @@
   "repository": "https://github.com/xberg-io/plugins",
   "license": "MIT",
   "category": "document-intelligence",
-  "keywords": ["document-intelligence", "extraction", "ocr", "pdf", "tables"],
+  "keywords": [
+    "document-intelligence",
+    "extraction",
+    "ocr",
+    "pdf",
+    "tables"
+  ],
   "brandColor": "#1F6FEB",
   "icon": "./assets/icon.svg",
   "logo": "./assets/logo.png"

@@ -1,0 +1,49 @@
+version = "4.0"
+name = "liter-llm"
+description = "Universal LLM API client for 143 providers — chat, streaming, tools, embeddings, search, OCR, plus an OpenAI-compatible proxy and an MCP server."
+
+[plugin]
+name = "liter-llm"
+version = "0.2.3"
+display_name = "Liter-LLM"
+description = "Universal LLM API client for 143 providers — chat, streaming, tools, embeddings, search, OCR, plus an OpenAI-compatible proxy and an MCP server."
+homepage = "https://xberg.io"
+repository = "https://github.com/xberg-io/plugins"
+license = "MIT"
+category = "developer-tools"
+brand_color = "#1F6FEB"
+icon = "./assets/icon.svg"
+logo = "./assets/logo.svg"
+keywords = ["llm", "openai", "proxy", "embeddings", "mcp"]
+
+[plugin.author]
+name = "Kreuzberg, Inc."
+email = "contact@xberg.io"
+url = "https://xberg.io"
+
+[[plugin.mcp]]
+name = "liter-llm"
+command = "${PLUGIN_ROOT}/scripts/mcp-launch.sh"
+args = ["mcp", "--transport", "stdio"]
+
+[plugin.interface]
+display_name = "Liter-LLM"
+short_description = "Universal LLM client for 143 providers with proxy and MCP server"
+long_description = "Call 143 LLM providers through one unified interface — chat, streaming, tool calling, embeddings, image generation, audio, moderation, web search, OCR, and reranking. Routes by `provider/model` prefix with built-in caching, rate limiting, cost tracking, budgets, and fallback. Ships an OpenAI-compatible proxy server and an auto-installing MCP server exposing 22 tools. The plugin's MCP launcher locates or downloads a version-matched `liter-llm` binary on first run."
+developer_name = "Kreuzberg, Inc."
+category = "developer-tools"
+capabilities = ["Read", "Write"]
+default_prompt = [
+    "Send a chat completion to openai/gpt-4o",
+    "Embed these documents and rank them",
+    "Run an OpenAI-compatible proxy for my team",
+]
+website_url = "https://xberg.io"
+privacy_policy_url = "https://xberg.io/privacy"
+terms_of_service_url = "https://xberg.io/terms"
+composer_icon = "./assets/icon.svg"
+logo = "./assets/logo.svg"
+brand_color = "#1F6FEB"
+
+[plugin.gemini]
+context_file_name = "GEMINI.md"
