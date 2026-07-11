@@ -4,7 +4,6 @@
 #   default group: marketplace (tracks VERSION — the claude/codex/cursor/factory
 #   /github/gemini plugin manifests). The opencode group tracks OPENCODE_VERSION
 #   (the @xberg-io/opencode-* npm packages, versioned independently).
-# Examples:
 #   scripts/bump-version.sh 0.2.3                    # bump the marketplace plugins
 #   scripts/bump-version.sh --group opencode 0.1.1   # bump the npm packages
 #   scripts/bump-version.sh --group opencode         # sync packages from OPENCODE_VERSION
@@ -63,13 +62,11 @@ if [ -z "$NEW" ]; then
 	NEW="$(tr -d '[:space:]' <"$REPO_ROOT/$version_file")"
 fi
 
-# semver (with optional pre-release / build metadata)
 if ! [[ "$NEW" =~ ^[0-9]+\.[0-9]+\.[0-9]+([-+][0-9A-Za-z.-]+)?$ ]]; then
 	echo "bump-version: '$NEW' is not a valid semver" >&2
 	exit 2
 fi
 
-# Convert a dotted field like "plugins.0.version" into a jq path ".plugins[0].version".
 dotted_to_jq_path() { echo ".$1" | sed -E 's/\.([0-9]+)/[\1]/g'; }
 
 written=0

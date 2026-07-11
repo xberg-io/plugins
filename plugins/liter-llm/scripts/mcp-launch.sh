@@ -1,43 +1,4 @@
 #!/usr/bin/env bash
-# liter-llm MCP launcher — ensures a working liter-llm binary is available, then
-# exec's it as an MCP server with the forwarded arguments (the plugin passes
-# `mcp --transport stdio`).
-#
-# Why this exists: the Claude Code plugin ships manifests + scripts, not a
-# compiled binary. Rather than require users to install liter-llm first, this
-# launcher locates or installs a binary on first run, preferring tools the user
-# likely already has. Every step FALLS THROUGH to the next on any failure, so
-# the launcher self-heals as more distribution channels come online.
-#
-# Resolution order (override with LITER_LLM_LAUNCHER=auto|npx|uvx|brew|download):
-#
-#   a) Any working liter-llm binary (cached in the plugin's bin/, or on PATH
-#      from a prior brew install) — fastest, no network. ANY working binary is
-#      accepted; the launcher does NOT pin a version (the plugin's own version
-#      is unrelated to the tool's version).
-#   b) npx: probe the published npm package, and if it exposes the CLI, run it.
-#   c) uvx: probe the published PyPI package, and if it exposes the CLI, run it.
-#   d) brew install xberg-io/tap/liter-llm, then exec the on-PATH binary.
-#   e) Checksum-verified download of the prebuilt CLI archive from the tool's
-#      LATEST GitHub release. The latest tag is resolved via the GitHub API; the
-#      versioned asset + SHA256SUMS file are then fetched and verified.
-#   f) Give up with guidance (brew tap, or `cargo install liter-llm-cli`).
-#
-# `auto` tries every step in order; an explicit value pins that single channel
-# (each still first honors an already-present binary in step (a)).
-#
-# The liter-llm CLI crate is published to crates.io, so `cargo install
-# liter-llm-cli` works. It is intentionally absent from the auto-resolution
-# steps above because it compiles from source (slow, needs a Rust toolchain);
-# the launcher prefers prebuilt channels. It appears in the final guidance below.
-#
-# Note on npx/uvx: the liter-llm npm and PyPI CLI packages self-install/run the binary
-# (basemind-style). Each is PROBED first and falls through cleanly if absent.
-# The `@xberg-io/*` / `liter-llm` binding packages (NAPI-RS / PyO3) are language
-# SDKs, NOT the CLI — they are not used here.
-#
-# CRITICAL: stdout is the MCP stdio protocol channel. Every diagnostic in this
-# script MUST go to stderr (>&2). Only the exec'd binary may write to stdout.
 set -euo pipefail
 
 REPO="xberg-io/liter-llm"
@@ -58,8 +19,6 @@ esac
 
 want() { [ "$LAUNCHER" = "auto" ] || [ "$LAUNCHER" = "$1" ]; }
 
-# Resolve the plugin root: prefer the value Claude Code injects, else derive it
-# from this script's location (scripts/ lives one level under the plugin root).
 PLUGIN_ROOT="${CLAUDE_PLUGIN_ROOT:-}"
 if [ -z "$PLUGIN_ROOT" ]; then
 	PLUGIN_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -74,12 +33,8 @@ BIN="$BIN_DIR/$BINARY_NAME"
 
 have() { command -v "$1" >/dev/null 2>&1; }
 
-# Confirm a candidate path is an executable liter-llm that actually runs.
 runs_ok() { [ -x "$1" ] && "$1" --version >/dev/null 2>&1; }
 
-# ---- (a) Existing binary (cached or on PATH) --------------------------------
-# Accept ANY working binary — do NOT match against the plugin's manifest
-# version. The plugin version and the tool version are unrelated.
 if runs_ok "$BIN"; then
 	log "using cached liter-llm at $BIN"
 	exec "$BIN" "$@"
@@ -92,10 +47,6 @@ if have "$BINARY_NAME"; then
 	fi
 fi
 
-# ---- (b) npx (published npm package self-installs/runs the CLI) --------------
-# npx resolves a same-named local package.json before the registry, so probe and
-# run from a scratch cwd to dodge a local package of the same name. The package
-# may not be published yet, so PROBE `--version` first and only exec on success.
 if want npx && have npx; then
 	log "probing npx $NPM_PKG@latest ..."
 	scratch="$(mktemp -d)"
@@ -108,7 +59,6 @@ if want npx && have npx; then
 	log "npx $NPM_PKG not available (no CLI bin yet); falling through"
 fi
 
-# ---- (c) uvx (published PyPI package self-installs/runs the CLI) -------------
 if want uvx && have uvx; then
 	log "probing uvx --from $PYPI_PKG $BINARY_NAME ..."
 	if uvx --from "$PYPI_PKG" "$BINARY_NAME" --version >/dev/null 2>&1; then
@@ -118,7 +68,6 @@ if want uvx && have uvx; then
 	log "uvx $PYPI_PKG not available (no CLI entry point yet); falling through"
 fi
 
-# ---- (d) Homebrew -----------------------------------------------------------
 if want brew && have brew; then
 	log "installing via 'brew install xberg-io/tap/liter-llm' ..."
 	if brew install xberg-io/tap/liter-llm >&2; then
@@ -132,7 +81,6 @@ if want brew && have brew; then
 	fi
 fi
 
-# ---- fetch/sha helpers (shared by download path) ----------------------------
 if have curl; then
 	fetch() { curl -fsSL --retry 3 -o "$2" "$1"; }
 	fetch_stdout() { curl -fsSL --retry 3 "$1"; }
@@ -152,14 +100,6 @@ else
 	sha256() { return 1; }
 fi
 
-# ---- (e) Prebuilt download from the LATEST release --------------------------
-# liter-llm publishes CLI archives named `liter-llm-<version>-<target>.<ext>`
-# (inner dir of the same stem holds the binary) plus a consolidated
-# `SHA256SUMS-<version>.txt`. See liter-llm/.github/workflows/publish.yaml
-# (build-cli-binaries / upload-cli-binaries). Released targets:
-#   x86_64-unknown-linux-gnu, aarch64-unknown-linux-gnu,
-#   aarch64-apple-darwin, x86_64-pc-windows-msvc (zip).
-# Intel macOS is NOT shipped.
 try_download() {
 	if ! have curl && ! have wget; then
 		log "download: no curl or wget available; falling through"
@@ -196,7 +136,6 @@ try_download() {
 		;;
 	esac
 
-	# Resolve the latest tag (e.g. "v1.7.4") via the GitHub API.
 	local api_json tag version
 	api_json="$(fetch_stdout "https://api.github.com/repos/${REPO}/releases/latest" 2>/dev/null)" ||
 		{
@@ -228,8 +167,6 @@ try_download() {
 		return 1
 	fi
 
-	# Verify against the published checksums when possible; otherwise WARN and
-	# proceed over HTTPS rather than aborting the whole launch.
 	if sha256 "$tmp/$asset" >/dev/null 2>&1 && fetch "$sums_url" "$tmp/checksums.txt" 2>/dev/null; then
 		local expected actual
 		expected="$(awk -v f="$asset" '{name=$NF; sub(/^[*]/, "", name); if (name == f) print $1}' "$tmp/checksums.txt")"
@@ -281,7 +218,6 @@ if want download; then
 	fi
 fi
 
-# ---- (f) Give up with guidance ----------------------------------------------
 die "could not locate or install liter-llm. Install it with one of:
   brew install xberg-io/tap/liter-llm
   cargo install liter-llm-cli

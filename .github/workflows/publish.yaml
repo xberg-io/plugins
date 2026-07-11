@@ -13,7 +13,7 @@ on:
 
 permissions:
   contents: read
-  id-token: write # required for npm Trusted Publishing (OIDC) + provenance
+  id-token: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -37,9 +37,6 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           cache: pnpm
 
-      # Trusted Publishing (OIDC) is an npm-CLI feature and needs npm >= 11.5.1.
-      # We publish with `npm` (not `pnpm`) so the OIDC token exchange happens; no
-      # NPM token is configured — auth comes from the OIDC id-token above.
       - name: Upgrade npm (trusted publishing support)
         run: npm install -g npm@latest
 

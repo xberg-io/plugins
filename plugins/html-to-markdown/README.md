@@ -2,7 +2,7 @@
 
 Fast, lossless HTML→Markdown conversion with structured metadata, tables, and document-structure extraction — using the local `html-to-markdown` CLI in your agent.
 
-<!-- TODO: screenshot -->
+<!-- ~keep TODO: add screenshot -->
 
 ## Install
 

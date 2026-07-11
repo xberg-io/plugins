@@ -2,7 +2,7 @@
 
 Extract text, tables, metadata, and images from 91+ document formats — PDF, Office, images with OCR, HTML, email, archives, academic — using the local `xberg` CLI in your agent.
 
-<!-- TODO: screenshot -->
+<!-- ~keep TODO: add screenshot -->
 
 ## Install
 

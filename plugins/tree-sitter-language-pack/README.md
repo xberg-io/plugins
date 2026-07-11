@@ -2,7 +2,7 @@
 
 Parse and extract code intelligence from 300+ programming languages with tree-sitter — structure, imports, symbols, and syntax-aware chunking — using the local `ts-pack` CLI in your agent.
 
-<!-- TODO: screenshot -->
+<!-- ~keep TODO: add screenshot -->
 
 ## Install
 

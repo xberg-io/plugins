@@ -2,7 +2,7 @@
 
 Universal LLM API client for 143 providers — chat, streaming, tools, embeddings, search, OCR, plus an OpenAI-compatible proxy and an MCP server, in your agent.
 
-<!-- TODO: screenshot -->
+<!-- ~keep TODO: add screenshot -->
 
 ## Install
 

@@ -1,44 +1,4 @@
 #!/usr/bin/env bash
-# xberg MCP launcher — ensures a working xberg binary is available, then
-# exec's it with the forwarded arguments (the plugin passes `mcp --transport stdio`).
-#
-# Why this exists: the Claude Code plugin ships manifests + scripts, not a
-# compiled binary. Rather than require users to install xberg first, this
-# launcher locates or installs a binary on first run, preferring tools the user
-# likely already has. Every step FALLS THROUGH to the next on any failure, so
-# the launcher self-heals as more distribution channels come online.
-#
-# Resolution order (override with XBERG_LAUNCHER=auto|npx|uvx|brew|download):
-#
-#   a) An existing xberg on PATH, or cached at $PLUGIN_ROOT/bin — any working
-#      binary is accepted (no version match: the CLI release line and the plugin
-#      version line are independent).
-#   b) npx: probe the published npm package, and if it exposes the CLI, run it.
-#   c) uvx: probe the published PyPI package, and if it exposes the CLI, run it.
-#   d) brew install xberg-io/tap/xberg, then exec the on-PATH binary.
-#   e) Direct download of the prebuilt CLI archive from the GitHub LATEST release.
-#   f) Fail with guidance (brew tap, or `cargo install xberg-cli` from crates.io).
-#
-# `auto` tries every step in order; an explicit value pins that single channel
-# (each still first honors an already-present binary in step (a)).
-#
-# The xberg CLI crate is published to crates.io, so `cargo install xberg-cli`
-# (registry form) works — see the final guidance below.
-#
-# Note on npx/uvx: the xberg npm and PyPI CLI packages self-install/run the binary
-# (basemind-style). Each is PROBED first and falls through cleanly if absent.
-# The `@xberg-io/*` npm packages and the importable pip package are language
-# SDKs/bindings, NOT the CLI — they are not used here.
-#
-# Note on the download channel: xberg publishes CLI assets named
-# `xberg-cli-<triple>.tar.gz` (`.zip` on Windows) with NO version in the
-# asset name, so we fetch from `releases/latest/download/`. No checksums are
-# published alongside the archives, so integrity is TLS-only — we WARN on every
-# download and never silently trust. brew/cargo are verified by their own
-# tooling and are the recommended install paths.
-#
-# CRITICAL: stdout is the MCP stdio protocol channel. Every diagnostic in this
-# script MUST go to stderr (>&2). Only the exec'd binary may write to stdout.
 set -euo pipefail
 
 NPM_PKG="@xberg-io/xberg-cli"
@@ -58,8 +18,6 @@ esac
 
 want() { [ "$LAUNCHER" = "auto" ] || [ "$LAUNCHER" = "$1" ]; }
 
-# Resolve the plugin root: prefer the value Claude Code injects, else derive it
-# from this script's location (scripts/ lives one level under the plugin root).
 PLUGIN_ROOT="${CLAUDE_PLUGIN_ROOT:-}"
 if [ -z "$PLUGIN_ROOT" ]; then
 	PLUGIN_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -74,8 +32,6 @@ BIN="$BIN_DIR/$BINARY_NAME"
 
 have() { command -v "$1" >/dev/null 2>&1; }
 
-# ---- (a) Existing binary (cached in the plugin, or on PATH) ------------------
-# Accept any binary that runs; the CLI and plugin version lines are independent.
 runnable() { [ -x "$1" ] && "$1" --version >/dev/null 2>&1; }
 
 if runnable "$BIN"; then
@@ -90,10 +46,6 @@ if have "$BINARY_NAME"; then
 	fi
 fi
 
-# ---- (b) npx (published npm package self-installs/runs the CLI) --------------
-# npx resolves a same-named local package.json before the registry, so probe and
-# run from a scratch cwd to dodge a local package of the same name. The package
-# may not be published yet, so PROBE `--version` first and only exec on success.
 if want npx && have npx; then
 	log "probing npx $NPM_PKG@latest ..."
 	scratch="$(mktemp -d)"
@@ -106,7 +58,6 @@ if want npx && have npx; then
 	log "npx $NPM_PKG not available (no CLI bin yet); falling through"
 fi
 
-# ---- (c) uvx (published PyPI package self-installs/runs the CLI) -------------
 if want uvx && have uvx; then
 	log "probing uvx --from $PYPI_PKG $BINARY_NAME ..."
 	if uvx --from "$PYPI_PKG" "$BINARY_NAME" --version >/dev/null 2>&1; then
@@ -116,7 +67,6 @@ if want uvx && have uvx; then
 	log "uvx $PYPI_PKG not available (no CLI entry point yet); falling through"
 fi
 
-# ---- (d) Homebrew -----------------------------------------------------------
 if want brew && have brew; then
 	log "installing via 'brew install xberg-io/tap/xberg' ..."
 	if brew install xberg-io/tap/xberg >&2; then
@@ -130,15 +80,11 @@ if want brew && have brew; then
 	fi
 fi
 
-# ---- (e) Prebuilt download from the GitHub LATEST release --------------------
-# Falls through (does not die) on unsupported platform or 404 so the final
-# guidance can still help the user.
 try_download() {
 	local arch triple ext base_url asset asset_url tmp ex src_dir
 	arch="$(uname -m)"
 	case "$(uname -s)" in
 	Darwin)
-		# Only Apple Silicon (arm64) macOS CLI archives are published.
 		case "$arch" in
 		arm64 | aarch64) triple="aarch64-apple-darwin" ;;
 		*)
@@ -148,8 +94,6 @@ try_download() {
 		esac
 		;;
 	Linux)
-		# Prefer gnu; musl is not reliably detectable here and gnu covers the common
-		# case. musl-only hosts should build from source.
 		case "$arch" in
 		aarch64 | arm64) triple="aarch64-unknown-linux-gnu" ;;
 		x86_64) triple="x86_64-unknown-linux-gnu" ;;
@@ -170,7 +114,6 @@ try_download() {
 	*) ext="tar.gz" ;;
 	esac
 
-	# No version in the asset name; pull from the latest release directly.
 	base_url="https://github.com/xberg-io/xberg/releases/latest/download"
 	asset="xberg-cli-${triple}.${ext}"
 	asset_url="${base_url}/${asset}"
@@ -194,7 +137,6 @@ try_download() {
 		return 1
 	fi
 
-	# No checksums are published with the CLI archives — integrity is TLS-only.
 	log "warning: no published checksum for $asset; integrity is verified by HTTPS/TLS only, not a content hash"
 
 	ex="$tmp/extracted"
@@ -217,8 +159,6 @@ try_download() {
 		;;
 	esac
 
-	# CLI archives wrap their contents in a "xberg-cli-<triple>/" directory
-	# holding the binary (and, on musl, a bundled lib/ tree). Locate the binary.
 	src_dir="$ex/xberg-cli-${triple}"
 	[ -d "$src_dir" ] || src_dir="$ex"
 	if [ ! -f "$src_dir/$BINARY_NAME" ]; then
@@ -228,7 +168,6 @@ try_download() {
 
 	rm -rf "$BIN_DIR"
 	mkdir -p "$BIN_DIR"
-	# Move every extracted entry (binary + any bundled lib/) into BIN_DIR.
 	mv "$src_dir"/* "$BIN_DIR"/
 	chmod +x "$BIN"
 	log "installed xberg to $BIN"
@@ -241,7 +180,6 @@ if want download; then
 	fi
 fi
 
-# ---- (f) Give up ------------------------------------------------------------
 die "could not locate or install xberg. Install it manually with one of:
   brew install xberg-io/tap/xberg
   cargo install xberg-cli

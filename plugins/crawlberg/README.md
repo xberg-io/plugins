@@ -2,7 +2,7 @@
 
 Crawl, scrape, and convert websites to Markdown using the local `crawlberg` CLI in your agent.
 
-<!-- TODO: screenshot -->
+<!-- ~keep TODO: add screenshot -->
 
 ## Install
 
