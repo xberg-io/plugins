@@ -57,6 +57,12 @@ jobs:
             plugins/html-to-markdown \
             plugins/tree-sitter-language-pack \
             plugins/liter-llm; do
+            name="$(node -p "require('./$dir/package.json').name")"
+            ver="$(node -p "require('./$dir/package.json').version")"
+            if npm view "${name}@${ver}" version >/dev/null 2>&1; then
+              echo "skip pack ${name}@${ver} (already on npm)"
+              continue
+            fi
             echo "::group::pack $dir"
             (cd "$dir" && npm publish --dry-run --access public)
             echo "::endgroup::"
