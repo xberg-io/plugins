@@ -1,6 +1,6 @@
 {
   "schema_version": "v1",
-  "source_hash": "blake3:bfae27a85ee8ba17273541f8cb674bcbc63ec91a6a7fa0f51acee0c2dab1aad8",
+  "source_hash": "blake3:2138f20821f5d7b63139d31aac4f187b6d9b28ccf3b0d10319c86e69d6c42933",
   "outputs": {
     ".claude-plugin/plugin.json": {
       "content_hash": "blake3:9a9c451b15c1f12fc4a5bc4756809d403e119cb561f4b6708a46d03ab814aee3"
@@ -54,7 +54,7 @@
       "content_hash": "blake3:3bdda05cad3307ce6b17bbd958fe07eb596abfb6716469fb2cb6a4ae4995da15"
     },
     "package.json": {
-      "content_hash": "blake3:df723c2b99221b4984b23e0e13d5bba01f5ad59deeac5b2bfea2385d91d21c6f"
+      "content_hash": "blake3:4e34c2185ab29e62542303c75b5c494da9e54d9e49c86fe552e7c9136176afab"
     },
     "skills/chunking-for-llms/SKILL.md": {
       "content_hash": "blake3:194808ab41cbfc122dee398cccb0ecad135949fb11fd3201110a2ea6f8ec3369"

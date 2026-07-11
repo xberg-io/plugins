@@ -1,6 +1,6 @@
 {
   "schema_version": "v1",
-  "source_hash": "blake3:203c39f9f9eafbfc33a54a35d8f9c1707734fdb34a77e402be4c4c604702e404",
+  "source_hash": "blake3:423668b412497a7795a67a9bf7832067ab152f86bcbb158d23c8dfdeaf12cf6e",
   "outputs": {
     ".claude-plugin/plugin.json": {
       "content_hash": "blake3:d07be4cc935f1481d8339bed85b51ea31d9303326f23bec2009cbfa99182291a"
@@ -78,7 +78,7 @@
       "content_hash": "blake3:ddfa299839f894eff601d648efca1ac00caa55a58ed434dd19e19117e2292e3a"
     },
     "package.json": {
-      "content_hash": "blake3:7410838d4557dcf820edbfce2aeac7ce0e8559ea3af2a62009f29e95917a6791"
+      "content_hash": "blake3:7c133dfefcd78181d9e25fa3e9c784e4cace57da5896b94632c38ab7d3a9fdf0"
     },
     "skills/batch-extraction/SKILL.md": {
       "content_hash": "blake3:56759cf9f3342d73deb4620e219564789a72f852b3dd6dbf0f44f737c2eecb14"

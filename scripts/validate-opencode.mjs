@@ -92,6 +92,9 @@ for (const plugin of plugins) {
   if (packageJson.dependencies?.["@opencode-ai/plugin"] === undefined) {
     throw new Error(`${packagePath} is missing the @opencode-ai/plugin dependency`);
   }
+  if (packageJson.repository?.type !== "git" || packageJson.repository?.url !== "https://github.com/xberg-io/plugins") {
+    throw new Error(`${packagePath} must declare the GitHub repository for npm provenance`);
+  }
 }
 
 console.log(`validate-opencode: ${plugins.length} entrypoints import cleanly`);

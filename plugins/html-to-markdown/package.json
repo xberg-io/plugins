@@ -10,6 +10,10 @@
     "metadata"
   ],
   "homepage": "https://xberg.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xberg-io/plugins"
+  },
   "license": "MIT",
   "type": "module",
   "main": ".opencode/plugins/html-to-markdown.js",
