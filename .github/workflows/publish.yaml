@@ -55,8 +55,8 @@ jobs:
             plugins/xberg \
             plugins/crawlberg \
             plugins/html-to-markdown \
-            plugins/liter-llm \
-            plugins/tree-sitter-language-pack; do
+            plugins/tree-sitter-language-pack \
+            plugins/liter-llm; do
             echo "::group::pack $dir"
             (cd "$dir" && npm publish --dry-run --access public)
             echo "::endgroup::"
@@ -69,8 +69,8 @@ jobs:
             plugins/xberg \
             plugins/crawlberg \
             plugins/html-to-markdown \
-            plugins/liter-llm \
-            plugins/tree-sitter-language-pack; do
+            plugins/tree-sitter-language-pack \
+            plugins/liter-llm; do
             name="$(node -p "require('./$dir/package.json').name")"
             ver="$(node -p "require('./$dir/package.json').version")"
             if npm view "${name}@${ver}" version >/dev/null 2>&1; then
