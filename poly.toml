@@ -142,3 +142,8 @@ disable = ["MD012", "MD013", "MD024", "MD033", "MD036", "MD041", "MD046", "MD051
 "crates/*-ffi/include/*.h" = ["comment", "doc-comment"]
 "packages/go/include/*.h" = ["comment", "doc-comment"]
 "Package.swift" = ["comment", "doc-comment"]
+[[hooks.sources]]
+id = "ai-rulez"
+git = "https://github.com/Goldziher/ai-rulez.git"
+revision = "v4.9.1"
+hooks = ["ai-rulez-validate", "ai-rulez-plugin-verify"]

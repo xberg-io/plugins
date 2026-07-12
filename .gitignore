@@ -37,3 +37,4 @@ coverage/
 
 # Plugin binaries installed at runtime by scripts/mcp-launch.sh
 plugins/*/bin/
+poly.local.toml
