@@ -145,5 +145,5 @@ disable = ["MD012", "MD013", "MD024", "MD033", "MD036", "MD041", "MD046", "MD051
 [[hooks.sources]]
 id = "ai-rulez"
 git = "https://github.com/Goldziher/ai-rulez.git"
-revision = "v4.9.1"
+revision = "v4.9.3"
 hooks = ["ai-rulez-validate", "ai-rulez-plugin-verify"]
