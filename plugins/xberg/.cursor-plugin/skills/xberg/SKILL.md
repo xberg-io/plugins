@@ -16,10 +16,9 @@ metadata:
 <!--
 AI-RULEZ :: GENERATED FILE — DO NOT EDIT
 Content-Hash: blake3:41a41741e3865333a4b14e83a550aaecdae016a9469db77a921f556b83cd4854
-Source-Hash: blake3:423668b412497a7795a67a9bf7832067ab152f86bcbb158d23c8dfdeaf12cf6e
+Source-Hash: blake3:8d48733330070809966ed2939557b5ca2c73f676d4c16daa306750bc5fb8d5bc
 Schema-Version: v1
 -->
-
 
 # Xberg Document Extraction
 

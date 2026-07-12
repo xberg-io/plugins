@@ -9,10 +9,9 @@ description: >-
 <!--
 AI-RULEZ :: GENERATED FILE — DO NOT EDIT
 Content-Hash: blake3:d4aa39402d49ad2eada44eea60c4a03a463b56134d3b869b5119f23d06144211
-Source-Hash: blake3:1f61d8c2374603de5272675670a902e63c673b03da987bca31e44b3df4d7c23c
+Source-Hash: blake3:b5689383a3914da8e3cc6ad3614356ae7f98c90cf99cb1b4b47be38456ff7a7c
 Schema-Version: v1
 -->
-
 
 # Scraping HTML to Markdown
 

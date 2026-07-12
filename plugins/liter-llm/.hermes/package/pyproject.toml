@@ -1,0 +1,25 @@
+[build-system]
+requires = ['hatchling>=1.27']
+build-backend = 'hatchling.build'
+
+[project]
+name = 'liter-llm-hermes-plugin'
+version = '0.2.3'
+description = 'Universal LLM API client for 143 providers — chat, streaming, tools, embeddings, search, OCR, plus an OpenAI-compatible proxy and an MCP server.'
+requires-python = '>=3.11'
+keywords = ['llm', 'openai', 'proxy', 'embeddings', 'mcp']
+
+[project.entry-points]
+[project.entry-points.'hermes_agent.plugins']
+liter-llm = 'liter_llm_hermes_plugin'
+
+[project.urls]
+Homepage = 'https://xberg.io'
+Repository = 'https://github.com/xberg-io/plugins'
+
+[tool]
+[tool.hatch]
+[tool.hatch.build]
+[tool.hatch.build.targets]
+[tool.hatch.build.targets.wheel]
+packages = ['src/liter_llm_hermes_plugin']

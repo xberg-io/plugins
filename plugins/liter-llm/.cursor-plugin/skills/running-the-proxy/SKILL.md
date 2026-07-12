@@ -6,10 +6,9 @@ description: Use when running the `liter-llm api` OpenAI-compatible gateway — 
 <!--
 AI-RULEZ :: GENERATED FILE — DO NOT EDIT
 Content-Hash: blake3:c116c87cc47e287a604e874041bfbf9fd6c4da4206035b9f9943563df1a3ce4b
-Source-Hash: blake3:24bc8c5900c1b5df25fc7be857793c983a5012134d0044d08dd7dbc479aaf3a2
+Source-Hash: blake3:994b83e19a30ce07bfdfeb4caf56e995dc024de32e00f13b45cd995d0e441086
 Schema-Version: v1
 -->
-
 
 # Running the Proxy
 

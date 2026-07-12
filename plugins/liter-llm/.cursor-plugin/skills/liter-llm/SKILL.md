@@ -18,10 +18,9 @@ metadata:
 <!--
 AI-RULEZ :: GENERATED FILE — DO NOT EDIT
 Content-Hash: blake3:2fa27fd4d771d530a072afc9c10f24123280b69a3eb09f1b06f58abdba7b4511
-Source-Hash: blake3:24bc8c5900c1b5df25fc7be857793c983a5012134d0044d08dd7dbc479aaf3a2
+Source-Hash: blake3:994b83e19a30ce07bfdfeb4caf56e995dc024de32e00f13b45cd995d0e441086
 Schema-Version: v1
 -->
-
 
 # Liter-LLM Universal LLM Client
 

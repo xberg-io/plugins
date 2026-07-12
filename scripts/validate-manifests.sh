@@ -23,7 +23,11 @@ while IFS= read -r group; do
 		if [ "$field" = "__raw__" ]; then
 			actual="$(tr -d '[:space:]' <"$abs")"
 		elif [[ "$relpath" == *.toml ]]; then
-			actual="$(perl -0ne 'print $1 if /\[plugin\][^\[]*?\nversion\s*=\s*"([^"]+)"/s' "$abs")"
+			section="${field%%.*}"
+			key="${field##*.}"
+			actual="$(SECTION="$section" KEY="$key" perl -0ne 'print $1 if /\[\Q$ENV{SECTION}\E\][^\[]*?\n\Q$ENV{KEY}\E\s*=\s*["\x27]([^"\x27]+)["\x27]/s' "$abs")"
+		elif [[ "$relpath" == *.yaml || "$relpath" == *.yml ]]; then
+			actual="$(sed -n -E "s/^${field}:[[:space:]]*['\"]?([^'\"]+)['\"]?[[:space:]]*$/\\1/p" "$abs" | head -1)"
 		else
 			actual="$(jq -r "$(dotted_to_jq_path "$field")" "$abs")"
 		fi

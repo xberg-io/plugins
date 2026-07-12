@@ -49,6 +49,12 @@ JS_HEADER = re.compile(
     rb"// Source-Hash: (blake3:[0-9a-f]{64})\n"
     rb"// Schema-Version: v1\n\n"
 )
+PYTHON_HEADER = re.compile(
+    rb"\A# AI-RULEZ :: GENERATED FILE \xe2\x80\x94 DO NOT EDIT\n"
+    rb"# Content-Hash: (blake3:[0-9a-f]{64})\n"
+    rb"# Source-Hash: (blake3:[0-9a-f]{64})\n"
+    rb"# Schema-Version: v1\n\n"
+)
 MARKDOWN_HEADER = re.compile(
     rb"\n?<!--\nAI-RULEZ :: GENERATED FILE \xe2\x80\x94 DO NOT EDIT\n"
     rb"Content-Hash: (blake3:[0-9a-f]{64})\n"
@@ -92,6 +98,12 @@ def strip_generated_header(path: Path, content: bytes, errors: list[str]) -> tup
             errors.append(f"{path.relative_to(REPO_ROOT)}: missing or invalid generated-file header")
             return content, None, None
         return content[match.end() :], match.group(1).decode(), match.group(2).decode()
+    if extension == ".py":
+        match = PYTHON_HEADER.match(content)
+        if match is None:
+            errors.append(f"{path.relative_to(REPO_ROOT)}: missing or invalid generated-file header")
+            return content, None, None
+        return content[match.end() :], match.group(1).decode(), match.group(2).decode()
     if extension not in {".md", ".mdx", ".markdown"}:
         return content, None, None
 
@@ -104,7 +116,8 @@ def strip_generated_header(path: Path, content: bytes, errors: list[str]) -> tup
     if match is None:
         errors.append(f"{path.relative_to(REPO_ROOT)}: missing or invalid generated-file header")
         return content, None, None
-    return content[:offset] + content[match.end() :], match.group(1).decode(), match.group(2).decode()
+    separator = b"\n" if offset > 0 else b""
+    return content[:offset] + separator + content[match.end() :], match.group(1).decode(), match.group(2).decode()
 
 
 def validate_provenance(bundle_root: Path, errors: list[str]) -> None:

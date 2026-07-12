@@ -17,10 +17,9 @@ metadata:
 <!--
 AI-RULEZ :: GENERATED FILE — DO NOT EDIT
 Content-Hash: blake3:4dd5afb4092d88c3f73f3ddaaace755ef35ccf8f0f91efce63d44acf21e8d36b
-Source-Hash: blake3:2138f20821f5d7b63139d31aac4f187b6d9b28ccf3b0d10319c86e69d6c42933
+Source-Hash: blake3:0ea306aa0c0ca9bee85179b4f8c1d90fe853693a25a18ddd111b9160ff6fc800
 Schema-Version: v1
 -->
-
 
 # Tree-Sitter Language Pack
 

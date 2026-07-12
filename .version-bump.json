@@ -195,6 +195,46 @@
         {
           "path": "plugins/tree-sitter-language-pack/package.json",
           "field": "version"
+        },
+        {
+          "path": "plugins/xberg/.hermes/plugins/xberg/plugin.yaml",
+          "field": "version"
+        },
+        {
+          "path": "plugins/crawlberg/.hermes/plugins/crawlberg/plugin.yaml",
+          "field": "version"
+        },
+        {
+          "path": "plugins/html-to-markdown/.hermes/plugins/html-to-markdown/plugin.yaml",
+          "field": "version"
+        },
+        {
+          "path": "plugins/liter-llm/.hermes/plugins/liter-llm/plugin.yaml",
+          "field": "version"
+        },
+        {
+          "path": "plugins/tree-sitter-language-pack/.hermes/plugins/tree-sitter-language-pack/plugin.yaml",
+          "field": "version"
+        },
+        {
+          "path": "plugins/xberg/.hermes/package/pyproject.toml",
+          "field": "project.version"
+        },
+        {
+          "path": "plugins/crawlberg/.hermes/package/pyproject.toml",
+          "field": "project.version"
+        },
+        {
+          "path": "plugins/html-to-markdown/.hermes/package/pyproject.toml",
+          "field": "project.version"
+        },
+        {
+          "path": "plugins/liter-llm/.hermes/package/pyproject.toml",
+          "field": "project.version"
+        },
+        {
+          "path": "plugins/tree-sitter-language-pack/.hermes/package/pyproject.toml",
+          "field": "project.version"
         }
       ]
     }

@@ -6,9 +6,15 @@ tasks:
     cmds:
       - python3 scripts/validate-codex.py
 
+  validate:hermes:
+    desc: Validate generated Hermes project plugins
+    cmds:
+      - python3 scripts/validate-hermes.py
+
   test:
     desc: Run repository validation
     cmds:
       - bash scripts/validate-manifests.sh
       - task: validate:codex
+      - task: validate:hermes
       - pnpm validate:opencode

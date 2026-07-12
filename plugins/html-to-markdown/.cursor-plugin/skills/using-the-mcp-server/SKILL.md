@@ -10,10 +10,9 @@ description: >-
 <!--
 AI-RULEZ :: GENERATED FILE — DO NOT EDIT
 Content-Hash: blake3:c6276d5c9515b3ea110d1f483a3c0ac259c4edb0b9e298431f5644d1c4103c66
-Source-Hash: blake3:94b6596172fbbfb9af67d0c25d7ae807c6faec78760a9728a8b59aaf917234df
+Source-Hash: blake3:b863a9279a8e31251a475dd8c895529ec38eec6b6506af4fe5c874832e9a48a6
 Schema-Version: v1
 -->
-
 
 # Using the MCP Server
 

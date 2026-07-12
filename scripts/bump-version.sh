@@ -65,6 +65,27 @@ fi
 
 dotted_to_jq_path() { echo ".$1" | sed -E 's/\.([0-9]+)/[\1]/g'; }
 
+if [ "$GROUP" = "marketplace" ]; then
+	printf '%s\n' "$NEW" >"$REPO_ROOT/$version_file"
+	for config in "$REPO_ROOT"/plugins/*/.ai-rulez/config.toml; do
+		VERSION="$NEW" perl -0pi -e \
+			's/(\[plugin\][^\[]*?\nversion\s*=\s*")[^"]+(")/$1$ENV{VERSION}$2/s' "$config"
+	done
+	AI_RULEZ="${AI_RULEZ:-ai-rulez}"
+	command -v "$AI_RULEZ" >/dev/null 2>&1 || {
+		echo "bump-version: ai-rulez is required to regenerate plugin outputs" >&2
+		exit 1
+	}
+	(
+		cd "$REPO_ROOT"
+		"$AI_RULEZ" generate --plugin
+		"$AI_RULEZ" verify --plugin
+	)
+	VERSION="$NEW" perl -0pi -e 's/Version: [0-9]+\.[0-9]+\.[0-9]+/Version: $ENV{VERSION}/g; s/version-[0-9]+\.[0-9]+\.[0-9]+-blue/version-$ENV{VERSION}-blue/g; s/Stable — v[0-9]+\.[0-9]+\.[0-9]+/Stable — v$ENV{VERSION}/g' "$REPO_ROOT/README.md"
+	echo "bump-version: group '$GROUP' -> $NEW (updated canonical sources and regenerated outputs)"
+	exit 0
+fi
+
 written=0
 missing=0
 while IFS=$'\t' read -r relpath field; do
@@ -77,7 +98,14 @@ while IFS=$'\t' read -r relpath field; do
 	if [ "$field" = "__raw__" ]; then
 		printf '%s\n' "$NEW" >"$abs"
 	elif [[ "$relpath" == *.toml ]]; then
-		VERSION="$NEW" perl -0pi -e 's/(\[plugin\][^\[]*?\nversion\s*=\s*")[^"]+(" )/$1$ENV{VERSION}$2/s; s/(\[plugin\][^\[]*?\nversion\s*=\s*")[^"]+("\n)/$1$ENV{VERSION}$2/s' "$abs"
+		section="${field%%.*}"
+		key="${field##*.}"
+		SECTION="$section" KEY="$key" VERSION="$NEW" perl -0pi -e \
+			's/(\[\Q$ENV{SECTION}\E\][^\[]*?\n\Q$ENV{KEY}\E\s*=\s*")[^"]+(")/$1$ENV{VERSION}$2/s' "$abs"
+	elif [[ "$relpath" == *.yaml || "$relpath" == *.yml ]]; then
+		tmp="$(mktemp)"
+		sed -E "s/^(${field}:[[:space:]]*).*/\\1\"$NEW\"/" "$abs" >"$tmp"
+		mv "$tmp" "$abs"
 	else
 		tmp="$(mktemp)"
 		jq --arg v "$NEW" "$(dotted_to_jq_path "$field") = \$v" "$abs" >"$tmp"

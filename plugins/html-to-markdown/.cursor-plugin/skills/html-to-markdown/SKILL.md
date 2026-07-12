@@ -16,10 +16,9 @@ metadata:
 <!--
 AI-RULEZ :: GENERATED FILE — DO NOT EDIT
 Content-Hash: blake3:c60ca71925e3dec29b8b9dfc1e2775c899c932e93fca99e659fb0aac87ac79e4
-Source-Hash: blake3:94b6596172fbbfb9af67d0c25d7ae807c6faec78760a9728a8b59aaf917234df
+Source-Hash: blake3:b863a9279a8e31251a475dd8c895529ec38eec6b6506af4fe5c874832e9a48a6
 Schema-Version: v1
 -->
-
 
 # html-to-markdown
 

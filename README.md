@@ -7,7 +7,7 @@
 
 # Xberg Plugins Marketplace
 
-Document-intelligence plugins for coding agents. Install any of the five into Claude Code, Codex CLI, Cursor, Gemini CLI, Factory Droid, GitHub Copilot CLI, or opencode.
+Document-intelligence plugins for coding agents. Install any of the five into Claude Code, Codex CLI, Cursor, Gemini CLI, Factory Droid, GitHub Copilot CLI, Hermes Agent, or opencode.
 
 ## Badges
 
@@ -30,13 +30,13 @@ Document-intelligence plugins for coding agents. Install any of the five into Cl
 
 Every plugin ships a bundled MCP server and installs into each supported agent from this one marketplace.
 
-| Plugin | Claude Code | Codex CLI | Cursor | Factory Droid | Gemini CLI | Copilot CLI | opencode | MCP server |
-|--------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| **xberg** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **crawlberg** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **html-to-markdown** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **liter-llm** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **tree-sitter-language-pack** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Plugin | Claude Code | Codex CLI | Cursor | Factory Droid | Gemini CLI | Copilot CLI | Hermes | opencode | MCP server |
+|--------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| **xberg** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **crawlberg** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **html-to-markdown** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **liter-llm** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **tree-sitter-language-pack** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 Version and manifest parity across every platform is kept in sync by ai-rulez generation and enforced in CI by `scripts/validate-manifests.sh` (see [Releasing](#releasing)).
 
@@ -134,6 +134,21 @@ copilot plugin install tree-sitter-language-pack@xberg
 </details>
 
 <details>
+<summary><strong>Hermes Agent</strong></summary>
+
+Install the package into the same Python environment as Hermes, then enable it:
+
+```bash
+pip install xberg-hermes-plugin
+hermes plugins enable xberg
+```
+
+Replace `xberg` with another marketplace plugin name. The corresponding distribution is
+`<name>-hermes-plugin`. Configure its MCP server separately in `~/.hermes/config.yaml`; the package
+provides the skills and runtime adapter.
+</details>
+
+<details>
 <summary><strong>opencode</strong></summary>
 
 Add the published packages to `opencode.json`:
@@ -201,11 +216,14 @@ matching generated-file headers, while strict JSON and binary artifacts remain b
 ```bash
 scripts/bump-version.sh 0.2.3
 scripts/validate-manifests.sh
+ai-rulez verify --plugin
 git commit -am "chore: release"
 git tag vX.Y.Z && git push --tags
 ```
 
 The OpenCode packages publish from `.github/workflows/publish.yaml` with npm Trusted Publishing and provenance when a GitHub release is published.
+Before the first Hermes release, create each `<name>-hermes-plugin` project on PyPI and register
+`xberg-io/plugins` with workflow `publish.yaml` as its trusted GitHub publisher.
 
 ## Contributing
 

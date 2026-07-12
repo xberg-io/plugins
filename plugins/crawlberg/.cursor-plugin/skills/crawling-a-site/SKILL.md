@@ -10,10 +10,9 @@ description: >-
 <!--
 AI-RULEZ :: GENERATED FILE — DO NOT EDIT
 Content-Hash: blake3:87e62f8235715c6d9ff820d40d26b521d5d0e0fb9888f7d04589c7429d28da14
-Source-Hash: blake3:1f61d8c2374603de5272675670a902e63c673b03da987bca31e44b3df4d7c23c
+Source-Hash: blake3:b5689383a3914da8e3cc6ad3614356ae7f98c90cf99cb1b4b47be38456ff7a7c
 Schema-Version: v1
 -->
-
 
 # Crawling a site
 

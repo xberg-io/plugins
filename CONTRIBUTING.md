@@ -76,9 +76,9 @@ Every plugin conforms to the same shape:
 3. **Install** — the main skill + README document install via brew / cargo / npx / uvx as the tool
    actually supports them (verify against the tool repo). Tools without an MCP server shell out to
    the CLI; the opencode runner surfaces an install hint on `ENOENT`.
-4. **Manifests** — six harness manifests (`.claude-plugin/` (+ `mcp.json` when there's an MCP
+4. **Manifests** — runtime manifests (`.claude-plugin/` (+ `mcp.json` when there's an MCP
    server), `.codex-plugin/`, `.cursor-plugin/`, `.factory-plugin/`, `.github/plugin/`,
-   `gemini-extension.json`), plus `README.md`, `GEMINI.md`, `assets/`, and an opencode
+   `gemini-extension.json`, `.hermes/plugins/<name>/`), plus `README.md`, `GEMINI.md`, `assets/`, and an opencode
    `.opencode/plugins/<name>.js` + `package.json` where the tool has a CLI. `capabilities`:
    `Read` = fetch/parse/extract; add `Write` only when the plugin's tools write/submit/modify.
 5. **README order** — Install → Skills (table matching `skills/`) → MCP/CLI → Configuration →

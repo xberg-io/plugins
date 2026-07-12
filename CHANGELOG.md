@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Generated Hermes Agent project plugins and PyPI packages for all five marketplace members.
+- Hermes package validation and Trusted Publishing workflow.
+
 ## [0.2.3] - 2026-07-11
 
 ### Added

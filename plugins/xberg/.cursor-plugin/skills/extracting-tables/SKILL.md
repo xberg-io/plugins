@@ -6,10 +6,9 @@ description: Use when extracting tabular data from PDFs, spreadsheets, or images
 <!--
 AI-RULEZ :: GENERATED FILE — DO NOT EDIT
 Content-Hash: blake3:668fb7004896108b5c4def0946cb4d1cd215c9416868c2ebec2a73cebd4b203b
-Source-Hash: blake3:423668b412497a7795a67a9bf7832067ab152f86bcbb158d23c8dfdeaf12cf6e
+Source-Hash: blake3:8d48733330070809966ed2939557b5ca2c73f676d4c16daa306750bc5fb8d5bc
 Schema-Version: v1
 -->
-
 
 # Extracting tables
 
