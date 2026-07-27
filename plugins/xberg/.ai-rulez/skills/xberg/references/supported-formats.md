@@ -1,6 +1,6 @@
 # Supported Formats Reference
 
-Xberg supports 91+ file formats across 8 major categories with intelligent format detection and comprehensive metadata extraction. All formats support text and metadata extraction. Additional capabilities like OCR and table detection are noted per format.
+Xberg supports 98+ file formats across 8 major categories with intelligent format detection and comprehensive metadata extraction. All formats support text and metadata extraction. Additional capabilities like OCR and table detection are noted per format.
 
 ## Office Documents
 
@@ -178,7 +178,7 @@ Xberg supports 91+ file formats across 8 major categories with intelligent forma
 
 ### Text Extraction
 
-All 91+ formats support full or partial text extraction. Document structure and encoding are automatically detected.
+All 98+ formats support full or partial text extraction. Document structure and encoding are automatically detected.
 
 ### Metadata Support
 
