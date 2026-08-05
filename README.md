@@ -7,6 +7,8 @@
 
 # Xberg Plugins Marketplace
 
+**This Repository has been deprecated and plugins have been migrated to the respective repos (e.g. Xberg plugins are under the xberg repository**
+
 Document-intelligence plugins for coding agents. Install any of the five into Claude Code, Codex CLI, Cursor, Gemini CLI, Factory Droid, GitHub Copilot CLI, Hermes Agent, or opencode.
 
 ## Badges
