@@ -4,7 +4,7 @@
 version = 1
 ai_rulez_version = '5.14.1'
 scope = 'all'
-tree = 'sha256:2ffc25a55cd0ca6bd7bd92a97e645828ccac6b97c138a04ecd4f6bcefce3308a'
+tree = 'sha256:cd1c99a9972d50203369b4fec328a841fde00e0eb96fd89514201e2196c6b06a'
 
 [[include]]
 name = 'xberg-core'
@@ -80,7 +80,7 @@ digest = 'sha256:5cb87728d1449fadda6d8557501fcc0823509c60a37058ce4d2dda123296f67
 name = 'marketplace-maintenance'
 source = '.ai-rulez/skills/marketplace-maintenance/SKILL.md'
 commit = ''
-digest = 'sha256:55d8d6b8373f88e1fad975490ba9c0348cc2bc0521c595c9b85262ad4edcf34a'
+digest = 'sha256:5f25c9d262cc23f44878a003ac16819ffeafc9ece64373f1e48794ac6d0253e7'
 
 [[served]]
 name = 'mise-tasks'
@@ -158,4 +158,4 @@ digest = 'sha256:5d0c471ed894636ce8564b370c63d1b1cb53ff0312760fe48bf4054c410ab87
 kind = 'skill'
 id = 'marketplace-maintenance'
 path = 'skills/marketplace-maintenance'
-digest = 'sha256:9659335d511f21e6bce195ac0a5cb1742b38a220245f40fed195aa949de68e1a'
+digest = 'sha256:e9e04032d5a5eec4e8c53322e011498a9799dbc7a71c72399f493a54e3037a75'

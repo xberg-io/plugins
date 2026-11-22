@@ -15,7 +15,7 @@ x-ai-rulez:
     name: marketplace-maintenance
 ---
 
-# Marketplace maintenance
+## Marketplace maintenance
 
 Each product repository owns its plugin in `plugin/`. This repository only pins which release of it each marketplace serves.
 
