@@ -11,13 +11,13 @@ A thin aggregator. This repository holds no plugin content: each marketplace ent
 
 | Plugin | Source | Pinned release |
 |--------|--------|----------------|
-| xberg | [xberg-io/xberg](https://github.com/xberg-io/xberg/tree/main/plugin) | see `.claude-plugin/marketplace.json` |
-| crawlberg | [xberg-io/crawlberg](https://github.com/xberg-io/crawlberg/tree/main/plugin) | |
-| html-to-markdown | [xberg-io/html-to-markdown](https://github.com/xberg-io/html-to-markdown/tree/main/plugin) | |
-| liter-llm | [xberg-io/liter-llm](https://github.com/xberg-io/liter-llm/tree/main/plugin) | |
-| tree-sitter-language-pack | [xberg-io/tree-sitter-language-pack](https://github.com/xberg-io/tree-sitter-language-pack/tree/main/plugin) | |
-| poly | [Goldziher/poly](https://github.com/Goldziher/poly/tree/main/plugin) | |
-| sceptre | [xberg-io/sceptre](https://github.com/xberg-io/sceptre/tree/main/plugin) | |
+| xberg | [`xberg-io/xberg`](https://github.com/xberg-io/xberg/tree/main/plugin) | see `.claude-plugin/marketplace.json` |
+| crawlberg | [`xberg-io/crawlberg`](https://github.com/xberg-io/crawlberg/tree/main/plugin) | |
+| html-to-markdown | [`xberg-io/html-to-markdown`](https://github.com/xberg-io/html-to-markdown/tree/main/plugin) | |
+| liter-llm | [`xberg-io/liter-llm`](https://github.com/xberg-io/liter-llm/tree/main/plugin) | |
+| tree-sitter-language-pack | [`xberg-io/tree-sitter-language-pack`](https://github.com/xberg-io/tree-sitter-language-pack/tree/main/plugin) | |
+| `poly` | [`Goldziher/poly`](https://github.com/Goldziher/poly/tree/main/plugin) | |
+| sceptre | [`xberg-io/sceptre`](https://github.com/xberg-io/sceptre/tree/main/plugin) | |
 
 Each plugin bundles an MCP server launcher and skills; the tool's binary is installed on first use or via `brew install xberg-io/tap/<tool>`.
 
@@ -56,7 +56,7 @@ Not served from this marketplace:
 
 - Cursor: its marketplace manifest only documents relative `source` paths inside the same repository, so it cannot point at a product repo. Install from the product repository's `plugin/` directory.
 - Antigravity (the Gemini CLI successor): `agy plugin install` documents the official marketplace, a GitHub repository URL and a local directory, and no custom marketplaces. Our plugins live in `plugin/` of each product repository, so see each product repo's `plugin/` directory.
-- opencode and Hermes packages are published by each product's own release.
+- OpenCode and Hermes packages are published by each product's own release.
 
 ## Updates
 
@@ -96,3 +96,7 @@ CI (`validate.yaml`) runs `scripts/validate.py`: JSON and schema checks, identic
 ## License
 
 MIT. See [LICENSE](LICENSE). Report vulnerabilities per [SECURITY.md](SECURITY.md).
+
+## Development
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for setup (`mise run setup`), the test and validate tasks, and how to move a pin.
