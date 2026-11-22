@@ -1,18 +1,51 @@
-version = "4.0"
-name = "xberg-plugins"
-description = "Xberg plugin marketplace."
+# Documentation: https://github.com/Goldziher/ai-rulez
 
-[marketplace]
-name = "xberg"
-description = "Curated document-intelligence plugins by Kreuzberg, Inc."
-members = [
-    "plugins/xberg",
-    "plugins/crawlberg",
-    "plugins/html-to-markdown",
-    "plugins/liter-llm",
-    "plugins/tree-sitter-language-pack",
+version = "5.0"
+name = 'plugins'
+description = 'Thin plugin marketplace for AI coding harnesses: pinned references to each xberg-io product plugin'
+gitignore = true
+# ~keep The manifest is committed so CI can detect stale generated files.
+gitignore_exclude = [".ai-rulez/.generated-manifest.json"]
+presets = ["claude", "codex", "opencode"]
+builtins = [
+  "!agent-delegation",
+  "!ai-governance/agent-workflow",
+  "!git-workflow",
+  "!testing/test-alongside-code",
+  "!testing/tdd-workflow",
+  "!token-efficiency/output-awareness",
+  "!token-efficiency/task-runner",
+  "!ai-governance/explain-reasoning",
+  "!security/least-privilege",
+  "!security/input-validation",
+  "default-commands",
 ]
 
-[marketplace.owner]
-name = "Kreuzberg, Inc."
-email = "contact@xberg.io"
+default_layers = ["plugins"]
+compact = true
+[[includes]]
+name = 'xberg-core'
+source = 'https://github.com/xberg-io/agent-conventions.git'
+version = "^1"
+path = 'modules/core'
+merge_strategy = 'local-override'
+
+[mcp]
+self_server_command = ["ai-rulez", "mcp"]
+# ~keep Skill discovery only: the full server lists 67 tools (~38k tokens of schema) at every session start.
+serve_skills = true
+read_only = true
+discover_skills = "repo"
+tools = ["find_skill", "load_skill"]
+
+[exposure]
+mcp_server_tokens = 1150
+start_budget = 5650
+codex_start_budget = 5800
+
+[lock]
+include_outputs = false
+
+[rules]
+# ~keep Glob-scoped rules stay out of AGENTS.md: rule files for Claude, path-gated skills for Codex.
+scoped_fallback = "skill"

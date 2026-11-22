@@ -1,0 +1,30 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate marketplaces
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Script tests
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Validate marketplace files
+        run: python3 scripts/validate.py
+
+      - name: Claude Code schema
+        run: npx -y @anthropic-ai/claude-code@latest plugin validate . --strict

@@ -1,14 +1,17 @@
 {
   "name": "xberg",
   "interface": {
-    "displayName": "xberg"
+    "displayName": "Xberg"
   },
   "plugins": [
     {
       "name": "xberg",
+      "description": "Local document extraction: text, tables, metadata, images from 107 formats with optional OCR.",
       "source": {
-        "source": "local",
-        "path": "./plugins/xberg"
+        "source": "git-subdir",
+        "url": "https://github.com/xberg-io/xberg.git",
+        "path": "./plugin",
+        "ref": "v1.4.2"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -18,9 +21,12 @@
     },
     {
       "name": "crawlberg",
+      "description": "Web crawling and scraping with HTML→Markdown and headless-Chrome fallback.",
       "source": {
-        "source": "local",
-        "path": "./plugins/crawlberg"
+        "source": "git-subdir",
+        "url": "https://github.com/xberg-io/crawlberg.git",
+        "path": "./plugin",
+        "ref": "v1.13.1"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -30,9 +36,12 @@
     },
     {
       "name": "html-to-markdown",
+      "description": "Fast, lossless HTML→Markdown conversion with structured metadata, tables, and document-structure extraction.",
       "source": {
-        "source": "local",
-        "path": "./plugins/html-to-markdown"
+        "source": "git-subdir",
+        "url": "https://github.com/xberg-io/html-to-markdown.git",
+        "path": "./plugin",
+        "ref": "v3.23.0"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -42,9 +51,12 @@
     },
     {
       "name": "liter-llm",
+      "description": "Universal LLM API client for 174 providers: chat, streaming, tools, embeddings, search, OCR, plus an OpenAI-compatible proxy and an MCP server.",
       "source": {
-        "source": "local",
-        "path": "./plugins/liter-llm"
+        "source": "git-subdir",
+        "url": "https://github.com/xberg-io/liter-llm.git",
+        "path": "./plugin",
+        "ref": "v2.7.3"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -54,15 +66,48 @@
     },
     {
       "name": "tree-sitter-language-pack",
+      "description": "Parse and extract code intelligence from 371 programming languages with tree-sitter: structure, imports, symbols, and syntax-aware chunking.",
       "source": {
-        "source": "local",
-        "path": "./plugins/tree-sitter-language-pack"
+        "source": "git-subdir",
+        "url": "https://github.com/xberg-io/tree-sitter-language-pack.git",
+        "path": "./plugin",
+        "ref": "v1.25.2"
       },
       "policy": {
         "installation": "AVAILABLE",
         "authentication": "ON_INSTALL"
       },
       "category": "developer-tools"
+    },
+    {
+      "name": "poly",
+      "description": "polylint: one linter and formatter for every language in the repository, driven by poly.toml, with an MCP server exposing check, fix, info and manage tools.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/Goldziher/poly.git",
+        "path": "./plugin",
+        "ref": "v0.36.1"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "developer-tools"
+    },
+    {
+      "name": "sceptre",
+      "description": "Local OCR with CRAFT detection and multilingual CRNN recognition.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/xberg-io/sceptre.git",
+        "path": "./plugin",
+        "ref": "v0.10.1"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "document-intelligence"
     }
   ]
 }

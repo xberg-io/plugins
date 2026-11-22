@@ -7,262 +7,92 @@
 
 # Xberg Plugins Marketplace
 
-**This Repository has been deprecated and plugins have been migrated to the respective repos (e.g. Xberg plugins are under the xberg repository**
+A thin aggregator. This repository holds no plugin content: each marketplace entry points at the `plugin/` directory of a product repository, pinned to that product's latest published release tag. Plugins are authored, versioned and released in the product repositories.
 
-Document-intelligence plugins for coding agents. Install any of the five into Claude Code, Codex CLI, Cursor, Gemini CLI, Factory Droid, GitHub Copilot CLI, Hermes Agent, or opencode.
+| Plugin | Source | Pinned release |
+|--------|--------|----------------|
+| xberg | [xberg-io/xberg](https://github.com/xberg-io/xberg/tree/main/plugin) | see `.claude-plugin/marketplace.json` |
+| crawlberg | [xberg-io/crawlberg](https://github.com/xberg-io/crawlberg/tree/main/plugin) | |
+| html-to-markdown | [xberg-io/html-to-markdown](https://github.com/xberg-io/html-to-markdown/tree/main/plugin) | |
+| liter-llm | [xberg-io/liter-llm](https://github.com/xberg-io/liter-llm/tree/main/plugin) | |
+| tree-sitter-language-pack | [xberg-io/tree-sitter-language-pack](https://github.com/xberg-io/tree-sitter-language-pack/tree/main/plugin) | |
+| poly | [Goldziher/poly](https://github.com/Goldziher/poly/tree/main/plugin) | |
+| sceptre | [xberg-io/sceptre](https://github.com/xberg-io/sceptre/tree/main/plugin) | |
 
-## Badges
-
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/xberg-io/plugins/blob/main/LICENSE)
-[![Version: 0.2.3](https://img.shields.io/badge/version-0.2.3-blue.svg)](https://github.com/xberg-io/plugins/releases)
-[![GitHub stars](https://img.shields.io/github/stars/xberg-io/plugins?style=social)](https://github.com/xberg-io/plugins)
-[![Discord](https://img.shields.io/badge/Discord-Chat-007ec6?logo=discord&logoColor=white)](https://discord.gg/xt9WY3GnKR)
-
-## What You Get
-
-| Plugin | Value Proposition | Status |
-|--------|-------------------|--------|
-| **xberg** | Local document extraction from 91+ formats (PDF, Office, images with OCR, HTML, email, archives, academic) | Stable — v0.2.3 |
-| **crawlberg** | Web crawling and scraping with HTML→Markdown and headless-Chrome fallback | Stable — v0.2.3 |
-| **html-to-markdown** | Fast, lossless HTML→Markdown with structured metadata and tables | Stable — v0.2.3 |
-| **liter-llm** | Universal LLM API client for 143 providers (chat, streaming, tools, embeddings) | Stable — v0.2.3 |
-| **tree-sitter-language-pack** | Parse and extract code intelligence from 300+ languages | Stable — v0.2.3 |
-
-## Platform Coverage
-
-Every plugin ships a bundled MCP server and installs into each supported agent from this one marketplace.
-
-| Plugin | Claude Code | Codex CLI | Cursor | Factory Droid | Gemini CLI | Copilot CLI | Hermes | opencode | MCP server |
-|--------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| **xberg** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **crawlberg** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **html-to-markdown** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **liter-llm** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **tree-sitter-language-pack** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-
-Version and manifest parity across every platform is kept in sync by ai-rulez generation and enforced in CI by `scripts/validate-manifests.sh` (see [Releasing](#releasing)).
+Each plugin bundles an MCP server launcher and skills; the tool's binary is installed on first use or via `brew install xberg-io/tap/<tool>`.
 
 ## Install
 
-<details open>
-<summary><strong>Claude Code</strong></summary>
-
-Once approved by the marketplace:
-
-```text
-/plugin install xberg@claude-community
-/plugin install crawlberg@claude-community
-/plugin install html-to-markdown@claude-community
-/plugin install liter-llm@claude-community
-/plugin install tree-sitter-language-pack@claude-community
-```
-
-Self-host (works today):
+Claude Code:
 
 ```text
 /plugin marketplace add xberg-io/plugins
 /plugin install xberg@xberg
-/plugin install crawlberg@xberg
-/plugin install html-to-markdown@xberg
-/plugin install liter-llm@xberg
-/plugin install tree-sitter-language-pack@xberg
 ```
 
-Pending review for official Claude marketplace.
-</details>
-
-<details>
-<summary><strong>Codex CLI</strong></summary>
-
-Self-host install:
+Codex CLI (then install from the plugin directory in Codex, `/plugins`):
 
 ```text
-/plugins add https://github.com/xberg-io/plugins
+codex plugin marketplace add xberg-io/plugins
 ```
 
-Then search for the plugin you want — e.g. `xberg`, `crawlberg`, `html-to-markdown`, `liter-llm`, or `tree-sitter-language-pack` — and select "Install Plugin".
-</details>
-
-<details>
-<summary><strong>Cursor</strong></summary>
-
-Self-host install only:
-
-Settings → Plugins → Add from URL → `https://github.com/xberg-io/plugins`. Select the plugin(s) you want.
-</details>
-
-<details>
-<summary><strong>Gemini CLI</strong></summary>
-
-Self-host install:
+GitHub Copilot CLI:
 
 ```text
-gemini extensions install https://github.com/xberg-io/plugins
-```
-
-</details>
-
-<details>
-<summary><strong>Factory Droid</strong></summary>
-
-Self-host install:
-
-```text
-droid plugin marketplace add https://github.com/xberg-io/plugins
-droid plugin install xberg@xberg
-droid plugin install crawlberg@xberg
-droid plugin install html-to-markdown@xberg
-droid plugin install liter-llm@xberg
-droid plugin install tree-sitter-language-pack@xberg
-```
-
-Pending review for official Factory Droid marketplace.
-</details>
-
-<details>
-<summary><strong>GitHub Copilot CLI</strong></summary>
-
-Self-host install:
-
-```text
-copilot plugin marketplace add https://github.com/xberg-io/plugins
+copilot plugin marketplace add xberg-io/plugins
 copilot plugin install xberg@xberg
-copilot plugin install crawlberg@xberg
-copilot plugin install html-to-markdown@xberg
-copilot plugin install liter-llm@xberg
-copilot plugin install tree-sitter-language-pack@xberg
 ```
 
-</details>
-
-<details>
-<summary><strong>Hermes Agent</strong></summary>
-
-Install the package into the same Python environment as Hermes, then enable it:
-
-```bash
-pip install xberg-hermes-plugin
-hermes plugins enable xberg
-```
-
-Replace `xberg` with another marketplace plugin name. The corresponding distribution is
-`<name>-hermes-plugin`. Configure its MCP server separately in `~/.hermes/config.yaml`; the package
-provides the skills and runtime adapter.
-</details>
-
-<details>
-<summary><strong>opencode</strong></summary>
-
-Add the published packages to `opencode.json`:
-
-```json
-{
-  "$schema": "https://opencode.ai/config.json",
-  "plugin": [
-    "@xberg-io/opencode-xberg",
-    "@xberg-io/opencode-crawlberg",
-    "@xberg-io/opencode-html-to-markdown",
-    "@xberg-io/opencode-liter-llm",
-    "@xberg-io/opencode-tree-sitter-language-pack"
-  ]
-}
-```
-
-</details>
-
-## Binary Requirements
-
-Each plugin shells out to a real CLI. Install whichever you use:
-
-| Plugin | Binary | Install |
-|--------|--------|---------|
-| xberg | `xberg` | `brew install xberg-io/tap/xberg` |
-| crawlberg | `crawlberg` | `brew install xberg-io/tap/crawlberg` |
-| html-to-markdown | `html-to-markdown` | `brew install xberg-io/tap/html-to-markdown` |
-| liter-llm | `liter-llm` | `brew install xberg-io/tap/liter-llm` |
-| tree-sitter-language-pack | `tree-sitter-language-pack` | `brew install xberg-io/tap/tree-sitter-language-pack` |
-
-## How Agent Skills Work
-
-Each plugin ships SKILL.md files describing what it can do. Agent harnesses auto-load skills based on the `description:` frontmatter in each file. When you ask your agent to extract a document or crawl a site, the matching skill fires automatically — you don't invoke skills directly.
-
-Example: when you say "extract text and tables from this PDF", the `xberg` skill detects the request and loads the `extract` MCP tool from the local `xberg` binary. The agent then calls that tool with your document, getting back structured text, tables, and metadata. The same pattern applies to web crawling with `crawlberg`.
-
-Skills are loaded at agent startup. Their descriptions stay in context so agents can decide when to use them. This means skills consume zero tokens unless the agent decides to invoke them.
-
-## Layout
+Factory Droid:
 
 ```text
-.claude-plugin/
-├── marketplace.json           # Claude marketplace
-.github/plugin/
-├── marketplace.json           # Copilot CLI marketplace
-plugins/
-├── xberg/
-│   └── plugin.json            # MCP server config
-└── crawlberg/
-    └── plugin.json
-scripts/
-├── bump-version.sh            # version bump/sync
-└── validate-manifests.sh      # CI parity check
+droid plugin marketplace add xberg-io/plugins
+droid plugin install xberg@xberg --scope user
 ```
 
-## Releasing
+Replace `xberg` before `@` with any plugin name from the table.
 
-All generated runtime manifests and OpenCode npm packages track `VERSION`.
-Update the version in the ai-rulez plugin sources, regenerate, and use
-`validate-manifests.sh` to check parity.
-Each generated bundle includes `.ai-rulez-generated.json` with BLAKE3 hashes. JavaScript and Markdown outputs carry
-matching generated-file headers, while strict JSON and binary artifacts remain byte-identical.
+Not served from this marketplace:
 
-```bash
-scripts/bump-version.sh 0.2.3
-scripts/validate-manifests.sh
-ai-rulez verify --plugin
-git commit -am "chore: release"
-git tag vX.Y.Z && git push --tags
-```
+- Cursor: its marketplace manifest only documents relative `source` paths inside the same repository, so it cannot point at a product repo. Install from the product repository's `plugin/` directory.
+- Antigravity (the Gemini CLI successor): `agy plugin install` documents the official marketplace, a GitHub repository URL and a local directory, and no custom marketplaces. Our plugins live in `plugin/` of each product repository, so see each product repo's `plugin/` directory.
+- opencode and Hermes packages are published by each product's own release.
 
-The OpenCode packages publish from `.github/workflows/publish.yaml` with npm Trusted Publishing and provenance when a GitHub release is published.
-Before the first Hermes release, create each `<name>-hermes-plugin` project on PyPI and register
-`xberg-io/plugins` with workflow `publish.yaml` as its trusted GitHub publisher.
+## Updates
 
-## Contributing
+Each entry is pinned with `ref` to a release tag, and the plugin's own `plugin.json` carries the version (entries never set `version`). A user gets a new plugin version when this repository moves a ref and the client refreshes the marketplace.
 
-Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on adding skills, testing locally, and bumping versions.
+- Claude Code: background auto-update is off for third-party marketplaces. Enable it under **Marketplaces** in `/plugin`, or run `/plugin marketplace update xberg`.
+- Codex: `codex plugin marketplace upgrade xberg`.
+- Copilot and Droid: `copilot plugin marketplace browse xberg`, `droid plugin marketplace update xberg`.
 
-## Security
+Refs are bumped with `python3 scripts/bump-ref.py <plugin> <tag>`, which rewrites every marketplace file; product release automation is intended to call it from a bot PR. A daily workflow (`staleness.yaml`) compares each ref with the product's latest release and keeps one issue open while any is behind.
 
-Report security vulnerabilities privately at [SECURITY.md](SECURITY.md). Do not open public issues for security concerns.
+## Marketplace files
 
-## FAQ
+| File | Harness | Source form |
+|------|---------|-------------|
+| `.claude-plugin/marketplace.json` | Claude Code | `git-subdir` |
+| `.agents/plugins/marketplace.json` | Codex | `git-subdir` |
+| `.github/plugin/marketplace.json` | GitHub Copilot | `github` with `path` (no `git-subdir` support) |
+| `.factory-plugin/marketplace.json` | Factory Droid | `git-subdir` |
 
-**Can I use just one plugin?**
+CI (`validate.yaml`) runs `scripts/validate.py`: JSON and schema checks, identical plugin set and refs across files, every `ref` an existing tag, every `path` present at that tag with a matching `plugin.json` name. Run `python3 -m unittest discover -s tests` for the script tests.
 
-Yes. `/plugin install xberg@xberg` installs only xberg.
+## Submissions
 
-**Do skills consume context?**
-
-Only when triggered. Skill descriptions load at startup (~300 tokens total) but stay in context. They consume zero tokens unless the agent decides to invoke the MCP tools.
-
-**Can I customize a skill locally?**
-
-Yes. Fork the repo, edit the skill SKILL.md, and use `/plugin marketplace add <local-path>` to self-host your version.
-
-**How do I report a broken skill?**
-
-Open an issue at [xberg-io/plugins](https://github.com/xberg-io/plugins/issues) with the plugin name, agent harness, and exact request that failed.
+| Directory | Status |
+|-----------|--------|
+| Claude plugin directory | not submitted |
+| MCP Registry | not submitted |
+| Codex | not submitted |
+| Cursor marketplace | not submitted |
+| GitHub awesome-copilot | not submitted |
+| Antigravity | not submitted |
+| Factory | not submitted |
+| OpenCode | not submitted |
+| Agent Skills | not submitted |
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
-
-## Part of Xberg.io
-
-- [Xberg](https://github.com/xberg-io/xberg) — document intelligence: text, tables, metadata from 91+ formats with optional OCR.
-- [Xberg Enterprise](https://github.com/xberg-io/xberg-enterprise) — managed extraction API with SDKs, dashboards, and observability.
-- [crawlberg](https://github.com/xberg-io/crawlberg) — web crawling and scraping with HTML→Markdown and headless-Chrome fallback.
-- [html-to-markdown](https://github.com/xberg-io/html-to-markdown) — fast, lossless HTML→Markdown engine.
-- [liter-llm](https://github.com/xberg-io/liter-llm) — universal LLM API client with native bindings for 14 languages and 143 providers.
-- [tree-sitter-language-pack](https://github.com/xberg-io/tree-sitter-language-pack) — tree-sitter grammars and code-intelligence primitives.
-- [alef](https://github.com/xberg-io/alef) — the polyglot binding generator that produces every per-language binding across the 5 polyglot repos.
+MIT. See [LICENSE](LICENSE). Report vulnerabilities per [SECURITY.md](SECURITY.md).

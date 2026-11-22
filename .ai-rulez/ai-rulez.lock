@@ -1,0 +1,161 @@
+# ai-rulez.lock: pins remote includes, installed skills and authored content. Commit this file.
+# Refresh it with `ai-rulez lock`; `ai-rulez generate --locked` fails when it is stale.
+
+version = 1
+ai_rulez_version = '5.14.1'
+scope = 'all'
+tree = 'sha256:2ffc25a55cd0ca6bd7bd92a97e645828ccac6b97c138a04ecd4f6bcefce3308a'
+
+[[include]]
+name = 'xberg-core'
+source = 'https://github.com/xberg-io/agent-conventions.git'
+path = 'modules/core'
+ref = '^1'
+tag = 'v1.11.0'
+tag_object = '965e61a1b3472d5e64a1dbd123654db5efb67ab9'
+commit = 'bf52d634477cb3076694b8b483979cd5ba46370c'
+digest = 'sha256:0f55f52cd05c79e4e21ed6e333a06e0607f07081b062d9da8e718881af5a9a05'
+
+[[served]]
+name = 'adr-authoring'
+source = 'include:xberg-core/skills/adr-authoring/SKILL.md'
+commit = 'bf52d634477cb3076694b8b483979cd5ba46370c'
+digest = 'sha256:62662bab0dc50dbc1ec0e42b0bdc4faa961d0fe1b6655aee247a771756613875'
+
+[[served]]
+name = 'agent-coordination'
+source = 'include:xberg-core/skills/agent-coordination/SKILL.md'
+commit = 'bf52d634477cb3076694b8b483979cd5ba46370c'
+digest = 'sha256:496bf60b5d58799ea58b717fa0fe70984ad4e2e6298053de2e767fbe5e4d9ad6'
+
+[[served]]
+name = 'basemind-tools'
+source = 'include:xberg-core/skills/basemind-tools/SKILL.md'
+commit = 'bf52d634477cb3076694b8b483979cd5ba46370c'
+digest = 'sha256:ff5cf13e1d705a00567e6ea1f4e4ea2774fd8d7e780f53586bb41727a10c4478'
+
+[[served]]
+name = 'code-quality-standards'
+source = 'builtin://universal/code-quality/skills/code-quality-standards/SKILL.md'
+commit = ''
+digest = 'sha256:fbb459dca3be6c91a4fe1944e844728c53e8856b517c5b122b8b2aeac566f666'
+
+[[served]]
+name = 'config-placement'
+source = 'builtin://universal/ai-governance/skills/config-placement/SKILL.md'
+commit = ''
+digest = 'sha256:31adedeec2e2f4e7e0cc802f32467ad38d6db4034df698dac1ee9b52b747fd00'
+
+[[served]]
+name = 'correctness-review'
+source = 'include:xberg-core/skills/correctness-review/SKILL.md'
+commit = 'bf52d634477cb3076694b8b483979cd5ba46370c'
+digest = 'sha256:f65064543a03d13e672c1ee7847b75da17791a999eda2ac7dfe0e3ca47a4f2ec'
+
+[[served]]
+name = 'dependency-awareness'
+source = 'builtin://universal/security/skills/dependency-awareness/SKILL.md'
+commit = ''
+digest = 'sha256:8f41215233c26441abed2b18f35575ce6b5614f91d9bef4885d550322542d4a5'
+
+[[served]]
+name = 'error-handling'
+source = 'builtin://universal/code-quality/skills/error-handling/SKILL.md'
+commit = ''
+digest = 'sha256:fbc7d452c7171e71341578b6c7a56fc2c87031c0ce15d35884bc3260e04ff68a'
+
+[[served]]
+name = 'incremental-approach'
+source = 'builtin://universal/token-efficiency/skills/incremental-approach/SKILL.md'
+commit = ''
+digest = 'sha256:b31111df0d7c3427e8ef3257fedeea76bc2430e4e132e7c986ab39d7c9b0d9c6'
+
+[[served]]
+name = 'iterate'
+source = ''
+commit = ''
+digest = 'sha256:5cb87728d1449fadda6d8557501fcc0823509c60a37058ce4d2dda123296f67c'
+
+[[served]]
+name = 'marketplace-maintenance'
+source = '.ai-rulez/skills/marketplace-maintenance/SKILL.md'
+commit = ''
+digest = 'sha256:55d8d6b8373f88e1fad975490ba9c0348cc2bc0521c595c9b85262ad4edcf34a'
+
+[[served]]
+name = 'mise-tasks'
+source = 'include:xberg-core/skills/mise-tasks/SKILL.md'
+commit = 'bf52d634477cb3076694b8b483979cd5ba46370c'
+digest = 'sha256:31534b5c6a3277702ec20250ac3791d5a55c3d2e7ed288f81afe7100bd6ae68a'
+
+[[served]]
+name = 'mise-toolchains'
+source = 'include:xberg-core/skills/mise-toolchains/SKILL.md'
+commit = 'bf52d634477cb3076694b8b483979cd5ba46370c'
+digest = 'sha256:d78be30b9b194c4cf8f94351f473e5085cf17f45adaf0560cbd2122f285e56d3'
+
+[[served]]
+name = 'owasp-quick-reference'
+source = 'builtin://universal/security/skills/owasp-quick-reference/SKILL.md'
+commit = ''
+digest = 'sha256:195755e5e5628857b680bb0b0453c909f258a0c36ce3f1b8e1d746c7ea54bffc'
+
+[[served]]
+name = 'parallelize'
+source = ''
+commit = ''
+digest = 'sha256:2700d984ba10baa2e16ed19b48cc8fd5f7351776f2ce03f6712394d3912f91cb'
+
+[[served]]
+name = 'poly-lint-format'
+source = 'include:xberg-core/skills/poly-lint-format/SKILL.md'
+commit = 'bf52d634477cb3076694b8b483979cd5ba46370c'
+digest = 'sha256:8aeecc81ec712d2eb0dae015b20501b0e9803459bb041eab46c54c6feb24d525'
+
+[[served]]
+name = 'pull-requests'
+source = 'include:xberg-core/skills/pull-requests/SKILL.md'
+commit = 'bf52d634477cb3076694b8b483979cd5ba46370c'
+digest = 'sha256:d0d72791ebfa675d5f1529b0a7d434fd48dfc1b7990c4d5ea7d19c57f109f483'
+
+[[served]]
+name = 'release-workflow'
+source = 'include:xberg-core/skills/release-workflow/SKILL.md'
+commit = 'bf52d634477cb3076694b8b483979cd5ba46370c'
+digest = 'sha256:edd9f8933e717c1b467fedeb7e5d224fa4a7a43b67490b692615c33ff79190cb'
+
+[[served]]
+name = 'skill-authoring'
+source = 'builtin://universal/ai-governance/skills/skill-authoring/SKILL.md'
+commit = ''
+digest = 'sha256:7ab2b543dc6608f204c957fedfc55ae902d22fda9dc8a52252330ff9b1406ff1'
+
+[[served]]
+name = 'tdd-workflow'
+source = 'include:xberg-core/skills/tdd-workflow/SKILL.md'
+commit = 'bf52d634477cb3076694b8b483979cd5ba46370c'
+digest = 'sha256:9b79adf527a12b1fe6d901de912efebdebb93af3b44bd21b385833e4006c48e5'
+
+[[served]]
+name = 'testing-conventions'
+source = 'builtin://universal/testing/skills/testing-conventions/SKILL.md'
+commit = ''
+digest = 'sha256:f406604437e2998fc756a0a5b6a08cd832b871c188f76ee5ecbfef33184e9652'
+
+[[served]]
+name = 'verification-harness'
+source = 'include:xberg-core/skills/verification-harness/SKILL.md'
+commit = 'bf52d634477cb3076694b8b483979cd5ba46370c'
+digest = 'sha256:517c67f45363ed00d4a5ff0b04b8271cb48e0771d2c11b374dec0fad11f403e7'
+
+[[item]]
+kind = 'context'
+id = 'area-map'
+path = 'context/area-map.md'
+digest = 'sha256:5d0c471ed894636ce8564b370c63d1b1cb53ff0312760fe48bf4054c410ab874'
+
+[[item]]
+kind = 'skill'
+id = 'marketplace-maintenance'
+path = 'skills/marketplace-maintenance'
+digest = 'sha256:9659335d511f21e6bce195ac0a5cb1742b38a220245f40fed195aa949de68e1a'
