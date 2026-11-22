@@ -27,4 +27,4 @@ jobs:
         run: python3 scripts/validate.py
 
       - name: Claude Code schema
-        run: npx -y @anthropic-ai/claude-code@latest plugin validate . --strict
+        run: npx -y @anthropic-ai/claude-code@2.1.330 plugin validate . --strict

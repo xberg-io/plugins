@@ -1,0 +1,30 @@
+name: Toolchain
+
+on:
+  pull_request:
+    paths:
+      - "mise.toml"
+      - "mise.lock"
+      - "mise.*.toml"
+      - "mise.*.lock"
+      - "toolchains.toml"
+      - "mise-tasks/**"
+      - ".github/workflows/toolchain.yml"
+  push:
+    branches: [main]
+    paths:
+      - "mise.toml"
+      - "mise.lock"
+      - "mise.*.toml"
+      - "mise.*.lock"
+      - "toolchains.toml"
+      - "mise-tasks/**"
+      - ".github/workflows/toolchain.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-toolchain:
+    uses: xberg-io/actions/.github/workflows/reusable-toolchain.yml@v1
