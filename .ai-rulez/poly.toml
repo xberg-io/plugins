@@ -1,9 +1,3 @@
-required_version = ">=0.36.0"
-
 # ~keep OKF title metadata is not a second rendered Markdown heading.
-[per_file_ignores]
+[per-file-ignores]
 "**/*.md" = ["MD025"]
-
-[engines.typos]
-# typos is opt-in in poly v2; this keeps the v1 default (on).
-enabled = true
