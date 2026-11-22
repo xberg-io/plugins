@@ -1,0 +1,23 @@
+# Versions follow the xberg-io/toolchains baseline named in toolchains.toml. ~keep
+[settings]
+lockfile = true
+lockfile_platforms = ["linux-x64", "linux-arm64", "macos-arm64", "windows-x64"]
+
+[tools]
+"github:Goldziher/poly" = "0.36.1"
+python = "3.15.2"
+
+[tasks.setup]
+description = "Install the mise toolchain and development hooks"
+run = ["mise install", { task = "governance:hooks:install" }]
+
+[task_config]
+includes = ["mise-tasks", "mise-tasks/shared.toml"]
+
+[tasks.test]
+description = "Run the marketplace script tests"
+run = "python3 -m unittest discover -s tests"
+
+[tasks.validate]
+description = "Validate every marketplace file against the product repositories (needs network)"
+run = "python3 scripts/validate.py"
