@@ -1,0 +1,22 @@
+name: AI-Rulez validation
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".ai-rulez/**"
+      - ".gitignore"
+      - ".github/workflows/ai-rulez-validation.yml"
+  pull_request:
+    paths:
+      - ".ai-rulez/**"
+      - ".gitignore"
+      - ".github/workflows/ai-rulez-validation.yml"
+permissions:
+  contents: read
+jobs:
+  validate:
+    uses: xberg-io/actions/.github/workflows/reusable-ai-rulez-validation.yml@v1
+    with:
+      budgets: |
+        claude=5250
+        codex=5300
