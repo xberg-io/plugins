@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -40,6 +41,11 @@ class MarketplaceError(Exception):
     pass
 
 
+def say(message: str, *, error: bool = False) -> None:
+    """Write one line to stdout, or to stderr for an error."""
+    (sys.stderr if error else sys.stdout).write(message + "\n")
+
+
 def repo_from_url(url: str) -> str:
     if not url.startswith(GITHUB):
         raise MarketplaceError(f"url {url!r} is not a {GITHUB} URL")
@@ -49,7 +55,7 @@ def repo_from_url(url: str) -> str:
     return repo
 
 
-def parse_source(fmt: Format, source: Any, where: str) -> tuple[str, str, str]:
+def parse_source(fmt: Format, source: object, where: str) -> tuple[str, str, str]:
     if not isinstance(source, dict):
         raise MarketplaceError(f"{where}: source must be an object, got {type(source).__name__}")
     if source.get("source") != fmt.source_type:

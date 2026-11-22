@@ -10,10 +10,13 @@ import argparse
 import json
 import subprocess
 import sys
-from collections.abc import Callable
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import marketplace as mp
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 def latest_release(repo: str) -> str:
@@ -51,14 +54,14 @@ def main() -> int:
     try:
         stale = find_stale(args.root)
     except mp.MarketplaceError as exc:
-        print(f"error: {exc}", file=sys.stderr)
+        mp.say(f"error: {exc}", error=True)
         return 2
     if args.json:
-        print(json.dumps(stale, indent=2))
+        mp.say(json.dumps(stale, indent=2))
     elif stale:
-        print(report(stale))
+        mp.say(report(stale))
     else:
-        print("all pinned refs match the latest release")
+        mp.say("all pinned refs match the latest release")
     return 1 if stale else 0
 
 

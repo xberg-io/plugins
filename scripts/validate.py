@@ -29,6 +29,21 @@ def git(*args: str, cwd: str | None = None) -> subprocess.CompletedProcess[str]:
     return subprocess.run(["git", *args], cwd=cwd, capture_output=True, text=True, env=env, check=False)
 
 
+def check_plugin_entry(fmt: mp.Format, plugin: dict, where: str) -> list[str]:
+    errs = []
+    if "version" in plugin:
+        errs.append(f"{where}: version must not be set (plugin.json owns it)")
+    if fmt.key == "codex":
+        policy = plugin.get("policy", {})
+        if policy.get("installation") not in {"AVAILABLE", "INSTALLED_BY_DEFAULT", "NOT_AVAILABLE"}:
+            errs.append(f"{where}: policy.installation is invalid")
+        if policy.get("authentication") not in {"ON_INSTALL", "ON_USE"}:
+            errs.append(f"{where}: policy.authentication is invalid")
+        if not isinstance(plugin.get("category"), str):
+            errs.append(f"{where}: category is required")
+    return errs
+
+
 def check_schema(fmt: mp.Format, data: dict) -> list[str]:
     errs = []
     if not isinstance(data.get("name"), str) or not mp.NAME_RE.match(data["name"]):
@@ -46,16 +61,7 @@ def check_schema(fmt: mp.Format, data: dict) -> list[str]:
         if name in seen:
             errs.append(f"{where}: duplicate plugin name {name!r}")
         seen.add(name)
-        if "version" in plugin:
-            errs.append(f"{where}: version must not be set (plugin.json owns it)")
-        if fmt.key == "codex":
-            policy = plugin.get("policy", {})
-            if policy.get("installation") not in {"AVAILABLE", "INSTALLED_BY_DEFAULT", "NOT_AVAILABLE"}:
-                errs.append(f"{where}: policy.installation is invalid")
-            if policy.get("authentication") not in {"ON_INSTALL", "ON_USE"}:
-                errs.append(f"{where}: policy.authentication is invalid")
-            if not isinstance(plugin.get("category"), str):
-                errs.append(f"{where}: category is required")
+        errs.extend(check_plugin_entry(fmt, plugin, where))
     if not data.get("plugins"):
         errs.append(f"{fmt.file}: plugins is empty")
     return errs
@@ -68,10 +74,12 @@ def check_drift(by_format: dict[str, list[mp.Entry]]) -> list[str]:
     base = {e.name: e for e in by_format[base_key]}
     for key in keys[1:]:
         other = {e.name: e for e in by_format[key]}
-        for name in sorted(base.keys() - other.keys()):
-            errs.append(f"drift: plugin {name!r} is in {base_key} but not in {key}")
-        for name in sorted(other.keys() - base.keys()):
-            errs.append(f"drift: plugin {name!r} is in {key} but not in {base_key}")
+        errs.extend(
+            f"drift: plugin {name!r} is in {base_key} but not in {key}" for name in sorted(base.keys() - other.keys())
+        )
+        errs.extend(
+            f"drift: plugin {name!r} is in {key} but not in {base_key}" for name in sorted(other.keys() - base.keys())
+        )
         for name in sorted(base.keys() & other.keys()):
             if base[name] != other[name]:
                 a, b = base[name], other[name]
@@ -156,9 +164,9 @@ def main() -> int:
     args = parser.parse_args()
     errs = validate(args.root, args.offline)
     for err in errs:
-        print(f"error: {err}", file=sys.stderr)
+        mp.say(f"error: {err}", error=True)
     count = len(mp.entries(mp.FORMATS[0], mp.load(mp.FORMATS[0], args.root))) if not errs else 0
-    print(f"{len(errs)} error(s)" if errs else f"ok: {len(mp.FORMATS)} marketplace files, {count} plugins")
+    mp.say(f"{len(errs)} error(s)" if errs else f"ok: {len(mp.FORMATS)} marketplace files, {count} plugins")
     return 1 if errs else 0
 
 

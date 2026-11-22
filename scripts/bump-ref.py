@@ -50,15 +50,15 @@ def main() -> int:
     try:
         changed = bump(args.repo, args.tag, args.root)
     except mp.MarketplaceError as exc:
-        print(f"error: {exc}", file=sys.stderr)
+        mp.say(f"error: {exc}", error=True)
         return 1
-    print(
+    mp.say(
         f"{args.repo} -> {args.tag}: updated {len(changed)} file(s)"
         if changed
         else f"{args.repo} already at {args.tag}"
     )
     for name in changed:
-        print(f"  {name}")
+        mp.say(f"  {name}")
     return 0
 
 
