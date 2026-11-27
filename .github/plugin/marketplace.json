@@ -36,7 +36,7 @@
         "source": "github",
         "repo": "xberg-io/html-to-markdown",
         "path": "plugin",
-        "ref": "v3.23.4"
+        "ref": "v3.23.5"
       }
     },
     {
@@ -47,7 +47,7 @@
         "source": "github",
         "repo": "xberg-io/liter-llm",
         "path": "plugin",
-        "ref": "v2.7.6"
+        "ref": "v2.7.7"
       }
     },
     {
@@ -58,7 +58,7 @@
         "source": "github",
         "repo": "xberg-io/tree-sitter-language-pack",
         "path": "plugin",
-        "ref": "v1.27.4"
+        "ref": "v1.28.0"
       }
     },
     {
@@ -80,7 +80,7 @@
         "source": "github",
         "repo": "xberg-io/sceptre",
         "path": "plugin",
-        "ref": "v0.10.4"
+        "ref": "v0.10.5"
       }
     }
   ]
