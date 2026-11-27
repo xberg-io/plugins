@@ -63,7 +63,8 @@ jobs:
           git config user.email "${user_id}+${APP_SLUG}[bot]@users.noreply.github.com"
           git switch -c "$BRANCH"
           git add .claude-plugin .agents/plugins .github/plugin .factory-plugin
-          git commit -m "$PR_TITLE" -F report.md
+          { printf '%s\n\n' "$PR_TITLE"; cat report.md; } > "$RUNNER_TEMP/commit-message"
+          git commit -F "$RUNNER_TEMP/commit-message"
           # ~keep The branch is owned by this workflow and rebuilt from main on every run.
           git push --force origin "HEAD:refs/heads/$BRANCH"
           number=$(gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number // empty')
