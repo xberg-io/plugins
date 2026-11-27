@@ -2,9 +2,9 @@
 # Refresh it with `ai-rulez lock`; `ai-rulez generate --locked` fails when it is stale.
 
 version = 1
-ai_rulez_version = '5.14.1'
+ai_rulez_version = '5.15.0'
 scope = 'all'
-tree = 'sha256:cd1c99a9972d50203369b4fec328a841fde00e0eb96fd89514201e2196c6b06a'
+tree = 'sha256:6b98f94cf46aaedac3a1aff6d4aac4fd9e4163ff01c2495902f7736bcf127806'
 
 [[include]]
 name = 'xberg-core'
@@ -80,7 +80,7 @@ digest = 'sha256:5cb87728d1449fadda6d8557501fcc0823509c60a37058ce4d2dda123296f67
 name = 'marketplace-maintenance'
 source = '.ai-rulez/skills/marketplace-maintenance/SKILL.md'
 commit = ''
-digest = 'sha256:5f25c9d262cc23f44878a003ac16819ffeafc9ece64373f1e48794ac6d0253e7'
+digest = 'sha256:5bb47db95537103ff1218cc99ff028c7fb827ac777bda80b4e1aaae89962f32d'
 
 [[served]]
 name = 'mise-tasks'
@@ -158,4 +158,4 @@ digest = 'sha256:5d0c471ed894636ce8564b370c63d1b1cb53ff0312760fe48bf4054c410ab87
 kind = 'skill'
 id = 'marketplace-maintenance'
 path = 'skills/marketplace-maintenance'
-digest = 'sha256:e9e04032d5a5eec4e8c53322e011498a9799dbc7a71c72399f493a54e3037a75'
+digest = 'sha256:c400655862149dc0db16aa8595d4c7ad43121b77129e463afc99897e9ed821d4'

@@ -66,7 +66,7 @@ Each entry is pinned with `ref` to a release tag, and the plugin's own `plugin.j
 - Codex: `codex plugin marketplace upgrade xberg`.
 - Copilot and Droid: `copilot plugin marketplace browse xberg`, `droid plugin marketplace update xberg`.
 
-Refs are bumped with `python3 scripts/bump-ref.py <plugin> <tag>`, which rewrites every marketplace file; product release automation is intended to call it from a bot PR. A daily workflow (`staleness.yaml`) compares each ref with the product's latest release and keeps one issue open while any is behind.
+Refs are bumped with `python3 scripts/bump-ref.py <plugin> <tag>`, which rewrites every marketplace file; product release automation is intended to call it from a bot PR. A daily workflow (`staleness.yaml`) compares each ref with the product's latest release and, while any is behind, keeps one pull request (`bot/bump-plugin-refs`) open that moves them.
 
 ## Marketplace files
 

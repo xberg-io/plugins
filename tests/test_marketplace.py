@@ -190,6 +190,16 @@ class StalenessTests(Base):
         self.assertEqual(stale, [{"name": "alpha", "repo": "acme/alpha", "pinned": "v1.0.0", "latest": "v1.1.0"}])
         self.assertIn("`v1.1.0`", staleness.report(stale))
 
+    def test_apply_moves_every_stale_ref_and_result_validates(self) -> None:
+        write_marketplaces(self.root, self.good)
+        latest = {"acme/alpha": "v1.1.0", "acme/beta": "v2.0.0"}
+        staleness.apply(staleness.find_stale(self.root, latest.__getitem__), self.root)
+        for fmt in mp.FORMATS:
+            refs = {e.name: e.ref for e in mp.entries(fmt, mp.load(fmt, self.root))}
+            self.assertEqual(refs, {"alpha": "v1.1.0", "beta": "v2.0.0"})
+        self.assertEqual(staleness.find_stale(self.root, latest.__getitem__), [])
+        self.assertEqual(validate.validate(self.root), [])
+
     def test_up_to_date_is_empty(self) -> None:
         write_marketplaces(self.root, self.good)
         latest = {"acme/alpha": "v1.0.0", "acme/beta": "v2.0.0"}

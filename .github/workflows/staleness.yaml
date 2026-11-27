@@ -7,44 +7,88 @@ on:
 
 permissions:
   contents: read
-  issues: write
+
+concurrency:
+  group: staleness
+  cancel-in-progress: false
 
 jobs:
   staleness:
-    name: Pinned refs vs latest releases
+    name: Bump pinned refs to the latest releases
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{ github.token }}
-      ISSUE_TITLE: Pinned plugin refs are behind the latest releases
+      BRANCH: bot/bump-plugin-refs
+      PR_TITLE: "chore(marketplace): pin plugins to their latest releases"
+      LEGACY_ISSUE_TITLE: Pinned plugin refs are behind the latest releases
     steps:
-      - uses: actions/checkout@v6
+      # ~keep A pull request opened with GITHUB_TOKEN starts no workflows, so the App token is used to let the
+      # PR validation run on the bump.
+      - uses: actions/create-github-app-token@v3
+        id: app-token
+        with:
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
 
-      - name: Compare refs with latest releases
+      - uses: actions/checkout@v6
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Move stale refs to the latest releases
         id: check
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           set +e
-          python3 scripts/staleness.py > report.md
+          python3 scripts/staleness.py --apply > report.md
           rc=$?
           cat report.md
           echo "rc=$rc" >> "$GITHUB_OUTPUT"
           [ "$rc" -le 1 ]
 
-      - name: Open or update the tracking issue
+      - name: Validate the bumped marketplaces
         if: steps.check.outputs.rc == '1'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: python3 scripts/validate.py
+
+      - name: Open or update the bump pull request
+        if: steps.check.outputs.rc == '1'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
         run: |
-          number=$(gh issue list --state open --search "$ISSUE_TITLE in:title" --json number,title \
-            --jq "map(select(.title == \"$ISSUE_TITLE\"))[0].number // empty")
+          set -euo pipefail
+          user_id=$(gh api "users/${APP_SLUG}[bot]" --jq .id)
+          git config user.name "${APP_SLUG}[bot]"
+          git config user.email "${user_id}+${APP_SLUG}[bot]@users.noreply.github.com"
+          git switch -c "$BRANCH"
+          git add .claude-plugin .agents/plugins .github/plugin .factory-plugin
+          git commit -m "$PR_TITLE" -F report.md
+          # ~keep The branch is owned by this workflow and rebuilt from main on every run.
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+          number=$(gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number // empty')
           if [ -n "$number" ]; then
-            gh issue edit "$number" --body-file report.md
+            gh pr edit "$number" --title "$PR_TITLE" --body-file report.md
           else
-            gh issue create --title "$ISSUE_TITLE" --body-file report.md
+            gh pr create --base main --head "$BRANCH" --title "$PR_TITLE" --body-file report.md
           fi
 
-      - name: Close the tracking issue when current
+      - name: Close the bump pull request when current
         if: steps.check.outputs.rc == '0'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
-          number=$(gh issue list --state open --search "$ISSUE_TITLE in:title" --json number,title \
-            --jq "map(select(.title == \"$ISSUE_TITLE\"))[0].number // empty")
+          number=$(gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number // empty')
           if [ -n "$number" ]; then
-            gh issue close "$number" --comment "All pinned refs match the latest releases."
+            gh pr close "$number" --delete-branch --comment "All pinned refs match the latest releases."
+          fi
+
+      - name: Close the legacy tracking issue
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          number=$(gh issue list --state open --search "$LEGACY_ISSUE_TITLE in:title" --json number,title \
+            --jq "map(select(.title == \"$LEGACY_ISSUE_TITLE\"))[0].number // empty")
+          if [ -n "$number" ]; then
+            gh issue close "$number" --comment "Stale refs are now bumped by a pull request from this workflow."
           fi

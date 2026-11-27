@@ -24,4 +24,4 @@ Each product repository owns its plugin in `plugin/`. This repository only pins 
 - Entries never set `version`; the plugin's own `plugin.json` is the source of the version.
 - Before pushing: `python3 -m unittest discover -s tests` and `python3 scripts/validate.py`.
 - Cursor is not served from here: its marketplace format cannot point at another repository.
-- `scripts/staleness.py` (daily workflow) reports refs behind the latest release; a product release bumps its ref here through a bot PR.
+- `scripts/staleness.py` (daily workflow) finds refs behind the latest release; with `--apply` it bumps them, and the workflow keeps one bot PR (`bot/bump-plugin-refs`) open with the bump.
