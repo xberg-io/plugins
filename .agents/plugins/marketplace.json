@@ -26,7 +26,7 @@
         "source": "git-subdir",
         "url": "https://github.com/xberg-io/crawlberg.git",
         "path": "./plugin",
-        "ref": "v1.13.5"
+        "ref": "v1.13.6"
       },
       "policy": {
         "installation": "AVAILABLE",
